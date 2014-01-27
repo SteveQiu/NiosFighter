@@ -13,13 +13,15 @@ void DrawBackground(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy) {
 	// Clear the screen
 	alt_up_pixel_buffer_dma_clear_screen(pixel_buffer_cpy, 0);
 	// Draw a white lineto the foreground buffer
-	alt_up_pixel_buffer_dma_draw_line(pixel_buffer_cpy, 0, 0, 320, 240, 0xFFFF, 0);
+	alt_up_pixel_buffer_dma_draw_hline(pixel_buffer_cpy, 0, 320, 40, 0x064F, 0);
+	//Resolution:320x240
 }
 
 void DrawCharTest(alt_up_char_buffer_dev* char_buffer_cpy) {
 	alt_up_char_buffer_init(char_buffer_cpy);
 	// Write some text
-	alt_up_char_buffer_string(char_buffer_cpy, "NiosFighter", 40, 30);
+	alt_up_char_buffer_string(char_buffer_cpy, "NiosFighter",160,200);
+	//Resolution:320x240
 }
 
 int main() {
