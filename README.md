@@ -46,6 +46,8 @@ Initially we assume you have the following file directory structure:
 15. refresh the NiosFighter project (do this after every git pull, it will add the source files to the project)
 16. You should now be able to build the NiosFighter project
 
+Alternative: If you prefer setting up your eclipse projects on other directories, you need to install git plugin for eclipse.
+
 Compilation Notes:
 ==================
 1. In order for eclipse to properly compile/use the system timers for the frameTimer module, please see
