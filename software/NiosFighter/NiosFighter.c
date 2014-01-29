@@ -13,7 +13,7 @@ void DrawBackground(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy) {
 	// Clear the screen
 	alt_up_pixel_buffer_dma_clear_screen(pixel_buffer_cpy, 0);
 	// Draw a white lineto the foreground buffer
-	alt_up_pixel_buffer_dma_draw_hline(pixel_buffer_cpy, 0, 320, 40, 0x064F, 0);
+	alt_up_pixel_buffer_dma_draw_hline(pixel_buffer_cpy, 0, 320, 200, 0x064F, 0);
 	//Resolution:320x240
 }
 
