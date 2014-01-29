@@ -1,0 +1,3 @@
+*
+!./NiosFighter/*.c
+!./NiosFighter/*.h
