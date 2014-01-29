@@ -35,7 +35,7 @@ Initially we assume you have the following file directory structure:
 5. Using qsys, build the .qsys file in the /src/system/ directory
 6. add the generated .qip file to the quartus two project
 7. Add the .vhd file to the quartus 2 project /src/NiosFighter.vhd
-8. The quartus two project should now compile
+8. The quartus two project should now compile. Import the Pin Assignment file then compile
 9. Open eclipse for nios tool
 10. Create a new project+bsp template project
 11. use the generated .sopcinfo file as the eclipse sopcinfo file
