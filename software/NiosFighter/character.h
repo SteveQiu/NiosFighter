@@ -8,4 +8,6 @@ struct character {
 	int xPosition;
 };
 
+int initCharacter(character *target);
+
 

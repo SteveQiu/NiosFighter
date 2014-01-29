@@ -3,8 +3,8 @@
 #include "render.h"
 
 int main() {
-
 	gameState gstate;
+	initGameState(gstate);
 
 	//gameLoop
 	while(!gameOver) {

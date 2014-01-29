@@ -4,7 +4,8 @@ typedef struct gameState gameState;
 struct gameState {
 	character player1;
 	character player2;
+	int gameOver;
 };
 
 //Returns 0 on successful completion
-int initGameState(gameState state);
+int initGameState(gameState *state);

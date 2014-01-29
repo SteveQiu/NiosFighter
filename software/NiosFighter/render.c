@@ -22,15 +22,15 @@ void DrawCharTest(alt_up_char_buffer_dev* char_buffer_cpy) {
 	//Resolution:320x240
 }
 
-void render() {
+void render(gameState *state) {
 	alt_up_pixel_buffer_dma_dev* pixel_buffer;
 	pixel_buffer = alt_up_pixel_buffer_dma_open_dev(VIDEO_PIXEL_BUFFER_DMA_NAME);
-	//Initialize the graphic buffer
+	//Initialise the graphic buffer
 
 	alt_up_char_buffer_dev* char_buffer;
 	char_buffer = alt_up_char_buffer_open_dev("/dev/video_character_buffer_with_dma");
 	assert(char_buffer);
-	//Initialize the character buffer
+	//Initialise the character buffer
 
 	DrawBackground(pixel_buffer);
 	//Invoke this function to draw background;

@@ -4,4 +4,4 @@
 
 void DrawBackground();
 void DrawCharTest();
-void render(gameState state);
+void render(gameState *state);
