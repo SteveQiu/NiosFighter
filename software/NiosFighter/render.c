@@ -5,8 +5,8 @@ void InitPixBuff(alt_up_pixel_buffer_dma_dev **pixel_buffer_ptr) {
 			VIDEO_PIXEL_BUFFER_DMA_NAME);
 	//Initialise the graphic buffer
 
-	unsigned intpixel_buffer_addr1 = PIXEL_BUFFER_BASE;
-	unsigned intpixel_buffer_addr2 = PIXEL_BUFFER_BASE + (320 * 240 * 2);
+	unsigned int pixel_buffer_addr1 = VIDEO_PIXEL_BUFFER_DMA_BASE;
+	unsigned int pixel_buffer_addr2 = VIDEO_PIXEL_BUFFER_DMA_BASE + (320 * 240 * 2);
 
 	// Set the 1st buffer address
 	alt_up_pixel_buffer_dma_change_back_buffer_address(*pixel_buffer_ptr,
@@ -18,12 +18,12 @@ void InitPixBuff(alt_up_pixel_buffer_dma_dev **pixel_buffer_ptr) {
 	while (alt_up_pixel_buffer_dma_check_swap_buffers_status(*pixel_buffer_ptr))
 		;
 	// Set the 2nd buffer address
-	alt_up_pixel_buffer_dma_change_back_buffer_address(*pixel_buffer,
+	alt_up_pixel_buffer_dma_change_back_buffer_address(*pixel_buffer_ptr,
 			pixel_buffer_addr2);
 
 	// Clear both buffers (this makes all pixels black)
-	alt_up_pixel_buffer_dma_clear_screen(pixel_buffer, 0);
-	alt_up_pixel_buffer_dma_clear_screen(pixel_buffer, 1);
+	alt_up_pixel_buffer_dma_clear_screen(*pixel_buffer_ptr, 0);
+	alt_up_pixel_buffer_dma_clear_screen(*pixel_buffer_ptr, 1);
 }
 
 void InitCharBuff(alt_up_char_buffer_dev** char_buffer_ptr) {
@@ -50,7 +50,7 @@ void render(gameState* state) {
 	InitPixBuff(&pixel_buffer);
 
 	alt_up_char_buffer_dev* char_buffer;
-	InitPixBuff(&char_buffer);
+	InitCharBuff(&char_buffer);
 
 	DrawBackground(pixel_buffer);
 	//Invoke this function to draw background;
