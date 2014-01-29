@@ -1,3 +1,4 @@
 *
 !./NiosFighter/*.c
 !./NiosFighter/*.h
+!*.gitignore
