@@ -1,3 +1,5 @@
+#include "render.h"
+
 void DrawBackground(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy) {
 	// Clear the screen
 	alt_up_pixel_buffer_dma_clear_screen(pixel_buffer_cpy, 0);
@@ -11,10 +13,10 @@ void DrawCharTest(alt_up_char_buffer_dev* char_buffer_cpy) {
 	alt_up_char_buffer_string(char_buffer_cpy, "NiosFighter",160,200);
 }
 
-void render(gameState state_cpy) {
+void render(gameState* state) {
 	alt_up_pixel_buffer_dma_dev* pixel_buffer;
 	pixel_buffer = alt_up_pixel_buffer_dma_open_dev(VIDEO_PIXEL_BUFFER_DMA_NAME);
-	//Initialize the graphic buffer
+	//Initialise the graphic buffer
 
 	unsigned intpixel_buffer_addr1 = PIXEL_BUFFER_BASE;
 	unsigned intpixel_buffer_addr2 = PIXEL_BUFFER_BASE + (320 * 240 * 2);

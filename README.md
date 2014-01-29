@@ -15,6 +15,7 @@ All project related files manage yourself! Dont pollute this repo with files tha
 ie. Machine Generated Files 
 
 Setup Instructions (please follow):
+===================================
 
 Initially we assume you have the following file directory structure:
 ".../eece381/", this top level directory will subsequently be referenced with a simple '/'
@@ -44,3 +45,8 @@ Initially we assume you have the following file directory structure:
 14. Generate the BSP in eclipse
 15. refresh the NiosFighter project (do this after every git pull, it will add the source files to the project)
 16. You should now be able to build the NiosFighter project
+
+Compilation Notes:
+==================
+1. In order for eclipse to properly compile/use the system timers for the frameTimer module, please see
+	instructions at the top of frameTimer.h
