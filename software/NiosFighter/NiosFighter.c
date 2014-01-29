@@ -10,7 +10,7 @@ int main() {
 	while(!(gstate.gameOver)) {
 		startFrame(&ftimer);
 		//processInput();
-		updateGame(frameLength(&ftimer));
+		updateGame(&gstate, frameLength(&ftimer));
 		render(&gstate);
 		endFrame(&ftimer);
 	}

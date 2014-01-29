@@ -6,7 +6,7 @@
 #include "render.h"
 #include "frameTimer.h"
 
-void updateGame(int frameLength);
+void updateGame(gameState* state, int frameLength);
 
 #endif //NIOSFIGHTER_H
 
