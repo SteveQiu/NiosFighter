@@ -22,7 +22,7 @@ void DrawCharTest(alt_up_char_buffer_dev* char_buffer_cpy) {
 	//Resolution:320x240
 }
 
-void render() {
+void render(gameState state_cpy) {
 	alt_up_pixel_buffer_dma_dev* pixel_buffer;
 	pixel_buffer = alt_up_pixel_buffer_dma_open_dev(VIDEO_PIXEL_BUFFER_DMA_NAME);
 	//Initialize the graphic buffer
