@@ -137,16 +137,19 @@
          type = "String";
       }
    }
-   element LEDs.s1
+   element sdram.s1
    {
-      datum _tags
-      {
-         value = "";
-         type = "String";
-      }
       datum baseAddress
       {
-         value = "18448";
+         value = "16777216";
+         type = "long";
+      }
+   }
+   element switches.s1
+   {
+      datum baseAddress
+      {
+         value = "18432";
          type = "long";
       }
    }
@@ -163,19 +166,16 @@
          type = "String";
       }
    }
-   element switches.s1
+   element LEDs.s1
    {
-      datum baseAddress
+      datum _tags
       {
-         value = "18432";
-         type = "long";
+         value = "";
+         type = "String";
       }
-   }
-   element sdram.s1
-   {
       datum baseAddress
       {
-         value = "16777216";
+         value = "18448";
          type = "long";
       }
    }
@@ -276,10 +276,10 @@
  <parameter name="globalResetBus" value="false" />
  <parameter name="hdlLanguage" value="VERILOG" />
  <parameter name="maxAdditionalLatency" value="1" />
- <parameter name="projectName" value="lights.qpf" />
+ <parameter name="projectName" value="" />
  <parameter name="sopcBorderPoints" value="false" />
  <parameter name="systemHash" value="1" />
- <parameter name="timeStamp" value="1389755072327" />
+ <parameter name="timeStamp" value="1390960451004" />
  <parameter name="useTestBenchNamingPattern" value="false" />
  <instanceScript></instanceScript>
  <interface name="clk" internal="clk_0.clk_in" type="clock" dir="end" />
@@ -431,7 +431,7 @@
    enabled="1"
    name="onchip_memory">
   <parameter name="allowInSystemMemoryContentEditor" value="false" />
-  <parameter name="autoInitializationFileName">nios_system_onchip_memory</parameter>
+  <parameter name="autoInitializationFileName">fighterSystem_onchip_memory</parameter>
   <parameter name="blockType" value="AUTO" />
   <parameter name="dataWidth" value="32" />
   <parameter name="deviceFamily" value="Cyclone II" />
@@ -554,7 +554,7 @@
    version="12.0"
    enabled="1"
    name="video_pixel_buffer_dma">
-  <parameter name="addr_mode" value="X-Y" />
+  <parameter name="addr_mode" value="Consecutive" />
   <parameter name="start_address" value="0" />
   <parameter name="back_start_address" value="0" />
   <parameter name="image_width" value="320" />

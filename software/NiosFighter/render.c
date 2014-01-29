@@ -38,4 +38,4 @@ void render(gameState *state) {
 	DrawCharTest(char_buffer);
 	//Invoke this function to write some text;
 }
-}
+
