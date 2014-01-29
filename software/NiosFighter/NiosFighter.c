@@ -18,7 +18,7 @@ int main() {
 	return 0;
 }
 
-void updateGame(int frameLength) {
+void updateGame(gameState *gstate, int frameLength) {
 	return;
 }
 
