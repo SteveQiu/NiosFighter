@@ -13,8 +13,17 @@ void DrawBackground(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy) {
 	// Clear the screen
 	alt_up_pixel_buffer_dma_clear_screen(pixel_buffer_cpy, 0);
 	// Draw a white lineto the foreground buffer
-	alt_up_pixel_buffer_dma_draw_hline(pixel_buffer_cpy, 0, 320, 40, 0x064F, 0);
+	alt_up_pixel_buffer_dma_draw_hline(pixel_buffer_cpy, 0, 320, 200, 0x064F, 0);
 	//Resolution:320x240
+	DrawHP(pixel_buffer_cpy);
+}
+
+void DrawHP(alt_up_pixel_buffer_dma_dev* HP_buffer_cpy){
+
+	alt_up_char_buffer_init(HP_buffer_cpy);
+
+	alt_up_pixel_buffer_dma_draw_box(HP_buffer_cpy, 15, 20 , 150, 40, 0x064F, 0);
+
 }
 
 void DrawCharTest(alt_up_char_buffer_dev* char_buffer_cpy) {
@@ -22,6 +31,7 @@ void DrawCharTest(alt_up_char_buffer_dev* char_buffer_cpy) {
 	// Write some text
 	alt_up_char_buffer_string(char_buffer_cpy, "NiosFighter",160,200);
 	//Resolution:320x240
+
 }
 
 void render(gameState* state) {

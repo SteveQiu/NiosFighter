@@ -6,7 +6,9 @@
 #include "gameState.h"
 
 void DrawBackground(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy);
+void DrawHP(alt_up_pixel_buffer_dma_dev* HP_buffer_cpy);
 void DrawCharTest(alt_up_char_buffer_dev* char_buffer_cpy);
 void render(gameState *state);
+
 
 #endif //RENDER_H
