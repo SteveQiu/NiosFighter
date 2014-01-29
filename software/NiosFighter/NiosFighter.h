@@ -7,6 +7,7 @@
 #include "frameTimer.h"
 
 void updateGame(gameState* state, int frameLength);
+void processInput(gameState* gstate);
 
 #endif //NIOSFIGHTER_H
 

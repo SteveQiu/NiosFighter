@@ -9,7 +9,7 @@ int main() {
 	//gameLoop
 	while(!(gstate.gameOver)) {
 		startFrame(&ftimer);
-		//processInput();
+		processInput(&gstate);
 		updateGame(&gstate, frameLength(&ftimer));
 		render(&gstate);
 		endFrame(&ftimer);
@@ -20,4 +20,13 @@ int main() {
 
 void updateGame(int frameLength) {
 	return;
+}
+
+void processInput(gameState *gstate) {
+	//How to fill in this function
+	//Say the player presses a button that makes a character move left
+	//if(moveLeftButtonIsPressed()) {
+	//	gstate->player1->ismovingLeft = 1;
+	//}
+	//etc
 }
