@@ -1,16 +1,14 @@
 #include "NiosFighter.h"
-#include "gameState.h"
-#include "render.h"
 
 int main() {
 	gameState gstate;
-	initGameState(gstate);
+	initGameState(&gstate);
 
 	//gameLoop
-	while(!gameOver) {
+	while(!(gstate.gameOver)) {
 		//processInput();
 		//updateGame(int timePassed);
-		render(gstate);
+		render(&gstate);
 	}
 
 	return 0;

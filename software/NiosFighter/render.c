@@ -1,3 +1,5 @@
+#include "render.h"
+
 void DrawBackground(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy) {
 	// Set the background buffer address although we don't use the background,
 	// they only provide a function to change the background buffer address, so
@@ -22,7 +24,7 @@ void DrawCharTest(alt_up_char_buffer_dev* char_buffer_cpy) {
 	//Resolution:320x240
 }
 
-void render(gameState *state) {
+void render(gameState* state) {
 	alt_up_pixel_buffer_dma_dev* pixel_buffer;
 	pixel_buffer = alt_up_pixel_buffer_dma_open_dev(VIDEO_PIXEL_BUFFER_DMA_NAME);
 	//Initialise the graphic buffer

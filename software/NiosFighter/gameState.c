@@ -5,3 +5,4 @@ int initGameState(gameState *gstate) {
 
 	return 0;
 }
+
