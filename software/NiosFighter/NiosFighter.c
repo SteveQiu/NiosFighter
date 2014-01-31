@@ -11,7 +11,6 @@ int main() {
 
 	//gameLoop
 	while(!(gstate.gameOver)) {
-		DEBUGVAL("FLag%d/n",gstate.gameOver);
 		startFrame(&ftimer);
 		processInput(&gstate);
 		updateGame(&gstate, frameLength(&ftimer));
@@ -24,7 +23,6 @@ int main() {
 }
 
 void updateGame(gameState *gstate, int frameLength) {
-	return;
 }
 
 void processInput(gameState *gstate) {

@@ -1,6 +1,6 @@
 #include "render.h"
 
-char InttoChar(int time_remain){
+char InttoChar(int time_remain) {
 	int n = time_remain;
 
 	char c[3];
@@ -16,8 +16,8 @@ void InitPixBuff(alt_up_pixel_buffer_dma_dev **pixel_buffer_ptr) {
 	//Initialise the graphic buffer
 
 	printf("open success!\n");
-	unsigned int pixel_buffer_addr1 = VIDEO_PIXEL_BUFFER_DMA_BASE;
-	unsigned int pixel_buffer_addr2 = VIDEO_PIXEL_BUFFER_DMA_BASE + (320 * 240 * 2);
+	unsigned int pixel_buffer_addr1 = SRAM_BASE;
+	unsigned int pixel_buffer_addr2 = SRAM_BASE + (320 * 240 * 2);
 
 	printf("open success!");
 	// Set the 1st buffer address
@@ -55,12 +55,9 @@ void DrawBackground(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy) {
 	DrawHP(pixel_buffer_cpy);
 }
 
-void DrawHP(alt_up_pixel_buffer_dma_dev* HP_buffer_cpy){
+void DrawHP(alt_up_pixel_buffer_dma_dev* HP_buffer_cpy) {
 
-	alt_up_char_buffer_init(HP_buffer_cpy);
-
-	alt_up_pixel_buffer_dma_draw_box(HP_buffer_cpy, 15, 20 , 150, 40, 0x064F, 0);
-
+	alt_up_pixel_buffer_dma_draw_box(HP_buffer_cpy, 15, 20, 150, 40, 0x064F, 0);
 }
 
 void DrawTimer(alt_up_char_buffer_dev* char_buffer_cpy, int time_remain) {
@@ -70,7 +67,6 @@ void DrawTimer(alt_up_char_buffer_dev* char_buffer_cpy, int time_remain) {
 	alt_up_char_buffer_string(char_buffer_cpy, " ", 38, 0);
 	alt_up_char_buffer_string(char_buffer_cpy, time_char, 39, 0);
 	alt_up_char_buffer_string(char_buffer_cpy, " ", 40, 0);
-
 	//80*60 array across 320*280 resolution screen
 }
 
@@ -87,7 +83,6 @@ void render(gameState* state) {
 	//Invoke this function to draw background;
 	printf("test3");
 
-	DrawTimer(char_buffer, 99);
-	//Invoke this function to write some text;
-	printf("test");
+	//DrawTimer(char_buffer, 99);
+
 }
