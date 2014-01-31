@@ -40,9 +40,10 @@ void DrawBackground(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy) {
 	alt_up_pixel_buffer_dma_draw_hline(pixel_buffer_cpy, 0, 320, 170, 0x064F, 0);
 }
 
-void DrawCharTest(alt_up_char_buffer_dev* char_buffer_cpy) {
+void DrawTimerSpace(alt_up_char_buffer_dev* char_buffer_cpy) {
 	// Write some text
-	alt_up_char_buffer_string(char_buffer_cpy, "NiosFighter", 160, 200);
+	alt_up_char_buffer_string(char_buffer_cpy, "    ", 38, 0);
+	//80*60 array across 320*280 resolution screen
 }
 
 void render(gameState* state) {
