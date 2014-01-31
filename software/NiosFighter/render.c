@@ -2,9 +2,10 @@
 
 //This function convert int into char array
 void InttoChar(int time_remain, char** array) {
-	if(time_remain>99)
+	if (time_remain > 99)
 		exit(1);
-	int n = time_remain;;
+	int n = time_remain;
+	;
 	sprintf(*array, "%d", n);
 }
 
@@ -34,6 +35,7 @@ void InitPixBuff(alt_up_pixel_buffer_dma_dev **pixel_buffer_ptr) {
 	// Clear both buffers (this makes all pixels black)
 	alt_up_pixel_buffer_dma_clear_screen(*pixel_buffer_ptr, 0);
 	alt_up_pixel_buffer_dma_clear_screen(*pixel_buffer_ptr, 1);
+	//0 front, 1 back
 }
 
 //This function initializes the buffer needed for char printing
@@ -48,7 +50,7 @@ void InitCharBuff(alt_up_char_buffer_dev** char_buffer_ptr) {
 //This function draws the background of the game
 void DrawBackground(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy) {
 	// Clear the screen, this makes it black
-	alt_up_pixel_buffer_dma_clear_screen(pixel_buffer_cpy, 0);
+	alt_up_pixel_buffe_dma_clear_screen(pixel_buffer_cpy, 0);
 	// Draw a white lineto the foreground buffer
 	alt_up_pixel_buffer_dma_draw_hline(pixel_buffer_cpy, 0, 320, 200, 0x064F, 0);
 	//Resolution:320x240
@@ -84,4 +86,7 @@ void render(gameState* state) {
 
 	DrawTimer(char_buffer, 99);
 
+	alt_up_pixel_buffer_dma_swap_buffers(pixel_buffer);
+	while (alt_up_pixel_buffer_dma_check_swap_buffers_status(pixel_buffer))
+		;
 }
