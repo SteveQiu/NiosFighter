@@ -5,6 +5,7 @@
 #include "gameState.h"
 #include "render.h"
 #include "frameTimer.h"
+#include "debug.h"
 
 void updateGame(gameState* state, int frameLength);
 void processInput(gameState* gstate);
