@@ -18,11 +18,13 @@ int main() {
 	return 0;
 }
 
-void updateGame(gameState *gstate, int frameLength) {
+void updateGame(gameState *gstate, float frameLength) {
 
-	if (gstate->player1->movingDirection == LEFT) {
-		gstate->player1->xPosition +=
-	}
+	character* p1 = &(gstate->player1);
+	character* p2 = &(gstate->player2);
+	updatePlayerPosition(p1, frameLength);
+	updatePlayerPosition(p2, frameLength);
+
 
 	return;
 }

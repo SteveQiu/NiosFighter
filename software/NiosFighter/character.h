@@ -1,15 +1,25 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 #define NOTMOVING 0
-#define LEFT 1
-#define RIGHT 2
+#define LEFT -1
+#define RIGHT 1
+#define ARENALEFTBORDER -100
+#define ARENARIGHTBORDER 100
+#define STATUS_IDLE     0x00000001
+#define STATUS_STUNNED  0x00000010
+#define STATUS_BLOCKING 0x00000100
+#define STATUS_PUNCHING 0x00001000
 
 typedef struct character {
 	int facingDirection;
 	int health;
-	int xPosition;
+	float xPosition;
 	int movingDirection;
-
+	float walkingSpeed;
+	int status;
+	float punchMaxDuration;
+	float punchLength;
+	float punchDuration;
 } character;
 
 int initCharacter(character *target);

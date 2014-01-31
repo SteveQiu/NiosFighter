@@ -24,5 +24,9 @@ float frameLength(frameTimer *ftimer) {
 			/(float)alt_timestamp_freq();
 }
 
+int numTicksPerSecond() {
+	return alt_timestamp_freq();
+}
+
 
 
