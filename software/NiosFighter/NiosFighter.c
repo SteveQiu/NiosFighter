@@ -8,7 +8,7 @@ int main() {
 
 	//gameLoop
 	while(!(gstate.gameOver)) {
-		startFrame(&ftimer);
+//		startFrame(&ftimer);
 		processInput(&gstate);
 		updateGame(&gstate, frameLength(&ftimer));
 		render(&gstate);
