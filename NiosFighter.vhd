@@ -73,7 +73,7 @@ DRAM_LDQM<= DQM(0);
 NiosII: fighterSystem
 PORT MAP (
 		clk_clk => CLOCK_50,
-		reset_reset_n => KEY(0),
+		reset_reset_n => '1',
 		sdram_clk_clk => DRAM_CLK,
 		leds_export => LEDG,
 		switches_export => SW,
