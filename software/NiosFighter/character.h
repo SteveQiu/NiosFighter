@@ -20,6 +20,7 @@ typedef struct character {
 	float punchMaxDuration;
 	float punchLength;
 	float punchDuration;
+	float fistDistance;
 } character;
 
 int initCharacter(character *target);

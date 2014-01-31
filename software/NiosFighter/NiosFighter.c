@@ -24,6 +24,8 @@ void updateGame(gameState *gstate, float frameLength) {
 	character* p2 = &(gstate->player2);
 	updatePlayerPosition(p1, frameLength);
 	updatePlayerPosition(p2, frameLength);
+	updatePlayerPunch(p1, p2, frameLength);
+	updatePlayerPunch(p2, p1, frameLength);
 
 
 	return;

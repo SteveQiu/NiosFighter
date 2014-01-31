@@ -22,6 +22,34 @@ void updatePlayerPosition(character *ch, float time) {
 		if (ch->xPosition > ARENARIGHTBORDER)
 				ch->xPosition = ARENARIGHTBORDER;
 	}
+}
 
+void updatePlayerPunch(character *p1, character *p2, float time) {
+	if (p1->status == STATE_PUNCHING) {
+		if (p1->punchDuration == 0.0) {
+		} else if (p1->punchDuration < p1->punchMaxDuration) {
+			p1->punchDuration += time;
+			p1->fistDistance =
+					(p1->punchDuration/p1->punchMaxDuration)
+					* p1->punchLength * p1->facingDirection;
+		} else if (p1->punchDuration > p1->punchMaxDuration) {
+			p1->punchDuration = 0.0;
+			p1->state = hitDetection(p1,p2);
+			p1->fistDistance = 0;
+		}
+	}
+}
+
+int hitDetection(p1, p2) {
 
 }
+
+
+
+
+
+
+
+
+
+

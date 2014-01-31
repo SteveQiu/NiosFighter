@@ -10,6 +10,7 @@ int initCharacter(character *c) {
 	c->punchLength = 20;
 	c->punchMaxDuration = 1.0;
 	c->punchDuration = 0;
+	c->fistDistance = 0;
 	return 0;
 }
 
