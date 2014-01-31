@@ -1,13 +1,25 @@
 #include "render.h"
 
+char InttoChar(int time_remain){
+	int n = time_remain;
+
+	char c[3];
+	sprintf(c, "%d", n);
+
+	return c;
+}
+
 void InitPixBuff(alt_up_pixel_buffer_dma_dev **pixel_buffer_ptr) {
+	printf("open attempt\n");
 	*pixel_buffer_ptr = alt_up_pixel_buffer_dma_open_dev(
 			VIDEO_PIXEL_BUFFER_DMA_NAME);
 	//Initialise the graphic buffer
 
+	printf("open success!\n");
 	unsigned int pixel_buffer_addr1 = VIDEO_PIXEL_BUFFER_DMA_BASE;
 	unsigned int pixel_buffer_addr2 = VIDEO_PIXEL_BUFFER_DMA_BASE + (320 * 240 * 2);
 
+	printf("open success!");
 	// Set the 1st buffer address
 	alt_up_pixel_buffer_dma_change_back_buffer_address(*pixel_buffer_ptr,
 			pixel_buffer_addr1);
@@ -40,22 +52,30 @@ void DrawBackground(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy) {
 	alt_up_pixel_buffer_dma_draw_hline(pixel_buffer_cpy, 0, 320, 170, 0x064F, 0);
 }
 
-void DrawTimerSpace(alt_up_char_buffer_dev* char_buffer_cpy) {
+void DrawTimer(alt_up_char_buffer_dev* char_buffer_cpy, int time_remain) {
 	// Write some text
-	alt_up_char_buffer_string(char_buffer_cpy, "    ", 38, 0);
+	char* time_char = InttoChar(time_remain);
+
+	alt_up_char_buffer_string(char_buffer_cpy, " ", 38, 0);
+	alt_up_char_buffer_string(char_buffer_cpy, time_char, 39, 0);
+	alt_up_char_buffer_string(char_buffer_cpy, " ", 40, 0);
 	//80*60 array across 320*280 resolution screen
 }
 
 void render(gameState* state) {
 	alt_up_pixel_buffer_dma_dev* pixel_buffer;
 	InitPixBuff(&pixel_buffer);
+	printf("test1");
 
 	alt_up_char_buffer_dev* char_buffer;
 	InitCharBuff(&char_buffer);
+	printf("test2");
 
 	DrawBackground(pixel_buffer);
 	//Invoke this function to draw background;
+	printf("test3");
 
-	DrawCharTest(char_buffer);
+	DrawTimer(char_buffer, 99);
 	//Invoke this function to write some text;
+	printf("test");
 }

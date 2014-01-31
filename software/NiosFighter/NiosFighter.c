@@ -5,6 +5,9 @@ int main() {
 	frameTimer ftimer;
 	initGameState(&gstate);
 	initFrameTimer(&ftimer);
+	printf("test");
+	render(&gstate);
+	printf("test11");
 
 	//gameLoop
 	while(!(gstate.gameOver)) {
@@ -12,6 +15,7 @@ int main() {
 		processInput(&gstate);
 		updateGame(&gstate, frameLength(&ftimer));
 		render(&gstate);
+		printf("test");
 		endFrame(&ftimer);
 	}
 
