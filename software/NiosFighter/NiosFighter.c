@@ -19,6 +19,11 @@ int main() {
 }
 
 void updateGame(gameState *gstate, int frameLength) {
+
+	if (gstate->player1->movingDirection == LEFT) {
+		gstate->player1->xPosition +=
+	}
+
 	return;
 }
 

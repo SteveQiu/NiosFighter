@@ -1,6 +1,8 @@
 #ifndef INPUT_H
 #define INPUT_H
 
+#define LEFTPLAYERMOVELEFTBUTTON 1
+
 typedef struct input {
 
 } input;

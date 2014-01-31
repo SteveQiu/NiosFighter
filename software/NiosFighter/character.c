@@ -5,6 +5,7 @@ int initCharacter(character *c) {
 	c->facingDirection = LEFT;
 	c->movingDirection = NOTMOVING;
 	c->xPosition = 0;
+	c->walkingSpeed = 5;
 	return 0;
 }
 
