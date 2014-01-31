@@ -6,6 +6,7 @@ int main() {
 	initGameState(&gstate);
 	initFrameTimer(&ftimer);
 
+
 	//gameLoop
 	while(!(gstate.gameOver)) {
 		startFrame(&ftimer);
@@ -13,6 +14,8 @@ int main() {
 		updateGame(&gstate, frameLength(&ftimer));
 		render(&gstate);
 		endFrame(&ftimer);
+
+
 	}
 
 	return 0;
@@ -20,18 +23,22 @@ int main() {
 
 void updateGame(gameState *gstate, int frameLength) {
 
-	if (gstate->player1->movingDirection == LEFT) {
-		gstate->player1->xPosition +=
-	}
-
-	return;
 }
 
 void processInput(gameState *gstate) {
-	//How to fill in this function
-	//Say the player presses a button that makes a character move left
-	//if(moveLeftButtonIsPressed()) {
-	//	gstate->player1->ismovingLeft = 1;
-	//}
-	//etc
+	input move;
+	refkey(&move);
+	if(move.p){
+				if(move.left)
+					printf("Moving left\n");
+				if(move.right)
+					printf("Moving right\n");
+				if(move.punch)
+					printf("Punching\n");
+				if(move.jump)
+					printf("Jumping\n");
+			}
+			else
+				printf("Nothing\n");
+			usleep(100000);
 }

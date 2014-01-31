@@ -9,6 +9,7 @@ typedef struct character {
 	int health;
 	int xPosition;
 	int movingDirection;
+	float walkingSpeed;
 
 } character;
 
