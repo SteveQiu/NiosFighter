@@ -9,7 +9,7 @@
 #include "debug.h"
 #include "input.h"
 
-void updateGame(gameState* state, int frameLength);
+void updateGame(gameState* state, float frameLength);
 void processInput(gameState* gstate);
 
 #endif //NIOSFIGHTER_H

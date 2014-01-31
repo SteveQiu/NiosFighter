@@ -24,6 +24,7 @@ void endFrame(frameTimer *ftimer);
 //This function returns the time (in seconds) it took for the last
 //frame to execute
 float frameLength(frameTimer *ftimer);
+int numTicksPerSecond();
 
 
 #endif //FRAMETIMER_H

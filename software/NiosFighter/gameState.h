@@ -10,5 +10,9 @@ typedef struct gameState {
 
 //Returns 0 on successful completion
 int initGameState(gameState *state);
+void updatePlayerPosition(character* ch, float time);
+void updatePlayerPunch(character* c1, character *c2, float time);
+int hitDetection(character *c1, character *c2);
+int performPunch(character *c1, character *c2);
 
 #endif //GAMESTATE_H
