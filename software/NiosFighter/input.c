@@ -3,7 +3,7 @@
 
 void initkey(input *key) {
 	key->p = 0;
-	key->jump = 0;
+	key->block = 0;
 	key->punch = 0;
 	key->left = 0;
 	key->right = 0;
@@ -52,7 +52,7 @@ void refkey(input *key){
 			key->p =1;
 		}
 		if(isjumpkey())
-		{	key->jump = 1;
+		{	key->block = 1;
 			key->p =1;
 		}
 		if(ispunchkey())

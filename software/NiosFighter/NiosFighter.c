@@ -38,7 +38,7 @@ void processInput(gameState *gstate) {
 					printf("Moving right\n");
 				if(move.punch)
 					printf("Punching\n");
-				if(move.jump)
+				if(move.block)
 					printf("Jumping\n");
 			}
 			else

@@ -8,7 +8,7 @@ typedef struct input {
 int p;
 int left;
 int right;
-int jump;
+int block;
 int punch;
 } input;
 
