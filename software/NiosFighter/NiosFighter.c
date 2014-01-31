@@ -5,9 +5,7 @@ int main() {
 	frameTimer ftimer;
 	initGameState(&gstate);
 	initFrameTimer(&ftimer);
-	printf("test");
 	render(&gstate);
-	printf("test11");
 
 
 	//gameLoop
@@ -16,7 +14,6 @@ int main() {
 		processInput(&gstate);
 		updateGame(&gstate, frameLength(&ftimer));
 		render(&gstate);
-		printf("test");
 		endFrame(&ftimer);
 
 
@@ -39,17 +36,18 @@ void updateGame(gameState *gstate, float frameLength) {
 void processInput(gameState *gstate) {
 	input move;
 	refkey(&move);
+	gstate->player1->movingDirection = NOTMOVING;
+	gstate->player1->wantsToPunch = 0;
+	gstate->player1->wantsToBlock = 0;
 	if(move.p){
-				if(move.left)
-					printf("Moving left\n");
-				if(move.right)
-					printf("Moving right\n");
-				if(move.punch)
-					printf("Punching\n");
-				if(move.block)
-					printf("Jumping\n");
-			}
-			else
-				printf("Nothing\n");
-			usleep(100000);
+		if(move.left)
+			gstate->player1->movingDirection = LEFT;
+		if(move.right)
+			gstate->player1->movingDirection = RIGHT;
+		if(move.punch)
+			gstate->player1->wantsToPunch = 1;
+		if(move.block)
+			gstate->player1->wantsToBlock = 1;
+	}
+
 }

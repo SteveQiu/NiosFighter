@@ -25,6 +25,9 @@ void updatePlayerPosition(character *ch, float time) {
 }
 
 void updatePlayerPunch(character *p1, character *p2, float time) {
+	if (p1->wantsToPunch == 1 && p1->status == STATE_IDLE) {
+		p1->status = STATE_PUNCHING;
+	}
 	if (p1->status == STATE_PUNCHING) {
 		if (p1->punchDuration == 0.0) {
 		} else if (p1->punchDuration < p1->punchMaxDuration) {
@@ -68,10 +71,35 @@ int performPunch(character *c1, character *c2) {
 
 void updatePlayerStunned(character *c, float time) {
 	if (c->status == STATE_STUNNED) {
+		c->punchDuration = 0.0;
+		c->blockChangeTime = 0.0;
 		c->stunDuration += time;
 		if (c->stunDuration > c->stunMaxDuration) {
 			c->status = STATE_IDLE;
 			c->stunDuration = 0;
+		}
+	}
+}
+
+void updatePlayerBlocking(character *c, float time) {
+	if (c->wantsToBlock == 1) {
+		if (c->status == STATE_IDLE) {
+			if (c->blockChangeTime < c->blockChangeMaxTime) {
+				c->blockChangeTime += time;
+			} else if (c->blockChangeTime > c->blockChangeMaxTime) {
+				c->status = STATE_BLOCKING;
+				c->blockChangeTime = 0.0;
+			}
+		}
+	}
+	if (c->wantsToBlock = 0) {
+		if (c->state == STATE_BLOCKING) {
+			if (c->blockChangeTime < c->blockChangeMaxTime) {
+				c->blockChangeTime += time;
+			} else if (c->blockChangeTime > c->blockChangeMaxTime) {
+				c->status = STATE_IDLE;
+				c->blockChangeTime = 0.0;
+			}
 		}
 	}
 }

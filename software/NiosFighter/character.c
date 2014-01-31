@@ -13,6 +13,10 @@ int initCharacter(character *c) {
 	c->punchMaxDuration = 1.0;
 	c->punchDuration = 0;
 	c->fistDistance = 0;
+	c->wantsToPunch = 0;
+	c->wantsToBlock = 0;
+	c->blockChangeTime = 0;
+	c->blockChangeMaxTime = 0.75;
 	return 0;
 }
 

@@ -25,6 +25,10 @@ typedef struct character {
 	float fistDistance;
 	float stunDuration;
 	float stunMaxDuration;
+	int wantsToPunch;
+	int wantsToBlock;
+	float blockChangeTime;
+	float blockChangeMaxTime;
 } character;
 
 int initCharacter(character *target);
