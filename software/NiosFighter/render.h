@@ -3,9 +3,11 @@
 #include <altera_up_avalon_video_pixel_buffer_dma.h>
 #include <altera_up_avalon_video_character_buffer_with_dma.h>
 #include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "gameState.h"
 
-char InttoChar(int time_remain);
+void InttoChar(int time_remain,char**);
 void InitPixBuff(alt_up_pixel_buffer_dma_dev **pixel_buffer_ptr);
 void InitCharBuff(alt_up_char_buffer_dev** char_buffer_ptr);
 void DrawBackground(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy);
