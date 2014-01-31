@@ -5,6 +5,10 @@ int main() {
 	frameTimer ftimer;
 	initGameState(&gstate);
 	initFrameTimer(&ftimer);
+	printf("test");
+	render(&gstate);
+	printf("test11");
+
 
 	//gameLoop
 	while(!(gstate.gameOver)) {
@@ -12,12 +16,14 @@ int main() {
 		processInput(&gstate);
 		updateGame(&gstate, frameLength(&ftimer));
 		render(&gstate);
+		printf("test");
 		endFrame(&ftimer);
+
+
 	}
 
 	return 0;
 }
-
 void updateGame(gameState *gstate, float frameLength) {
 
 	character* p1 = &(gstate->player1);
@@ -28,16 +34,22 @@ void updateGame(gameState *gstate, float frameLength) {
 	updatePlayerPunch(p2, p1, frameLength);
 	updatePlayerStunned(p1, frameLength);
 	updatePlayerStunned(p2, frameLength);
-
-
-	return;
 }
 
 void processInput(gameState *gstate) {
-	//How to fill in this function
-	//Say the player presses a button that makes a character move left
-	//if(moveLeftButtonIsPressed()) {
-	//	gstate->player1->ismovingLeft = 1;
-	//}
-	//etc
+	input move;
+	refkey(&move);
+	if(move.p){
+				if(move.left)
+					printf("Moving left\n");
+				if(move.right)
+					printf("Moving right\n");
+				if(move.punch)
+					printf("Punching\n");
+				if(move.block)
+					printf("Jumping\n");
+			}
+			else
+				printf("Nothing\n");
+			usleep(100000);
 }

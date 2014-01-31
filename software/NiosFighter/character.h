@@ -23,7 +23,6 @@ typedef struct character {
 	float punchDuration;
 	int punchDamage;
 	float fistDistance;
-
 	float stunDuration;
 	float stunMaxDuration;
 } character;
