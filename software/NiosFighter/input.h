@@ -1,10 +1,6 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-typedef enum {
-
-} key_t;
-
 typedef struct input {
 
 } input;

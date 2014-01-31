@@ -68,6 +68,6 @@ void render(gameState* state) {
 	DrawBackground(pixel_buffer);
 	//Invoke this function to draw background;
 
-	DrawCharTest(char_buffer);
+	//DrawCharTest(char_buffer);
 	//Invoke this function to write some text;
 }
