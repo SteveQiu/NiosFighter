@@ -55,8 +55,9 @@ void DrawHP(alt_up_pixel_buffer_dma_dev* HP_buffer_cpy){
 >>>>>>> 2962f080fbd8b4e480e18f21296e55bdcf767fe3
 }
 
-void DrawCharTest(alt_up_char_buffer_dev* char_buffer_cpy) {
+void DrawTimerSpace(alt_up_char_buffer_dev* char_buffer_cpy) {
 	// Write some text
+<<<<<<< HEAD
 <<<<<<< HEAD
 	alt_up_char_buffer_string(char_buffer_cpy, "NiosFighter",160,200);
 	//Resolution:320x240
@@ -64,6 +65,10 @@ void DrawCharTest(alt_up_char_buffer_dev* char_buffer_cpy) {
 =======
 	alt_up_char_buffer_string(char_buffer_cpy, "NiosFighter", 160, 200);
 >>>>>>> 2962f080fbd8b4e480e18f21296e55bdcf767fe3
+=======
+	alt_up_char_buffer_string(char_buffer_cpy, "    ", 38, 0);
+	//80*60 array across 320*280 resolution screen
+>>>>>>> 775d68b6405a89d9b3b4dceab9e8aaa0d90245c7
 }
 
 void render(gameState* state) {
