@@ -5,7 +5,7 @@ USE ieee.std_logic_unsigned.all;
 ENTITY NiosFighter IS
 PORT (
 		SW : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-		KEY : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+		KEY : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
 		CLOCK_50 : IN STD_LOGIC;
 		LEDG : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
 		DRAM_CLK, DRAM_CKE : OUT STD_LOGIC;
@@ -59,7 +59,8 @@ PORT (
 		SRAM_UB_N : OUT STD_LOGIC;
 		SRAM_CE_N : OUT STD_LOGIC;
 		SRAM_OE_N : OUT STD_LOGIC;
-		SRAM_WE_N : OUT STD_LOGIC);
+		SRAM_WE_N : OUT STD_LOGIC;
+		key_export : in std_logic_vector(3 downto 0));
 END COMPONENT;
 SIGNAL DQM : STD_LOGIC_VECTOR(1 DOWNTO 0);
 SIGNAL BA : STD_LOGIC_VECTOR(1 DOWNTO 0);
@@ -105,5 +106,6 @@ PORT MAP (
 		sram_UB_N => SRAM_UB_N,
 		sram_CE_N => SRAM_CE_N,
 		sram_OE_N => SRAM_OE_N,
-		sram_WE_N => SRAM_WE_N);
+		sram_WE_N => SRAM_WE_N,
+		key_export => KEY);
 END Structure;

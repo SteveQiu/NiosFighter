@@ -12,6 +12,14 @@
    element $${FILENAME}
    {
    }
+   element KEY
+   {
+      datum _sortIndex
+      {
+         value = "5";
+         type = "int";
+      }
+   }
    element LEDs
    {
       datum _sortIndex
@@ -32,7 +40,7 @@
    {
       datum baseAddress
       {
-         value = "18520";
+         value = "18536";
          type = "long";
       }
    }
@@ -48,7 +56,7 @@
    {
       datum baseAddress
       {
-         value = "18512";
+         value = "18528";
          type = "long";
       }
    }
@@ -61,7 +69,7 @@
       }
       datum baseAddress
       {
-         value = "18528";
+         value = "18544";
          type = "long";
       }
    }
@@ -77,7 +85,7 @@
    {
       datum _sortIndex
       {
-         value = "8";
+         value = "9";
          type = "int";
       }
    }
@@ -93,7 +101,7 @@
    {
       datum _sortIndex
       {
-         value = "7";
+         value = "8";
          type = "int";
       }
    }
@@ -109,7 +117,7 @@
    {
       datum _sortIndex
       {
-         value = "5";
+         value = "6";
          type = "int";
       }
    }
@@ -153,11 +161,16 @@
          type = "long";
       }
    }
-   element switches.s1
+   element LEDs.s1
    {
+      datum _tags
+      {
+         value = "";
+         type = "String";
+      }
       datum baseAddress
       {
-         value = "18464";
+         value = "18480";
          type = "long";
       }
    }
@@ -174,16 +187,19 @@
          type = "String";
       }
    }
-   element LEDs.s1
+   element switches.s1
    {
-      datum _tags
-      {
-         value = "";
-         type = "String";
-      }
       datum baseAddress
       {
-         value = "18480";
+         value = "18464";
+         type = "long";
+      }
+   }
+   element KEY.s1
+   {
+      datum baseAddress
+      {
+         value = "18512";
          type = "long";
       }
    }
@@ -191,7 +207,7 @@
    {
       datum _sortIndex
       {
-         value = "6";
+         value = "7";
          type = "int";
       }
       datum megawizard_uipreferences
@@ -204,7 +220,7 @@
    {
       datum _sortIndex
       {
-         value = "9";
+         value = "10";
          type = "int";
       }
    }
@@ -220,7 +236,7 @@
    {
       datum _sortIndex
       {
-         value = "17";
+         value = "18";
          type = "int";
       }
    }
@@ -228,7 +244,7 @@
    {
       datum _sortIndex
       {
-         value = "14";
+         value = "15";
          type = "int";
       }
    }
@@ -236,7 +252,7 @@
    {
       datum _sortIndex
       {
-         value = "16";
+         value = "17";
          type = "int";
       }
    }
@@ -244,7 +260,7 @@
    {
       datum _sortIndex
       {
-         value = "15";
+         value = "16";
          type = "int";
       }
    }
@@ -252,7 +268,7 @@
    {
       datum _sortIndex
       {
-         value = "13";
+         value = "14";
          type = "int";
       }
    }
@@ -260,7 +276,7 @@
    {
       datum _sortIndex
       {
-         value = "10";
+         value = "11";
          type = "int";
       }
    }
@@ -268,7 +284,7 @@
    {
       datum _sortIndex
       {
-         value = "11";
+         value = "12";
          type = "int";
       }
    }
@@ -276,7 +292,7 @@
    {
       datum _sortIndex
       {
-         value = "12";
+         value = "13";
          type = "int";
       }
    }
@@ -295,7 +311,7 @@
  <parameter name="projectName" value="" />
  <parameter name="sopcBorderPoints" value="false" />
  <parameter name="systemHash" value="1" />
- <parameter name="timeStamp" value="1390964546372" />
+ <parameter name="timeStamp" value="1391129820418" />
  <parameter name="useTestBenchNamingPattern" value="false" />
  <instanceScript></instanceScript>
  <interface name="clk" internal="clk_0.clk_in" type="clock" dir="end" />
@@ -325,6 +341,11 @@
  <interface
    name="vga_controller"
    internal="vga_controller.external_interface"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="key"
+   internal="KEY.external_connection"
    type="conduit"
    dir="end" />
  <module kind="clock_source" version="12.0" enabled="1" name="clk_0">
@@ -426,7 +447,7 @@
   <parameter name="tightlyCoupledInstructionMaster2AddrWidth" value="1" />
   <parameter name="tightlyCoupledInstructionMaster3AddrWidth" value="1" />
   <parameter name="instSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory.s1' start='0x0' end='0x1000' /><slave name='nios2_processor.jtag_debug_module' start='0x4000' end='0x4800' /><slave name='nios2_processor.jtag_debug_module' start='0x4000' end='0x4800' /><slave name='sdram.s1' start='0x1000000' end='0x1800000' /></address-map>]]></parameter>
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory.s1' start='0x0' end='0x1000' /><slave name='video_character_buffer_with_dma.avalon_char_buffer_slave' start='0x2000' end='0x4000' /><slave name='nios2_processor.jtag_debug_module' start='0x4000' end='0x4800' /><slave name='timer_0.s1' start='0x4800' end='0x4820' /><slave name='switches.s1' start='0x4820' end='0x4830' /><slave name='LEDs.s1' start='0x4830' end='0x4840' /><slave name='video_pixel_buffer_dma.avalon_control_slave' start='0x4840' end='0x4850' /><slave name='jtag_uart.avalon_jtag_slave' start='0x4850' end='0x4858' /><slave name='video_character_buffer_with_dma.avalon_char_control_slave' start='0x4858' end='0x4860' /><slave name='character_lcd.avalon_lcd_slave' start='0x4860' end='0x4862' /><slave name='sram.avalon_sram_slave' start='0x80000' end='0x100000' /><slave name='sdram.s1' start='0x1000000' end='0x1800000' /></address-map>]]></parameter>
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory.s1' start='0x0' end='0x1000' /><slave name='video_character_buffer_with_dma.avalon_char_buffer_slave' start='0x2000' end='0x4000' /><slave name='nios2_processor.jtag_debug_module' start='0x4000' end='0x4800' /><slave name='timer_0.s1' start='0x4800' end='0x4820' /><slave name='switches.s1' start='0x4820' end='0x4830' /><slave name='LEDs.s1' start='0x4830' end='0x4840' /><slave name='video_pixel_buffer_dma.avalon_control_slave' start='0x4840' end='0x4850' /><slave name='KEY.s1' start='0x4850' end='0x4860' /><slave name='jtag_uart.avalon_jtag_slave' start='0x4860' end='0x4868' /><slave name='video_character_buffer_with_dma.avalon_char_control_slave' start='0x4868' end='0x4870' /><slave name='character_lcd.avalon_lcd_slave' start='0x4870' end='0x4872' /><slave name='sram.avalon_sram_slave' start='0x80000' end='0x100000' /><slave name='sdram.s1' start='0x1000000' end='0x1800000' /></address-map>]]></parameter>
   <parameter name="clockFrequency" value="50000000" />
   <parameter name="deviceFamilyName" value="Cyclone II" />
   <parameter name="internalIrqMaskSystemInfo" value="3" />
@@ -659,6 +680,20 @@
   <parameter name="timeoutPulseOutput" value="false" />
   <parameter name="timerPreset" value="FULL_FEATURED" />
  </module>
+ <module kind="altera_avalon_pio" version="12.0" enabled="1" name="KEY">
+  <parameter name="bitClearingEdgeCapReg" value="false" />
+  <parameter name="bitModifyingOutReg" value="false" />
+  <parameter name="captureEdge" value="false" />
+  <parameter name="clockRate" value="50000000" />
+  <parameter name="direction" value="Input" />
+  <parameter name="edgeType" value="RISING" />
+  <parameter name="generateIRQ" value="false" />
+  <parameter name="irqType" value="LEVEL" />
+  <parameter name="resetValue" value="0" />
+  <parameter name="simDoTestBenchWiring" value="false" />
+  <parameter name="simDrivenValue" value="0" />
+  <parameter name="width" value="4" />
+ </module>
  <connection
    kind="avalon"
    version="12.0"
@@ -748,7 +783,7 @@
    start="nios2_processor.data_master"
    end="jtag_uart.avalon_jtag_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x4850" />
+  <parameter name="baseAddress" value="0x4860" />
  </connection>
  <connection
    kind="reset"
@@ -847,7 +882,7 @@
    start="nios2_processor.data_master"
    end="character_lcd.avalon_lcd_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x4860" />
+  <parameter name="baseAddress" value="0x4870" />
  </connection>
  <connection
    kind="reset"
@@ -1019,7 +1054,7 @@
    start="nios2_processor.data_master"
    end="video_character_buffer_with_dma.avalon_char_control_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x4858" />
+  <parameter name="baseAddress" value="0x4868" />
  </connection>
  <connection
    kind="avalon"
@@ -1080,4 +1115,19 @@
    end="timer_0.irq">
   <parameter name="irqNumber" value="1" />
  </connection>
+ <connection kind="reset" version="12.0" start="clk_0.clk_reset" end="KEY.reset" />
+ <connection
+   kind="avalon"
+   version="12.0"
+   start="nios2_processor.data_master"
+   end="KEY.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x4850" />
+ </connection>
+ <connection
+   kind="reset"
+   version="12.0"
+   start="nios2_processor.jtag_debug_module_reset"
+   end="KEY.reset" />
+ <connection kind="clock" version="12.0" start="clocks.sys_clk" end="KEY.clk" />
 </system>
