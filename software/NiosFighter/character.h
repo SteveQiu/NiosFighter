@@ -13,6 +13,7 @@
 typedef struct character {
 	int facingDirection;
 	int health;
+	float width;
 	float xPosition;
 	int movingDirection;
 	float walkingSpeed;
@@ -20,7 +21,11 @@ typedef struct character {
 	float punchMaxDuration;
 	float punchLength;
 	float punchDuration;
+	int punchDamage;
 	float fistDistance;
+
+	float stunDuration;
+	float stunMaxDuration;
 } character;
 
 int initCharacter(character *target);

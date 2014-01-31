@@ -2,6 +2,8 @@
 
 int initCharacter(character *c) {
 	c->health = 100;
+	c->width = 20.0;
+	c->punchDamage = 10;
 	c->facingDirection = LEFT;
 	c->movingDirection = NOTMOVING;
 	c->xPosition = 0;

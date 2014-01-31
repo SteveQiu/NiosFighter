@@ -32,18 +32,49 @@ void updatePlayerPunch(character *p1, character *p2, float time) {
 			p1->fistDistance =
 					(p1->punchDuration/p1->punchMaxDuration)
 					* p1->punchLength * p1->facingDirection;
-		} else if (p1->punchDuration > p1->punchMaxDuration) {
-			p1->punchDuration = 0.0;
+		} if (p1->punchDuration > p1->punchMaxDuration) {
 			p1->state = hitDetection(p1,p2);
+			p1->punchDuration = 0.0;
 			p1->fistDistance = 0;
 		}
 	}
 }
 
-int hitDetection(p1, p2) {
-
+int hitDetection(character *c1, character *c2) {
+	if (c1->facingDirection == RIGHT) {
+		if (c1->xPosition+c1->punchLength >
+			c2->xPosition - c2->width) {
+			return performPunch(c1, c2);
+		}
+	}
+	if (c1->facingDirection == LEFT) {
+		if (c1->xPosition-c1->punchLength <
+			c2->xPosition + c2->width) {
+			return performPunch(c1, c2);
+		}
+	}
+	return STATE_IDLE;
 }
 
+int performPunch(character *c1, character *c2) {
+	if(c2->state == STATE_BLOCKING) {
+		return STATE_STUNNED;
+	}
+	else {
+		c2->health -= c1->punchDamage;
+		return STATE_IDLE;
+	}
+}
+
+void updatePlayerStunned(character *c, float time) {
+	if (c->status == STATE_STUNNED) {
+		c->stunDuration += time;
+		if (c->stunDuration > c->stunMaxDuration) {
+			c->status = STATE_IDLE;
+			c->stunDuration = 0;
+		}
+	}
+}
 
 
 
