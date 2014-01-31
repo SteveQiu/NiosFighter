@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define DEBUG_FLAG
+#define DEBUG_FLAG 1
 
 #ifdef DEBUG_FLAG
 #define DEBUGMSG(x); printf(x);
