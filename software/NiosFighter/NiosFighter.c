@@ -36,18 +36,18 @@ void updateGame(gameState *gstate, float frameLength) {
 void processInput(gameState *gstate) {
 	input move;
 	refkey(&move);
-	gstate->player1->movingDirection = NOTMOVING;
-	gstate->player1->wantsToPunch = 0;
-	gstate->player1->wantsToBlock = 0;
+	gstate->player1.movingDirection = NOTMOVING;
+	gstate->player1.wantsToPunch = 0;
+	gstate->player1.wantsToBlock = 0;
 	if(move.p){
 		if(move.left)
-			gstate->player1->movingDirection = LEFT;
+			gstate->player1.movingDirection = LEFT;
 		if(move.right)
-			gstate->player1->movingDirection = RIGHT;
+			gstate->player1.movingDirection = RIGHT;
 		if(move.punch)
-			gstate->player1->wantsToPunch = 1;
+			gstate->player1.wantsToPunch = 1;
 		if(move.block)
-			gstate->player1->wantsToBlock = 1;
+			gstate->player1.wantsToBlock = 1;
 	}
 
 }

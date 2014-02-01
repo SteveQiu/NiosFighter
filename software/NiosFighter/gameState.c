@@ -5,16 +5,16 @@ int initGameState(gameState *gstate) {
 	initCharacter(&gstate->player1);
 	initCharacter(&gstate->player2);
 
-	gstate->player1->xPosition = -50;
-	gstate->player2->xposition = 50;
-	gstate->player1->facingDirection = RIGHT;
-	gstate->player2->facingDirection = LEFT;
+	gstate->player1.xPosition = -50;
+	gstate->player2.xPosition = 50;
+	gstate->player1.facingDirection = RIGHT;
+	gstate->player2.facingDirection = LEFT;
 
 	return 0;
 }
 
 void updatePlayerPosition(character *ch, float time) {
-	if (ch->state == STATE_IDLE) {
+	if (ch->status == STATUS_IDLE) {
 		ch->xPosition +=
 				time * ch->movingDirection * ch->walkingSpeed;
 		if (ch->xPosition < ARENALEFTBORDER)
@@ -25,10 +25,10 @@ void updatePlayerPosition(character *ch, float time) {
 }
 
 void updatePlayerPunch(character *p1, character *p2, float time) {
-	if (p1->wantsToPunch == 1 && p1->status == STATE_IDLE) {
-		p1->status = STATE_PUNCHING;
+	if (p1->wantsToPunch == 1 && p1->status == STATUS_IDLE) {
+		p1->status = STATUS_PUNCHING;
 	}
-	if (p1->status == STATE_PUNCHING) {
+	if (p1->status == STATUS_PUNCHING) {
 		if (p1->punchDuration == 0.0) {
 		} else if (p1->punchDuration < p1->punchMaxDuration) {
 			p1->punchDuration += time;
@@ -36,7 +36,7 @@ void updatePlayerPunch(character *p1, character *p2, float time) {
 					(p1->punchDuration/p1->punchMaxDuration)
 					* p1->punchLength * p1->facingDirection;
 		} if (p1->punchDuration > p1->punchMaxDuration) {
-			p1->state = hitDetection(p1,p2);
+			p1->status = hitDetection(p1,p2);
 			p1->punchDuration = 0.0;
 			p1->fistDistance = 0;
 		}
@@ -56,26 +56,26 @@ int hitDetection(character *c1, character *c2) {
 			return performPunch(c1, c2);
 		}
 	}
-	return STATE_IDLE;
+	return STATUS_IDLE;
 }
 
 int performPunch(character *c1, character *c2) {
-	if(c2->state == STATE_BLOCKING) {
-		return STATE_STUNNED;
+	if(c2->status == STATUS_BLOCKING) {
+		return STATUS_STUNNED;
 	}
 	else {
 		c2->health -= c1->punchDamage;
-		return STATE_IDLE;
+		return STATUS_IDLE;
 	}
 }
 
 void updatePlayerStunned(character *c, float time) {
-	if (c->status == STATE_STUNNED) {
+	if (c->status == STATUS_STUNNED) {
 		c->punchDuration = 0.0;
 		c->blockChangeTime = 0.0;
 		c->stunDuration += time;
 		if (c->stunDuration > c->stunMaxDuration) {
-			c->status = STATE_IDLE;
+			c->status = STATUS_IDLE;
 			c->stunDuration = 0;
 		}
 	}
@@ -83,21 +83,21 @@ void updatePlayerStunned(character *c, float time) {
 
 void updatePlayerBlocking(character *c, float time) {
 	if (c->wantsToBlock == 1) {
-		if (c->status == STATE_IDLE) {
+		if (c->status == STATUS_IDLE) {
 			if (c->blockChangeTime < c->blockChangeMaxTime) {
 				c->blockChangeTime += time;
 			} else if (c->blockChangeTime > c->blockChangeMaxTime) {
-				c->status = STATE_BLOCKING;
+				c->status = STATUS_BLOCKING;
 				c->blockChangeTime = 0.0;
 			}
 		}
 	}
 	if (c->wantsToBlock = 0) {
-		if (c->state == STATE_BLOCKING) {
+		if (c->status == STATUS_BLOCKING) {
 			if (c->blockChangeTime < c->blockChangeMaxTime) {
 				c->blockChangeTime += time;
 			} else if (c->blockChangeTime > c->blockChangeMaxTime) {
-				c->status = STATE_IDLE;
+				c->status = STATUS_IDLE;
 				c->blockChangeTime = 0.0;
 			}
 		}
