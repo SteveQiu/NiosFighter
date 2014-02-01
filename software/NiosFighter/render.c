@@ -12,8 +12,7 @@ void InttoChar(int time_remain, char** array) {
 //This function initializes the buffer needed for drawing to work.
 void InitPixBuff(alt_up_pixel_buffer_dma_dev **pixel_buffer_ptr) {
 
-	*pixel_buffer_ptr = alt_up_pixel_buffer_dma_open_dev(
-			VIDEO_PIXEL_BUFFER_DMA_NAME);
+	*pixel_buffer_ptr = alt_up_pixel_buffer_dma_open_dev(VIDEO_PIXEL_BUFFER_DMA_NAME);
 	//Initialise the graphic buffer
 
 	unsigned int pixel_buffer_addr1 = SRAM_BASE;
@@ -26,8 +25,8 @@ void InitPixBuff(alt_up_pixel_buffer_dma_dev **pixel_buffer_ptr) {
 	// Swap buffers –we have to swap because there is only an API function
 	// to set the address of the background buffer.
 	alt_up_pixel_buffer_dma_swap_buffers(*pixel_buffer_ptr);
-	while (alt_up_pixel_buffer_dma_check_swap_buffers_status(*pixel_buffer_ptr))
-		;
+
+	while (alt_up_pixel_buffer_dma_check_swap_buffers_status(*pixel_buffer_ptr));
 	// Set the 2nd buffer address
 	alt_up_pixel_buffer_dma_change_back_buffer_address(*pixel_buffer_ptr,
 			pixel_buffer_addr2);
@@ -36,6 +35,7 @@ void InitPixBuff(alt_up_pixel_buffer_dma_dev **pixel_buffer_ptr) {
 	alt_up_pixel_buffer_dma_clear_screen(*pixel_buffer_ptr, 0);
 	alt_up_pixel_buffer_dma_clear_screen(*pixel_buffer_ptr, 1);
 	//0 front, 1 back
+
 }
 
 //This function initializes the buffer needed for char printing
@@ -54,12 +54,14 @@ void DrawBackground(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy) {
 	// Draw a white lineto the foreground buffer
 	alt_up_pixel_buffer_dma_draw_hline(pixel_buffer_cpy, 0, 320, 200, 0x064F, 0);
 	//Resolution:320x240
-	DrawHP(pixel_buffer_cpy);
+
 }
 
-void DrawHP(alt_up_pixel_buffer_dma_dev* HP_buffer_cpy) {
+void DrawHP(alt_up_pixel_buffer_dma_dev* HP_buffer_cpy, gameState *gstate){
 
-	alt_up_pixel_buffer_dma_draw_box(HP_buffer_cpy, 15, 20, 150, 40, 0x064F, 0);
+	alt_up_pixel_buffer_dma_draw_box(HP_buffer_cpy, 15, 20, gstate->player1.health, 40, 0x064F, 0);
+
+	alt_up_pixel_buffer_dma_draw_box(HP_buffer_cpy, 175, 20, (gstate->player2.health + 175), 40, 0x064F, 0);
 }
 
 //Draw the timer by giving a time in int, using inttochar to convert int
@@ -84,7 +86,11 @@ void render(gameState* state) {
 	DrawBackground(pixel_buffer);
 	//Invoke this function to draw background;
 
+	DrawHP(pixel_buffer, state);
+
 	DrawTimer(char_buffer, 99);
+
+
 
 	alt_up_pixel_buffer_dma_swap_buffers(pixel_buffer);
 	while (alt_up_pixel_buffer_dma_check_swap_buffers_status(pixel_buffer))

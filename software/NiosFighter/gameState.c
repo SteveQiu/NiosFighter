@@ -2,8 +2,8 @@
 
 int initGameState(gameState *gstate) {
 	gstate->gameOver = 0;
-	initCharacter(&gstate->player1);
-	initCharacter(&gstate->player2);
+	initCharacter(&(gstate->player1));
+	initCharacter(&(gstate->player2));
 
 	gstate->player1.xPosition = -50;
 	gstate->player2.xPosition = 50;
