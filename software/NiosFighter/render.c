@@ -52,16 +52,16 @@ void DrawBackground(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy) {
 	// Clear the screen, this makes it black
 	//alt_up_pixel_buffer_dma_clear_screen(pixel_buffer_cpy, 0);
 	// Draw a white lineto the foreground buffer
-	alt_up_pixel_buffer_dma_draw_hline(pixel_buffer_cpy, 0, 320, 200, 0x064F, 0);
+	alt_up_pixel_buffer_dma_draw_hline(pixel_buffer_cpy, 0, 320, 200, 0x064F, 1);
 	//Resolution:320x240
 
 }
 
 void DrawHP(alt_up_pixel_buffer_dma_dev* HP_buffer_cpy, gameState *gstate){
 
-	alt_up_pixel_buffer_dma_draw_box(HP_buffer_cpy, 15, 20, (gstate->player1.health * 1.4), 30, 0x064F, 0);
+	alt_up_pixel_buffer_dma_draw_box(HP_buffer_cpy, 15, 20, (gstate->player1.health * 1.4), 30, 0x064F, 1);
 
-	alt_up_pixel_buffer_dma_draw_box(HP_buffer_cpy, (320 - gstate->player2.health * 1.4), 20, 310, 30, 0x064F, 0);
+	alt_up_pixel_buffer_dma_draw_box(HP_buffer_cpy, (320 - gstate->player2.health * 1.4), 20, 310, 30, 0x064F, 1);
 }
 
 //Draw the timer by giving a time in int, using inttochar to convert int
