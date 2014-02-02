@@ -1,25 +1,29 @@
 #include "NiosFighter.h"
 
-int main() {
+void main() {
 	gameState gstate;
 	frameTimer ftimer;
 	initGameState(&gstate);
 	initFrameTimer(&ftimer);
-	render(&gstate);
+
+	alt_up_pixel_buffer_dma_dev* pixel_buffer;
+	InitPixBuff(&pixel_buffer);
+
+	alt_up_char_buffer_dev* char_buffer;
+	InitCharBuff(&char_buffer);
 
 
 	//gameLoop
 	while(!(gstate.gameOver)) {
-		startFrame(&ftimer);
-		processInput(&gstate);
-		updateGame(&gstate, frameLength(&ftimer));
-		render(&gstate);
-		endFrame(&ftimer);
+		//startFrame(&ftimer);
+		//processInput(&gstate);
+		//updateGame(&gstate, frameLength(&ftimer));
+		render(&gstate,char_buffer,pixel_buffer);
+		//endFrame(&ftimer);
 
 
 	}
 
-	return 0;
 }
 void updateGame(gameState *gstate, float frameLength) {
 
