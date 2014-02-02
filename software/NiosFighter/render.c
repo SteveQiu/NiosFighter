@@ -76,6 +76,12 @@ void DrawTimer(alt_up_char_buffer_dev* char_buffer_cpy, int time_remain){
 	//80*60 array across 320*280 resolution screen
 }
 
+void DrawCharacter(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate){
+alt_up_pixel_buffer_dma_draw_box(buffer_cpy, (gstate->player1.xPosition + 150), 160, (gstate->player1.xPosition + 170), 200, 0xFFFF, 1);
+
+alt_up_pixel_buffer_dma_draw_box(buffer_cpy, (gstate->player2.xPosition + 150), 160, (gstate->player2.xPosition + 170), 200, 0xFFFF, 1);
+}
+
 
 
 
@@ -93,7 +99,7 @@ void render(gameState *state, alt_up_char_buffer_dev* char_buffer,alt_up_pixel_b
 
 	DrawTimer(char_buffer, 99);
 
-
+	DrawCharacter(pixel_buffer, state);
 
 	alt_up_pixel_buffer_dma_swap_buffers(pixel_buffer);
 	while (alt_up_pixel_buffer_dma_check_swap_buffers_status(pixel_buffer));
