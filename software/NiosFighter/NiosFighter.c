@@ -21,9 +21,8 @@ void main() {
 		render(&gstate,char_buffer,pixel_buffer);
 		endFrame(&ftimer);
 		}
-	}
-
 }
+
 
 void updateGame(gameState *gstate, float frameLength) {
 
