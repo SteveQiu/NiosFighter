@@ -14,17 +14,17 @@ void main() {
 
 
 	//gameLoop
-	while(!(gstate.gameOver)) {
+		while(!(gstate.gameOver)) {
 		startFrame(&ftimer);
 		processInput(&gstate);
 		updateGame(&gstate, frameLength(&ftimer));
 		render(&gstate,char_buffer,pixel_buffer);
 		endFrame(&ftimer);
-
-
+		}
 	}
 
 }
+
 void updateGame(gameState *gstate, float frameLength) {
 
 	character* p1 = &(gstate->player1);

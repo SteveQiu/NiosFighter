@@ -9,6 +9,7 @@
 #define STATUS_STUNNED  0x00000010
 #define STATUS_BLOCKING 0x00000100
 #define STATUS_PUNCHING 0x00001000
+#define switchreset (char *) 0x00004820
 
 typedef struct character {
 	int facingDirection;
