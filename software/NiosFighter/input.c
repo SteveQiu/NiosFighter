@@ -28,7 +28,7 @@ int ispunchkey(){
 		return 0;
 }
 
-int isjumpkey(){
+int isblockkey(){
 	if(!(*pushbutton & 0x08))
 		return 1;
 	else
@@ -45,18 +45,22 @@ void refkey(input *key){
 		if(isleftkey()){
 			key->p =1;
 			key->left =1;
+			DEBUGMSG("Moving Left");
 		}
 		if(isrightkey())
 		{	key->right =1;
 			key->p =1;
+			DEBUGMSG("Moving Right");
 		}
-		if(isjumpkey())
+		if(isblockkey())
 		{	key->block = 1;
 			key->p =1;
+			DEBUGMSG("Blocking");
 		}
 		if(ispunchkey())
 		{	key->punch = 1;
 			key->p =1;
+			DEBUGMSG("Hitting");
 		}
 
 	}

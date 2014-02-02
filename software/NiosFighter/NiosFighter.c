@@ -15,11 +15,11 @@ void main() {
 
 	//gameLoop
 	while(!(gstate.gameOver)) {
-		//startFrame(&ftimer);
-		//processInput(&gstate);
-		//updateGame(&gstate, frameLength(&ftimer));
+		startFrame(&ftimer);
+		processInput(&gstate);
+		updateGame(&gstate, frameLength(&ftimer));
 		render(&gstate,char_buffer,pixel_buffer);
-		//endFrame(&ftimer);
+		endFrame(&ftimer);
 
 
 	}

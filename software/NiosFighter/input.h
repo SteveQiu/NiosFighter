@@ -18,6 +18,6 @@ void initkey(input *key);
 int isleftkey();
 int isrightkey();
 int ispunchkey();
-int isjumpkey();
+int isblockkey();
 void refkey(input *key);
 #endif //INPUT_H
