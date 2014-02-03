@@ -1,4 +1,5 @@
 #include "input.h"
+#include "debug.h"
 
 void initkey(input *key) {
 	key->p = 0;

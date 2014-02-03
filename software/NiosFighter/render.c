@@ -93,8 +93,6 @@ void render(gameState *state, alt_up_char_buffer_dev* char_buffer,alt_up_pixel_b
 
 	DrawTimer(char_buffer, 99);
 
-
-
 	alt_up_pixel_buffer_dma_swap_buffers(pixel_buffer);
 	while (alt_up_pixel_buffer_dma_check_swap_buffers_status(pixel_buffer));
 }
