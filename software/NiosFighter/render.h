@@ -16,5 +16,6 @@ void DrawHP(alt_up_pixel_buffer_dma_dev* HP_buffer_cpy, gameState *gstate);
 void DrawCharTest(alt_up_char_buffer_dev* char_buffer_cpy);
 void render(gameState *state,alt_up_char_buffer_dev* char_buffer,alt_up_pixel_buffer_dma_dev *pixel_buffer);
 void DrawCharacter(alt_up_pixel_buffer_dma_dev* HP_buffer_cpy, gameState *gstate);
+void DrawF(alt_up_pixel_buffer_dma_dev* HP_buffer_cpy, gameState *gstate);
 
 #endif //RENDER_H

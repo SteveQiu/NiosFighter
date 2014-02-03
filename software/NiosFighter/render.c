@@ -78,6 +78,7 @@ void DrawTimer(alt_up_char_buffer_dev* char_buffer_cpy, int time_remain){
 
 void DrawCharacter(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate){
 alt_up_pixel_buffer_dma_draw_box(buffer_cpy, (gstate->player1.xPosition + 150), 160, (gstate->player1.xPosition + 170), 200, 0xFFFF, 1);
+alt_up_pixel_buffer_dma_draw_box(buffer_cpy, (gstate->player1.xPosition + 150), 170, (gstate->player1.xPosition + 170 +gstate->player1.fistDistance), 173, 0xFFFF, 1);
 
 alt_up_pixel_buffer_dma_draw_box(buffer_cpy, (gstate->player2.xPosition + 150), 160, (gstate->player2.xPosition + 170), 200, 0xFFFF, 1);
 }

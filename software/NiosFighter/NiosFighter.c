@@ -1,6 +1,7 @@
 #include "NiosFighter.h"
 
 void main() {
+	while(1){
 	gameState gstate;
 	frameTimer ftimer;
 	initGameState(&gstate);
@@ -22,7 +23,7 @@ void main() {
 		endFrame(&ftimer);
 		}
 }
-
+}
 
 void updateGame(gameState *gstate, float frameLength) {
 
