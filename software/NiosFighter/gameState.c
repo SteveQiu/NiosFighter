@@ -16,7 +16,7 @@ int initGameState(gameState *gstate) {
 void updatePlayerPosition(character *ch, float time) {
 	if (ch->status == STATUS_IDLE) {
 		ch->xPosition +=
-				time * ch->movingDirection * ch->walkingSpeed;
+				time * ch->movingDirection * ch->walkingSpeed *2;
 		if (ch->xPosition < ARENALEFTBORDER)
 				ch->xPosition = ARENALEFTBORDER;
 		if (ch->xPosition > ARENARIGHTBORDER)
