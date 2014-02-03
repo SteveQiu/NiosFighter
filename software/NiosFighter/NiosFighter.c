@@ -26,7 +26,7 @@ void main() {
 }
 
 void updateGame(gameState *gstate, float frameLength) {
-
+	checkhp(gstate,&gstate->player1, &gstate->player2);
 	character* p1 = &(gstate->player1);
 	character* p2 = &(gstate->player2);
 	updatePlayerPosition(p1, frameLength);
