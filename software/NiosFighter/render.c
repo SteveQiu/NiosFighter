@@ -12,7 +12,8 @@ void InttoChar(int time_remain, char** array) {
 //This function initializes the buffer needed for drawing to work.
 void InitPixBuff(alt_up_pixel_buffer_dma_dev **pixel_buffer_ptr) {
 
-	*pixel_buffer_ptr = alt_up_pixel_buffer_dma_open_dev(VIDEO_PIXEL_BUFFER_DMA_NAME);
+	*pixel_buffer_ptr = alt_up_pixel_buffer_dma_open_dev(
+			VIDEO_PIXEL_BUFFER_DMA_NAME);
 	//Initialise the graphic buffer
 
 	unsigned int pixel_buffer_addr1 = SRAM_BASE;
@@ -26,7 +27,8 @@ void InitPixBuff(alt_up_pixel_buffer_dma_dev **pixel_buffer_ptr) {
 	// to set the address of the background buffer.
 	alt_up_pixel_buffer_dma_swap_buffers(*pixel_buffer_ptr);
 
-	while (alt_up_pixel_buffer_dma_check_swap_buffers_status(*pixel_buffer_ptr));
+	while (alt_up_pixel_buffer_dma_check_swap_buffers_status(*pixel_buffer_ptr))
+		;
 	// Set the 2nd buffer address
 	alt_up_pixel_buffer_dma_change_back_buffer_address(*pixel_buffer_ptr,
 			pixel_buffer_addr2);
@@ -49,23 +51,42 @@ void InitCharBuff(alt_up_char_buffer_dev** char_buffer_ptr) {
 
 //This function draws the background of the game
 void DrawBackground(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy) {
-	// Clear the screen, this makes it black
-	//alt_up_pixel_buffer_dma_clear_screen(pixel_buffer_cpy, 0);
-	// Draw a white lineto the foreground buffer
+	// Draw a line to the background buffer
 	alt_up_pixel_buffer_dma_draw_hline(pixel_buffer_cpy, 0, 320, 200, 0x064F, 1);
 	//Resolution:320x240
 
 }
 
-void DrawHP(alt_up_pixel_buffer_dma_dev* HP_buffer_cpy, gameState *gstate){
+void DrawBackground1(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy) {
+	FILE *bg;
+	char *array;
+	int row;
+	int column;
 
-	alt_up_pixel_buffer_dma_draw_box(HP_buffer_cpy, 15, 20, (gstate->player1.health * 1.4), 30, 0xF800, 1);
+	bg = fopen("bg1.txt", "r");
+	fgets(array, 7, bg);
+	printf("%s",array);
 
-	alt_up_pixel_buffer_dma_draw_box(HP_buffer_cpy, (320 - gstate->player2.health * 1.4), 20, 310, 30, 0xF800, 1);
+	//should be 240 but the bg resolution is wrong
+	for (row = 0; row < 242; row++) {
+		//should be 320 but the bg resolution is wrong
+		for (column = 0; column < 319; column++) {
+
+		}
+	}
+}
+
+void DrawHP(alt_up_pixel_buffer_dma_dev* HP_buffer_cpy, gameState *gstate) {
+
+	alt_up_pixel_buffer_dma_draw_box(HP_buffer_cpy, 15, 20,
+			(gstate->player1.health * 1.4), 30, 0xF800, 1);
+
+	alt_up_pixel_buffer_dma_draw_box(HP_buffer_cpy, (320
+			- gstate->player2.health * 1.4), 20, 310, 30, 0xF800, 1);
 }
 
 //Draw the timer by giving a time in int, using inttochar to convert int
-void DrawTimer(alt_up_char_buffer_dev* char_buffer_cpy, int time_remain){
+void DrawTimer(alt_up_char_buffer_dev* char_buffer_cpy, int time_remain) {
 	// Write some text
 	char* time_char;
 	InttoChar(time_remain, &time_char);
@@ -77,21 +98,25 @@ void DrawTimer(alt_up_char_buffer_dev* char_buffer_cpy, int time_remain){
 }
 
 //TODO: Split Character Function
-void DrawCharacter(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate){
-alt_up_pixel_buffer_dma_draw_box(buffer_cpy, (gstate->player1.xPosition + 160 - gstate->player1.width), 120, (gstate->player1.xPosition + 160+gstate->player1.width), 200, 0xF80F, 1);
-alt_up_pixel_buffer_dma_draw_box(buffer_cpy, (gstate->player1.xPosition + 160), 140, (gstate->player1.xPosition + 160 +gstate->player1.fistDistance), 150, 0xF80F, 1);
+void DrawCharacter(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate) {
+	alt_up_pixel_buffer_dma_draw_box(buffer_cpy, (gstate->player1.xPosition
+			+ 160 - gstate->player1.width), 120, (gstate->player1.xPosition
+			+ 160 + gstate->player1.width), 200, 0xF80F, 1);
+	alt_up_pixel_buffer_dma_draw_box(buffer_cpy, (gstate->player1.xPosition
+			+ 160), 140, (gstate->player1.xPosition + 160
+			+ gstate->player1.fistDistance), 150, 0xF80F, 1);
 
-alt_up_pixel_buffer_dma_draw_box(buffer_cpy, (gstate->player2.xPosition + 160 -gstate->player2.width), 120, (gstate->player2.xPosition + 160+gstate->player2.width), 200, 0x03FF, 1);
+	alt_up_pixel_buffer_dma_draw_box(buffer_cpy, (gstate->player2.xPosition
+			+ 160 - gstate->player2.width), 120, (gstate->player2.xPosition
+			+ 160 + gstate->player2.width), 200, 0x03FF, 1);
 }
 
-
-
-
-void render(gameState *state, alt_up_char_buffer_dev* char_buffer,alt_up_pixel_buffer_dma_dev *pixel_buffer){
-//clear screen
-//draw
-//swap buffer
-//check and wait for swap buffer
+void render(gameState *state, alt_up_char_buffer_dev* char_buffer,
+		alt_up_pixel_buffer_dma_dev *pixel_buffer) {
+	//clear screen
+	//draw
+	//swap buffer
+	//check and wait for swap buffer
 	alt_up_pixel_buffer_dma_clear_screen(pixel_buffer, 1);
 
 	DrawBackground(pixel_buffer);
@@ -104,5 +129,6 @@ void render(gameState *state, alt_up_char_buffer_dev* char_buffer,alt_up_pixel_b
 	DrawCharacter(pixel_buffer, state);
 
 	alt_up_pixel_buffer_dma_swap_buffers(pixel_buffer);
-	while (alt_up_pixel_buffer_dma_check_swap_buffers_status(pixel_buffer));
+	while (alt_up_pixel_buffer_dma_check_swap_buffers_status(pixel_buffer))
+		;
 }

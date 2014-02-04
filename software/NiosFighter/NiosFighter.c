@@ -13,6 +13,7 @@ void main() {
 	alt_up_char_buffer_dev* char_buffer;
 	InitCharBuff(&char_buffer);
 
+	//DrawBackground1(pixel_buffer);
 
 	//gameLoop
 		while(!(gstate.gameOver)) {
