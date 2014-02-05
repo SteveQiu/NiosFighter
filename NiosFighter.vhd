@@ -20,7 +20,13 @@ PORT (
 		VGA_CLK, VGA_BLANK, VGA_HS,VGA_VS, VGA_SYNC : OUT STD_LOGIC;
 		SRAM_DQ: INOUT STD_LOGIC_VECTOR(15 DOWNTO 0);
 		SRAM_ADDR: OUT STD_LOGIC_VECTOR(17 DOWNTO 0);
-		SRAM_LB_N, SRAM_UB_N,SRAM_CE_N,SRAM_OE_N,SRAM_WE_N: OUT STD_LOGIC);
+		SRAM_LB_N, SRAM_UB_N,SRAM_CE_N,SRAM_OE_N,SRAM_WE_N: OUT STD_LOGIC;
+		SD_CMD : inout std_logic;
+		SD_DAT : inout std_logic;
+		SD_DAT3: inout std_logic;
+		SD_CLK : out   std_logic;
+		I2C_SCLK: out   std_logic;
+		I2C_SDAT:inout std_logic);
 END NiosFighter;
 ARCHITECTURE Structure OF NiosFighter IS
 COMPONENT fighterSystem
@@ -60,7 +66,13 @@ PORT (
 		SRAM_CE_N : OUT STD_LOGIC;
 		SRAM_OE_N : OUT STD_LOGIC;
 		SRAM_WE_N : OUT STD_LOGIC;
-		key_export : in std_logic_vector(3 downto 0));
+		key_export : in std_logic_vector(3 downto 0);
+		sd_card_b_SD_cmd     : inout std_logic;
+		sd_card_b_SD_dat     : inout std_logic;
+		sd_card_b_SD_dat3    : inout std_logic;
+		sd_card_o_SD_clock   : out   std_logic;
+		audio_SDAT           : inout std_logic;
+      audio_SCLK           : out   std_logic );
 END COMPONENT;
 SIGNAL DQM : STD_LOGIC_VECTOR(1 DOWNTO 0);
 SIGNAL BA : STD_LOGIC_VECTOR(1 DOWNTO 0);
@@ -107,5 +119,11 @@ PORT MAP (
 		sram_CE_N => SRAM_CE_N,
 		sram_OE_N => SRAM_OE_N,
 		sram_WE_N => SRAM_WE_N,
-		key_export => KEY);
+		key_export => KEY,
+		sd_card_b_SD_cmd     => SD_CMD,
+		sd_card_b_SD_dat     => SD_DAT,
+		sd_card_b_SD_dat3    => SD_DAT3,
+		sd_card_o_SD_clock   => SD_CLK,
+		audio_SDAT =>I2C_SDAT,
+      audio_SCLK =>I2C_SCLK);
 END Structure;

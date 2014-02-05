@@ -115,6 +115,7 @@ void render(gameState *state, alt_up_char_buffer_dev* char_buffer,
 	alt_up_pixel_buffer_dma_clear_screen(pixel_buffer, 1);
 
 	DrawBackground(pixel_buffer);
+	//DrawBackground1(pixel_buffer);
 	//Invoke this function to draw background;
 
 	DrawHP(pixel_buffer, state);
