@@ -32,9 +32,11 @@ void checkPlayerCollisions(gameState *state) {
 	character *p2 = &(state->player2);
 	if (p1->xPosition > (p2->xPosition + (p1->width + p2->width)/2)) {
 		p1->xPosition = p2->xPosition - (p1->width - p2->width)/2;
+		p1->movingDirection = NOTMOVING;
 	}
 	if (p2->xPosition < (p1->xPosition + (p1->width + p2->width)/2)) {
 			p2->xPosition = p1->xPosition + (p1->width + p2->width)/2;
+			p2->movingDirection = NOTMOVING;
 	}
 }
 
