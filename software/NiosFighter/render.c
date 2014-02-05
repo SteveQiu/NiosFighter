@@ -63,10 +63,10 @@ void DrawBackground1(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy) {
 	int column;
 
 	//should be 240 but the bg resolution is wrong
-	for (row = 0; row < 242; row++) {
+	for (row = 0; row < 240; row++) {
 		//should be 320 but the bg resolution is wrong
-		for (column = 0; column < 319; column++) {
-			alt_up_pixel_buffer_dma_draw(pixel_buffer_cpy, sfb[column][row], row, column);
+		for (column = 0; column < 320; column++) {
+			alt_up_pixel_buffer_dma_draw(pixel_buffer_cpy, bg1[column][row], row, column);
 		}
 	}
 }
@@ -114,7 +114,7 @@ void render(gameState *state, alt_up_char_buffer_dev* char_buffer,
 	//check and wait for swap buffer
 	alt_up_pixel_buffer_dma_clear_screen(pixel_buffer, 1);
 
-	DrawBackground(pixel_buffer);
+	DrawBackground1(pixel_buffer);
 	//DrawBackground1(pixel_buffer);
 	//Invoke this function to draw background;
 
