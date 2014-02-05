@@ -62,11 +62,9 @@ void DrawBackground1(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy) {
 	int row;
 	int column;
 
-	//should be 240 but the bg resolution is wrong
 	for (row = 0; row < 240; row++) {
-		//should be 320 but the bg resolution is wrong
 		for (column = 0; column < 320; column++) {
-			alt_up_pixel_buffer_dma_draw(pixel_buffer_cpy, bg1[column][row], row, column);
+			alt_up_pixel_buffer_dma_draw(pixel_buffer_cpy, bg1[row][column], column, row);
 		}
 	}
 }
