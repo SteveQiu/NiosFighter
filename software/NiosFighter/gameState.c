@@ -27,6 +27,17 @@ void updatePlayerPosition(character *ch, float time) {
 	}
 }
 
+void checkPlayerCollisions(gameState *state) {
+	character *p1 = state->player1;
+	character *p2 = state->player2;
+	if (p1->xPosition > (p2->xPosition + (p1->width + p2->width)/2)) {
+		p1->xPosition = p2->xPosition - (p1->width - p2->width)/2;
+	}
+	if (p2->xPosition < (p1->xPosition + (p1->width + p2->width)/2)) {
+			p2->xPosition = p1->xPosition + (p1->width + p2->width)/2;
+	}
+}
+
 void updatePlayerPunch(character *p1, character *p2, float time) {
 	if (p1->wantsToPunch == 1 && p1->status == STATUS_IDLE) {
 		p1->status = STATUS_PUNCHING;
