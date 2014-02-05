@@ -58,20 +58,15 @@ void DrawBackground(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy) {
 }
 
 void DrawBackground1(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy) {
-	FILE *bg;
-	char *array;
+
 	int row;
 	int column;
-
-	bg = fopen("bg1.txt", "r");
-	fgets(array, 7, bg);
-	printf("%s",array);
 
 	//should be 240 but the bg resolution is wrong
 	for (row = 0; row < 242; row++) {
 		//should be 320 but the bg resolution is wrong
 		for (column = 0; column < 319; column++) {
-
+			alt_up_pixel_buffer_dma_draw(pixel_buffer_cpy, sfb[column][row], row, column);
 		}
 	}
 }

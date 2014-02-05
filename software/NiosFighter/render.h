@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "gameState.h"
+#include "materials.h"
 
 void InttoChar(int time_remain,char**);
 void InitPixBuff(alt_up_pixel_buffer_dma_dev **pixel_buffer_ptr);
