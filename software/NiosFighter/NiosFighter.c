@@ -30,7 +30,7 @@ void updateGame(gameState *gstate, float frameLength) {
 	checkhp(gstate,&gstate->player1, &gstate->player2);
 	character* p1 = &(gstate->player1);
 	character* p2 = &(gstate->player2);
-	updatePlayerCollisions(gstate);
+	checkPlayerCollisions(gstate);
 	updatePlayerPosition(p1, frameLength);
 	updatePlayerPosition(p2, frameLength);
 	updatePlayerPunch(p1, p2, frameLength);

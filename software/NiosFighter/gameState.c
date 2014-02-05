@@ -28,8 +28,8 @@ void updatePlayerPosition(character *ch, float time) {
 }
 
 void checkPlayerCollisions(gameState *state) {
-	character *p1 = state->player1;
-	character *p2 = state->player2;
+	character *p1 = &(state->player1);
+	character *p2 = &(state->player2);
 	if (p1->xPosition > (p2->xPosition + (p1->width + p2->width)/2)) {
 		p1->xPosition = p2->xPosition - (p1->width - p2->width)/2;
 	}
@@ -107,7 +107,7 @@ void updatePlayerBlocking(character *c, float time) {
 			}
 		}
 	}
-	if (c->wantsToBlock = 0) {
+	if (c->wantsToBlock == 0) {
 		if (c->status == STATUS_BLOCKING) {
 			if (c->blockChangeTime < c->blockChangeMaxTime) {
 				c->blockChangeTime += time;

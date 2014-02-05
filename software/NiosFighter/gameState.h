@@ -13,6 +13,7 @@ int initGameState(gameState *state);
 void checkPlayerCollisions(gameState *state);
 void updatePlayerPosition(character* ch, float time);
 void updatePlayerPunch(character* c1, character *c2, float time);
+void updatePlayerStunned(character *c, float time);
 int hitDetection(character *c1, character *c2);
 int performPunch(character *c1, character *c2);
 void checkhp(gameState *state,character *c1, character *c2);
