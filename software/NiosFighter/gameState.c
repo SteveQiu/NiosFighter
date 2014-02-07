@@ -13,6 +13,9 @@ int initGameState(gameState *gstate) {
 	gstate->player1.punchDamage = 20;
 	gstate->player1.width = 10;
 	gstate->player2.width = 10;
+
+	gstate->player2.status = BLOCKING;
+	gstate->player2.wantsToBlock = 1;
 	return 0;
 }
 

@@ -7,16 +7,16 @@ int initCharacter(character *c) {
 	c->facingDirection = LEFT;
 	c->movingDirection = NOTMOVING;
 	c->xPosition = 0;
-	c->walkingSpeed = 5.0;
+	c->walkingSpeed = 22.0;
 	c->status = STATUS_IDLE;
 	c->punchLength = 20;
-	c->punchMaxDuration = 1.0;
+	c->punchMaxDuration = 0.25;
 	c->punchDuration = 0;
 	c->fistDistance = 0;
 	c->wantsToPunch = 0;
 	c->wantsToBlock = 0;
 	c->blockChangeTime = 0;
-	c->blockChangeMaxTime = 0.75;
+	c->blockChangeMaxTime = 0.15;
 	return 0;
 }
 

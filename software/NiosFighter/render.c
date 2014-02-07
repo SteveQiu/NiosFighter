@@ -93,12 +93,17 @@ void DrawTimer(alt_up_char_buffer_dev* char_buffer_cpy, int time_remain) {
 
 //TODO: Split Character Function
 void DrawCharacter(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate) {
+	int playerColour = 0xF80F;
+	if (gstate->player1.status == STUNNED) {
+		playerColour = 0x03FF;
+	}
+
 	alt_up_pixel_buffer_dma_draw_box(buffer_cpy, (gstate->player1.xPosition
 			+ 160 - gstate->player1.width), 120, (gstate->player1.xPosition
-			+ 160 + gstate->player1.width), 200, 0xF80F, 1);
+			+ 160 + gstate->player1.width), 200, playerColour, 1);
 	alt_up_pixel_buffer_dma_draw_box(buffer_cpy, (gstate->player1.xPosition
 			+ 160), 140, (gstate->player1.xPosition + 160
-			+ gstate->player1.fistDistance), 150, 0xF80F, 1);
+			+ gstate->player1.fistDistance), 150, playerColour, 1);
 
 	alt_up_pixel_buffer_dma_draw_box(buffer_cpy, (gstate->player2.xPosition
 			+ 160 - gstate->player2.width), 120, (gstate->player2.xPosition
