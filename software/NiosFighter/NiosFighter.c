@@ -1,6 +1,7 @@
 #include "NiosFighter.h"
 
 int main() {
+/*
 	while(1){
 	gameState gstate;
 	frameTimer ftimer;
@@ -24,6 +25,16 @@ int main() {
 		endFrame(&ftimer);
 		}
 }
+*/
+
+	alt_up_sd_card_dev *device_reference = NULL;
+	//int connected = 0;
+	sdcard card;
+	initsdcard(&card,&device_reference);
+
+	testsdcard(&card,device_reference);
+
+
 	return 0;
 }
 
