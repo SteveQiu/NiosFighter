@@ -44,7 +44,7 @@ void updatePlayerPunch(character *p1, character *p2, float time) {
 	if (p1->wantsToPunch == 1 && p1->status == STATUS_IDLE) {
 		p1->status = STATUS_PUNCHING;
 		p1->punchDuration = 0.0;
-		p1->punchMaxDuration = 0.5;
+		p1->punchMaxDuration = 0.2;
 	}
 	if (p1->status == STATUS_PUNCHING) {
 		if (p1->punchMaxDuration == 0.0) {

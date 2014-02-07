@@ -1,8 +1,8 @@
 #ifndef INPUT_H
 #define INPUT_H
 #include "io.h"
-#define pushbutton (char *) 0x00004850
-
+#define pushbutton (char *) KEY_BASE
+#define ps2_key (char *) PS2_0_BASE
 #define LEFTPLAYERMOVELEFTBUTTON 1
 
 typedef struct input {

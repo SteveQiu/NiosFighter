@@ -1,6 +1,6 @@
 #include "input.h"
 #include "debug.h"
-
+#include <system.h>
 void initkey(input *key) {
 	key->p = 0;
 	key->block = 0;
@@ -10,27 +10,27 @@ void initkey(input *key) {
 }
 
 int isleftkey(){
-	if(!(IORD_8DIRECT(0x00004c50, 0) & 0x02))
+	if(!(IORD_8DIRECT(KEY_BASE, 0) & 0x02))
 		return 1;
 	else
 		return 0;
 }
 int isrightkey(){
-	if(!(IORD_8DIRECT(0x00004c50, 0) & 0x01))
+	if(!(IORD_8DIRECT(KEY_BASE, 0) & 0x01))
 		return 1;
 	else
 		return 0;
 }
 
 int ispunchkey(){
-	if(!(IORD_8DIRECT(0x00004c50, 0) & 0x04))
+	if(!(IORD_8DIRECT(KEY_BASE, 0) & 0x04))
 		return 1;
 	else
 		return 0;
 }
 
 int isblockkey(){
-	if(!(IORD_8DIRECT(0x00004c50, 0) & 0x08))
+	if(!(IORD_8DIRECT(KEY_BASE, 0) & 0x08))
 		return 1;
 	else
 		return 0;
@@ -38,7 +38,7 @@ int isblockkey(){
 
 void refkey(input *key){
 	initkey(key);
-	if(IORD_8DIRECT(0x00004c50, 0) == 0x0f)
+	if(IORD_8DIRECT(KEY_BASE, 0) == 0x0f)
 		initkey(key);
 	else
 	{

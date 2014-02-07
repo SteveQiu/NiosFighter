@@ -87,7 +87,6 @@ PORT (
 		SRAM_CE_N : OUT STD_LOGIC;
 		SRAM_OE_N : OUT STD_LOGIC;
 		SRAM_WE_N : OUT STD_LOGIC;
-		key_export : in std_logic_vector(3 downto 0);
 		sd_card_b_SD_cmd     : inout std_logic;
 		sd_card_b_SD_dat     : inout std_logic;
 		sd_card_b_SD_dat3    : inout std_logic;
@@ -155,7 +154,6 @@ PORT MAP (
 		sram_CE_N => SRAM_CE_N,
 		sram_OE_N => SRAM_OE_N,
 		sram_WE_N => SRAM_WE_N,
-		key_export => KEY,
 		sd_card_b_SD_cmd     => SD_CMD,
 		sd_card_b_SD_dat     => SD_DAT,
 		sd_card_b_SD_dat3    => SD_DAT3,
