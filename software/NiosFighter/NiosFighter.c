@@ -32,23 +32,23 @@ int main() {
 	testsdcard(&card,device_reference);
 	int handle;
 	handle = alt_up_sd_card_fopen("MK.wav", 0);
-	if(!handle)printf("file open failed");
+	if(handle)printf("file open failed");
 
 	//setup
 	av_config_setup();
 	//open audio device
 	alt_up_audio_dev *audio = alt_up_audio_open_dev(AUDIO_0_NAME);
 
-	const int length=600000;
-	unsigned int buffer[300000];
-	unsigned int buf [600000];
+	const int length=1600000;
+	unsigned int buffer[600000];
+	unsigned int buf [1600000];
 	int i;
-	for( i=0;i<600000;i++){
+	for( i=0;i<1600000;i++){
 		buf[i]=alt_up_sd_card_read(handle);
 	}
 	printf("Downloading\n");
 	int j=0;
-	for(i = 0; i<600000; i+=2){
+	for(i = 0; i<1600000; i+=2){
 			buffer[j] = (buf[i+1] << 8) | buf[i];
 			j++;
 			}
@@ -66,8 +66,8 @@ int main() {
 		int index_right=22;
 		//reading loop (contain within a while (true) )
 		while(1){
-			bytes_left = alt_up_audio_write_fifo(audio, &buffer[index_left], 50, ALT_UP_AUDIO_LEFT);
-			bytes_right = alt_up_audio_write_fifo(audio, &buffer[index_right], 50, ALT_UP_AUDIO_RIGHT);
+			bytes_left = alt_up_audio_write_fifo(audio, &buffer[index_left], 1600000, ALT_UP_AUDIO_LEFT);
+			bytes_right = alt_up_audio_write_fifo(audio, &buffer[index_right], 1600000, ALT_UP_AUDIO_RIGHT);
 			index_left += bytes_left;
 			index_right += bytes_right;
 			index++;
