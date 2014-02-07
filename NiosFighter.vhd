@@ -4,6 +4,8 @@ USE ieee.std_logic_arith.all;
 USE ieee.std_logic_unsigned.all;
 ENTITY NiosFighter IS
 PORT (
+--This version has SD card added. 
+--See EX 1.3 note 1 and add 3 missing files
 		SW : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
 		KEY : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
 		PS2_DATA : INOUT std_logic;
@@ -22,7 +24,21 @@ PORT (
 		VGA_CLK, VGA_BLANK, VGA_HS,VGA_VS, VGA_SYNC : OUT STD_LOGIC;
 		SRAM_DQ: INOUT STD_LOGIC_VECTOR(15 DOWNTO 0);
 		SRAM_ADDR: OUT STD_LOGIC_VECTOR(17 DOWNTO 0);
-		SRAM_LB_N, SRAM_UB_N,SRAM_CE_N,SRAM_OE_N,SRAM_WE_N: OUT STD_LOGIC
+		SRAM_LB_N, SRAM_UB_N,SRAM_CE_N,SRAM_OE_N,SRAM_WE_N: OUT STD_LOGIC;
+		SD_CMD : inout std_logic;
+		SD_DAT : inout std_logic;
+		SD_DAT3: inout std_logic;
+		SD_CLK : out   std_logic;
+		I2C_SCLK: out   std_logic;
+		I2C_SDAT:inout std_logic;
+		AUD_XCK: out std_LOGIC;
+		CLOCK_27: in std_LOGIC;
+		AUD_ADCDAT: in std_LOGIC;
+		AUD_ADCLRCK: in std_LOGIC;
+		AUD_BCLK: in std_LOGIC;
+		AUD_DACDAT: out std_LOGIC;
+		AUD_DACLRCK: in std_LOGIC
+
 		);
 END NiosFighter;
 ARCHITECTURE Structure OF NiosFighter IS
@@ -70,8 +86,21 @@ PORT (
 		SRAM_UB_N : OUT STD_LOGIC;
 		SRAM_CE_N : OUT STD_LOGIC;
 		SRAM_OE_N : OUT STD_LOGIC;
-		SRAM_WE_N : OUT STD_LOGIC
-		);
+		SRAM_WE_N : OUT STD_LOGIC;
+		key_export : in std_logic_vector(3 downto 0);
+		sd_card_b_SD_cmd     : inout std_logic;
+		sd_card_b_SD_dat     : inout std_logic;
+		sd_card_b_SD_dat3    : inout std_logic;
+		sd_card_o_SD_clock   : out   std_logic;
+		audio_SDAT           : inout std_logic;
+      audio_SCLK           : out   std_logic;
+	   audio_0_ADCDAT       : in    std_logic;
+      audio_0_ADCLRCK      : in    std_logic;
+		audio_0_BCLK         : in    std_logic;
+      audio_0_DACDAT       : out   std_logic;
+      audio_0_DACLRCK      : in    std_logic;
+      audio_clk_clk        : out   std_logic;
+      secondary_clk_clk    : in    std_logic);
 END COMPONENT;
 SIGNAL DQM : STD_LOGIC_VECTOR(1 DOWNTO 0);
 SIGNAL BA : STD_LOGIC_VECTOR(1 DOWNTO 0);
@@ -125,5 +154,19 @@ PORT MAP (
 		sram_UB_N => SRAM_UB_N,
 		sram_CE_N => SRAM_CE_N,
 		sram_OE_N => SRAM_OE_N,
-		sram_WE_N => SRAM_WE_N);
+		sram_WE_N => SRAM_WE_N,
+		key_export => KEY,
+		sd_card_b_SD_cmd     => SD_CMD,
+		sd_card_b_SD_dat     => SD_DAT,
+		sd_card_b_SD_dat3    => SD_DAT3,
+		sd_card_o_SD_clock   => SD_CLK,
+		audio_SDAT =>I2C_SDAT,
+      audio_SCLK =>I2C_SCLK,
+		audio_0_ADCDAT =>AUD_ADCDAT,
+      audio_0_ADCLRCK =>AUD_ADCLRCK,
+		audio_0_BCLK => AUD_BCLK,
+      audio_0_DACDAT => AUD_DACDAT,
+      audio_0_DACLRCK =>AUD_DACLRCK,
+      audio_clk_clk => AUD_XCK,
+      secondary_clk_clk => CLOCK_27);
 END Structure;

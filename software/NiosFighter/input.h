@@ -1,5 +1,6 @@
 #ifndef INPUT_H
 #define INPUT_H
+#include "io.h"
 #define pushbutton (char *) 0x00004850
 
 #define LEFTPLAYERMOVELEFTBUTTON 1

@@ -1,12 +1,12 @@
 #include "render.h"
 
 //This function convert int into char array
-void InttoChar(int time_remain, char** array) {
+void InttoChar(int time_remain, char* array) {
 	if (time_remain > 99)
 		exit(1);
 	int n = time_remain;
 	;
-	sprintf(*array, "%d", n);
+	sprintf(array, "%d", n);
 }
 
 //This function initializes the buffer needed for drawing to work.
@@ -62,11 +62,10 @@ void DrawBackground1(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy) {
 	int row;
 	int column;
 
-	//should be 240 but the bg resolution is wrong
-	for (row = 0; row < 242; row++) {
-		//should be 320 but the bg resolution is wrong
-		for (column = 0; column < 319; column++) {
-			alt_up_pixel_buffer_dma_draw(pixel_buffer_cpy, sfb[column][row], row, column);
+	for (row = 0; row < (ROW - 1); row++) {
+		for (column = 0; column < (COLUMN - 1); column++) {
+			alt_up_pixel_buffer_dma_draw_box(pixel_buffer_cpy, column, row,
+					column, row, bg1[row][column], 1);
 		}
 	}
 }
@@ -83,8 +82,8 @@ void DrawHP(alt_up_pixel_buffer_dma_dev* HP_buffer_cpy, gameState *gstate) {
 //Draw the timer by giving a time in int, using inttochar to convert int
 void DrawTimer(alt_up_char_buffer_dev* char_buffer_cpy, int time_remain) {
 	// Write some text
-	char* time_char;
-	InttoChar(time_remain, &time_char);
+	char time_char[3];
+	InttoChar(time_remain, time_char);
 
 	alt_up_char_buffer_string(char_buffer_cpy, " ", 38, 0);
 	alt_up_char_buffer_string(char_buffer_cpy, time_char, 39, 0);
@@ -115,6 +114,7 @@ void render(gameState *state, alt_up_char_buffer_dev* char_buffer,
 	alt_up_pixel_buffer_dma_clear_screen(pixel_buffer, 1);
 
 	DrawBackground(pixel_buffer);
+	//DrawBackground1(pixel_buffer);
 	//Invoke this function to draw background;
 
 	DrawHP(pixel_buffer, state);

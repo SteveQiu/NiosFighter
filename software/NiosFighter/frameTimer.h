@@ -5,6 +5,7 @@
 //1. Right click NiosFighter_bsp project
 //2. Go to Nios II -> BSP Editor
 //3. Go to Settings -> Common -> hal -> timestamp timer
+//REMEMBER TO CHECK COMMON AFTER, AND MAKE SURE sys_clk_timer IS SET TO none!
 //4. Set the value drowpdown to timer_0
 //5. Click "Generate" on the bottom right!
 //DONT FUCK WITH THE TIMER. alt_timestamp_start() SHOULD BE CALLED ONCE

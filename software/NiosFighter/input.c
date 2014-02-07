@@ -10,27 +10,27 @@ void initkey(input *key) {
 }
 
 int isleftkey(){
-	if(!(*pushbutton & 0x02))
+	if(!(IORD_8DIRECT(0x00004c50, 0) & 0x02))
 		return 1;
 	else
 		return 0;
 }
 int isrightkey(){
-	if(!(*pushbutton & 0x01))
+	if(!(IORD_8DIRECT(0x00004c50, 0) & 0x01))
 		return 1;
 	else
 		return 0;
 }
 
 int ispunchkey(){
-	if(!(*pushbutton & 0x04))
+	if(!(IORD_8DIRECT(0x00004c50, 0) & 0x04))
 		return 1;
 	else
 		return 0;
 }
 
 int isblockkey(){
-	if(!(*pushbutton & 0x08))
+	if(!(IORD_8DIRECT(0x00004c50, 0) & 0x08))
 		return 1;
 	else
 		return 0;
@@ -38,7 +38,7 @@ int isblockkey(){
 
 void refkey(input *key){
 	initkey(key);
-	if(*pushbutton == 0x0f)
+	if(IORD_8DIRECT(0x00004c50, 0) == 0x0f)
 		initkey(key);
 	else
 	{

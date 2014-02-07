@@ -3,11 +3,13 @@
 #include <system.h>
 #include <assert.h>
 #include <unistd.h>
+#include "sdcard.h"
 #include "gameState.h"
 #include "render.h"
 #include "frameTimer.h"
 #include "debug.h"
 #include "input.h"
+
 
 void updateGame(gameState* state, float frameLength);
 void processInput(gameState* gstate);

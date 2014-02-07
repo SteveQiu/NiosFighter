@@ -52,3 +52,8 @@ Compilation Notes:
 ==================
 1. In order for eclipse to properly compile/use the system timers for the frameTimer module, please see
 	instructions at the top of frameTimer.h
+2. In order for Quartus 2 to compile properly, you will need to manually copy
+Altera_UP_SD_Card_Memory_Block.bsf
+Altera_UP_SD_Card_Memory_Block.cmp
+Altera_UP_SD_Card_Memory_Block.vhd
+as instructed in exercise 1.3.

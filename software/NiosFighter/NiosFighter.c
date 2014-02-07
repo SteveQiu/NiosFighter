@@ -1,29 +1,38 @@
 #include "NiosFighter.h"
 
 int main() {
+
 	while(1){
+	//create variables
 	gameState gstate;
 	frameTimer ftimer;
+	sdcard card;
+	alt_up_sd_card_dev *device_reference = NULL;
+	alt_up_char_buffer_dev* char_buffer;
+	alt_up_pixel_buffer_dma_dev* pixel_buffer;
+
+	//initiation
 	initGameState(&gstate);
 	initFrameTimer(&ftimer);
-
-	alt_up_pixel_buffer_dma_dev* pixel_buffer;
+	initsdcard(&card,&device_reference);
 	InitPixBuff(&pixel_buffer);
-
-	alt_up_char_buffer_dev* char_buffer;
 	InitCharBuff(&char_buffer);
-
-	//DrawBackground1(pixel_buffer);
 
 	//gameLoop
 		while(!(gstate.gameOver)) {
 		startFrame(&ftimer);
+		testsdcard(&card,device_reference);
 		processInput(&gstate);
 		updateGame(&gstate, frameLength(&ftimer));
 		render(&gstate,char_buffer,pixel_buffer);
 		endFrame(&ftimer);
 		}
 }
+
+
+
+
+
 	return 0;
 }
 
