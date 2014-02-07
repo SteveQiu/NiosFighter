@@ -1,14 +1,14 @@
 typedef struct dirtySection {
 	int x,y;
 	int w,h;
-	dirtySection *next;
-};
+	struct dirtySection *next;
+}dirtySection;
 
 void initDirtySection(dirtySection *target);
 
 typedef struct dirtyManager {
 	dirtySection *head;
-};
+}dirtyManager ;
 
 void addDirtySection(dirtyManager *dm, dirtySection *ds);
 void popDirtySection(dirtyManager *dm);

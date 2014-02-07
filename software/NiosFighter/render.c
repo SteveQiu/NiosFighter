@@ -1,5 +1,16 @@
 #include "render.h"
 
+void addDirty(dirtyManager *dm, int x, int y, int w,
+		int h) {
+	dirtySection *newSection = malloc(sizeof(dirtySection));
+	initDirtySection(newSection);
+	newSection->x = x;
+	newSection->y = y;
+	newSection->w = w;
+	newSection->h = h;
+	addDirtySection(dm, newSection);
+}
+
 //This function convert int into char array
 void InttoChar(int time_remain, char* array) {
 	if (time_remain > 99)
@@ -69,22 +80,27 @@ void DrawBackground(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy) {
 
 }
 
-void DrawBackground1(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy, int row, int column) {
+void DrawBackground1(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy, int x,
+		int y, int w, int h) {
 
-	for (row = 0; row < (ROW - 1); row++) {
-		for (column = 0; column < (COLUMN - 1); column++) {
+	int row;
+	int column;
+
+	for (row = y; row < (w - 1); row++) {
+		for (column = x; column < (h - 1); column++) {
 			draw_pixel_fast(pixel_buffer_cpy, bg1[row][column], column, row);
 		}
 	}
 }
 
-void DrawHP(alt_up_pixel_buffer_dma_dev* HP_buffer_cpy, gameState *gstate) {
+void DrawHP(alt_up_pixel_buffer_dma_dev* HP_buffer_cpy, gameState *gstate, dirtyManager *dm) {
 
 	alt_up_pixel_buffer_dma_draw_box(HP_buffer_cpy, 15, 20,
 			(gstate->player1.health * 1.4), 30, 0xF800, 1);
 
 	alt_up_pixel_buffer_dma_draw_box(HP_buffer_cpy, (320
 			- gstate->player2.health * 1.4), 20, 310, 30, 0xF800, 1);
+	addDirty();
 }
 
 //Draw the timer by giving a time in int, using inttochar to convert int
@@ -100,7 +116,7 @@ void DrawTimer(alt_up_char_buffer_dev* char_buffer_cpy, int time_remain) {
 }
 
 //TODO: Split Character Function
-void DrawCharacter(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate) {
+void DrawCharacter(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate, dirtyManager *dm) {
 	alt_up_pixel_buffer_dma_draw_box(buffer_cpy, (gstate->player1.xPosition
 			+ 160 - gstate->player1.width), 120, (gstate->player1.xPosition
 			+ 160 + gstate->player1.width), 200, 0xF80F, 1);
@@ -111,10 +127,11 @@ void DrawCharacter(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate) {
 	alt_up_pixel_buffer_dma_draw_box(buffer_cpy, (gstate->player2.xPosition
 			+ 160 - gstate->player2.width), 120, (gstate->player2.xPosition
 			+ 160 + gstate->player2.width), 200, 0x03FF, 1);
+	addDirty();
 }
 
 void render(gameState *state, alt_up_char_buffer_dev* char_buffer,
-		alt_up_pixel_buffer_dma_dev *pixel_buffer) {
+		alt_up_pixel_buffer_dma_dev *pixel_buffer, dirtyManager *dm) {
 	//clear screen
 	//draw
 	//swap buffer
@@ -122,10 +139,15 @@ void render(gameState *state, alt_up_char_buffer_dev* char_buffer,
 	//alt_up_pixel_buffer_dma_clear_screen(pixel_buffer, 1);
 	//DrawBackground(pixel_buffer);
 	//Invoke this function to draw background;
+	while (dm->head != NULL) {
+		DrawBackground1(pixel_buffer, dm->head->x, dm->head->y, dm->head->w,
+				dm->head->h);
+		popDirtySection(dm);
+	}
 
 	DrawHP(pixel_buffer, state);
 
-	//DrawTimer(char_buffer, 99);
+	DrawTimer(char_buffer, 99);
 
 	DrawCharacter(pixel_buffer, state);
 
