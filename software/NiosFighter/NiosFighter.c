@@ -17,6 +17,7 @@ int main() {
 	initsdcard(&card,&device_reference);
 	InitPixBuff(&pixel_buffer);
 	InitCharBuff(&char_buffer);
+	DrawBackground1(pixel_buffer);
 
 	//gameLoop
 		while(!(gstate.gameOver)) {

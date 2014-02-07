@@ -9,6 +9,18 @@ void InttoChar(int time_remain, char* array) {
 	sprintf(array, "%d", n);
 }
 
+int draw_pixel_fast(alt_up_pixel_buffer_dma_dev *pixel_buffer,
+		unsigned int color, unsigned int x, unsigned int y) {
+	unsigned int addr;
+
+	addr = ((x & pixel_buffer->x_coord_mask) << 1);
+	addr += (((y & pixel_buffer->y_coord_mask) * 320) << 1);
+
+	IOWR_16DIRECT(pixel_buffer->back_buffer_start_address, addr, color);
+
+	return 0;
+}
+
 //This function initializes the buffer needed for drawing to work.
 void InitPixBuff(alt_up_pixel_buffer_dma_dev **pixel_buffer_ptr) {
 
@@ -57,15 +69,11 @@ void DrawBackground(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy) {
 
 }
 
-void DrawBackground1(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy) {
-
-	int row;
-	int column;
+void DrawBackground1(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy, int row, int column) {
 
 	for (row = 0; row < (ROW - 1); row++) {
 		for (column = 0; column < (COLUMN - 1); column++) {
-			alt_up_pixel_buffer_dma_draw_box(pixel_buffer_cpy, column, row,
-					column, row, bg1[row][column], 1);
+			draw_pixel_fast(pixel_buffer_cpy, bg1[row][column], column, row);
 		}
 	}
 }
@@ -111,15 +119,13 @@ void render(gameState *state, alt_up_char_buffer_dev* char_buffer,
 	//draw
 	//swap buffer
 	//check and wait for swap buffer
-	alt_up_pixel_buffer_dma_clear_screen(pixel_buffer, 1);
-
-	DrawBackground(pixel_buffer);
-	//DrawBackground1(pixel_buffer);
+	//alt_up_pixel_buffer_dma_clear_screen(pixel_buffer, 1);
+	//DrawBackground(pixel_buffer);
 	//Invoke this function to draw background;
 
 	DrawHP(pixel_buffer, state);
 
-	DrawTimer(char_buffer, 99);
+	//DrawTimer(char_buffer, 99);
 
 	DrawCharacter(pixel_buffer, state);
 
