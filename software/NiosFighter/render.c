@@ -5,8 +5,7 @@ void InttoChar(int time_remain, char* array) {
 	if (time_remain > 99)
 		exit(1);
 	int n = time_remain;
-	;
-	sprintf(array, "%d", n);
+	sprintf(array, "%02d", n);
 }
 
 //This function initializes the buffer needed for drawing to work.
@@ -94,7 +93,7 @@ void DrawTimer(alt_up_char_buffer_dev* char_buffer_cpy, int time_remain) {
 //TODO: Split Character Function
 void DrawCharacter(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate) {
 	int playerColour = 0xF80F;
-	if (gstate->player1.status == STUNNED) {
+	if (gstate->player1.status == STATUS_STUNNED) {
 		playerColour = 0x03FF;
 	}
 
@@ -124,7 +123,7 @@ void render(gameState *state, alt_up_char_buffer_dev* char_buffer,
 
 	DrawHP(pixel_buffer, state);
 
-	DrawTimer(char_buffer, 99);
+	DrawTimer(char_buffer, getTimeRemaining(state));
 
 	DrawCharacter(pixel_buffer, state);
 

@@ -17,6 +17,8 @@ int initCharacter(character *c) {
 	c->wantsToBlock = 0;
 	c->blockChangeTime = 0;
 	c->blockChangeMaxTime = 0.15;
+	c->stunMaxDuration = 0.5;
+	c->stunDuration = 0;
 	return 0;
 }
 

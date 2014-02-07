@@ -47,6 +47,7 @@ void updateGame(gameState *gstate, float frameLength) {
 	updatePlayerPunch(p2, p1, frameLength);
 	updatePlayerStunned(p1, frameLength);
 	updatePlayerStunned(p2, frameLength);
+	updateTime(gstate, frameLength);
 }
 
 void processInput(gameState *gstate) {
