@@ -9,3 +9,11 @@ void addDirtySection(dirtyManager *dm, dirtySection *ds) {
 	ds->next = dm->head;
 	dm->head = ds;
 }
+
+void popDirtySection(dirtyManager *dm) {
+	if (dm->head != NULL) {
+		dirtySection *temp = dm->head;
+		dm->head = dm->head->next;
+		free(temp);
+	}
+}
