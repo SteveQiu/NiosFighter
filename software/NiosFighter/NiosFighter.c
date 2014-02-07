@@ -2,7 +2,7 @@
 
 int main() {
 
-	while(1){
+//	while(1){
 	//create variables
 	gameState gstate;
 	frameTimer ftimer;
@@ -17,7 +17,7 @@ int main() {
 	initsdcard(&card,&device_reference);
 	InitPixBuff(&pixel_buffer);
 	InitCharBuff(&char_buffer);
-
+/*
 	//gameLoop
 		while(!(gstate.gameOver)) {
 		startFrame(&ftimer);
@@ -28,11 +28,43 @@ int main() {
 		endFrame(&ftimer);
 		}
 }
+	 */
+	testsdcard(&card,device_reference);
+	int handle;
+	handle = alt_up_sd_card_fopen("Mortal_Kombat.wave", 0);
+	if(!handle)printf("file open failed");
+
+	av_config_setup();
+	//open audio device
+	alt_up_audio_dev *audio = alt_up_audio_open_dev(AUDIO_0_NAME);
+
+	if(audio == NULL)
+		printf("Audio is null");
+
+	const int length=100;
+	unsigned int buf [length];
+
+	//creating waveform for testing
+	int i;
+	for(i =0; i<length; i++){
+		if(i<length/2)
+			buf[i]=0x4fff;
+		else
+			buf[i]=0x0000;
+	}
 
 
-
-
-
+	printf("Starting to play\n");
+	while(1){
+		int index=0;
+		//reading loop (contain within a while (true) )
+		while(index<length){
+			int bytes_read = alt_up_audio_write_fifo(audio, &buf[index], length-index, ALT_UP_AUDIO_LEFT);
+			alt_up_audio_write_fifo(audio, &buf[index], length-index, ALT_UP_AUDIO_RIGHT);
+			index += bytes_read;
+		}
+		printf("Sample\n");
+	}
 	return 0;
 }
 
