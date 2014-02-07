@@ -48,19 +48,15 @@ void updatePlayerPunch(character *p1, character *p2, float time) {
 	if (p1->wantsToPunch == 1 && p1->status == STATUS_IDLE) {
 		p1->status = STATUS_PUNCHING;
 		p1->punchDuration = 0.0;
-		p1->punchMaxDuration = 0.2;
 	}
-	if (p1->status == STATUS_PUNCHING) {
-		if (p1->punchMaxDuration == 0.0) {
-			p1->status = STATUS_IDLE;
-		}
-		else if (p1->punchDuration < p1->punchMaxDuration) {
+	else if (p1->status == STATUS_PUNCHING) {
+		if (p1->punchDuration < p1->punchMaxDuration) {
 			p1->punchDuration += time;
 			p1->fistDistance =(p1->punchDuration/p1->punchMaxDuration)* p1->punchLength * p1->facingDirection;
 		}
 		else if (p1->punchDuration > p1->punchMaxDuration) {
 			p1->status = hitDetection(p1,p2);
-			p1->punchMaxDuration = 0.0;
+			p1->punchDuration = 0.0;
 			p1->fistDistance = 0;
 			}
 	}
