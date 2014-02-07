@@ -1,6 +1,7 @@
 #ifndef FRAMETIMER_H
 #define FRAMETIMER_H
 #include <sys/alt_timestamp.h>
+#include "debug.h"
 //In order to get this to compile with eclipse do the following
 //1. Right click NiosFighter_bsp project
 //2. Go to Nios II -> BSP Editor

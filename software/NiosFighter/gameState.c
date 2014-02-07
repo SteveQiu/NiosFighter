@@ -2,6 +2,7 @@
 
 int initGameState(gameState *gstate) {
 	gstate->gameOver = 0;
+	gstate->roundTime = 0;
 	initCharacter(&(gstate->player1));
 	initCharacter(&(gstate->player2));
 
@@ -13,6 +14,9 @@ int initGameState(gameState *gstate) {
 	gstate->player1.punchDamage = 20;
 	gstate->player1.width = 10;
 	gstate->player2.width = 10;
+
+	gstate->player2.status = STATUS_BLOCKING;
+	gstate->player2.wantsToBlock = 1;
 	return 0;
 }
 
@@ -88,9 +92,11 @@ int performPunch(character *c1, character *c2) {
 
 void updatePlayerStunned(character *c, float time) {
 	if (c->status == STATUS_STUNNED) {
+		DEBUGMSG("PlayerIsStunned\n");
 		c->punchDuration = 0.0;
 		c->blockChangeTime = 0.0;
 		c->stunDuration += time;
+		DEBUGVAL("Stun Duration:%f\n", c->stunDuration);
 		if (c->stunDuration > c->stunMaxDuration) {
 			c->status = STATUS_IDLE;
 			c->stunDuration = 0;
@@ -126,6 +132,18 @@ void checkhp(gameState *state,character *c1, character *c2){
 		state->gameOver = 1;
 	else if(c2 -> health <=0)
 		state->gameOver = 1;
+}
+
+void updateTime(gameState *gstate, float time) {
+	gstate->roundTime += time;
+	if (gstate->roundTime > 99) {
+		gstate->gameOver = 1;
+	}
+}
+
+int getTimeRemaining(gameState *gstate) {
+	float timeleft = 99 - gstate->roundTime;
+	return (int)timeleft;
 }
 
 
