@@ -16,7 +16,7 @@ void InitPixBuff(alt_up_pixel_buffer_dma_dev **pixel_buffer_ptr) {
 	//Initialise the graphic buffer
 
 	unsigned int pixel_buffer_addr1 = SRAM_BASE;
-	unsigned int pixel_buffer_addr2 = SRAM_BASE + (320 * 240 * 2);
+	unsigned int pixel_buffer_addr2 = SRAM_BASE + (512 * 240 * 2);
 
 	// Set the 1st buffer address
 	alt_up_pixel_buffer_dma_change_back_buffer_address(*pixel_buffer_ptr,
