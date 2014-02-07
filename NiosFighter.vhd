@@ -6,6 +6,8 @@ ENTITY NiosFighter IS
 PORT (
 		SW : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
 		KEY : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+		PS2_DATA : INOUT std_logic;
+		PS2_CLK : INOUT std_logic;
 		CLOCK_50 : IN STD_LOGIC;
 		LEDG : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
 		DRAM_CLK, DRAM_CKE : OUT STD_LOGIC;
@@ -20,16 +22,25 @@ PORT (
 		VGA_CLK, VGA_BLANK, VGA_HS,VGA_VS, VGA_SYNC : OUT STD_LOGIC;
 		SRAM_DQ: INOUT STD_LOGIC_VECTOR(15 DOWNTO 0);
 		SRAM_ADDR: OUT STD_LOGIC_VECTOR(17 DOWNTO 0);
-		SRAM_LB_N, SRAM_UB_N,SRAM_CE_N,SRAM_OE_N,SRAM_WE_N: OUT STD_LOGIC);
+		SRAM_LB_N, SRAM_UB_N,SRAM_CE_N,SRAM_OE_N,SRAM_WE_N: OUT STD_LOGIC
+		);
 END NiosFighter;
 ARCHITECTURE Structure OF NiosFighter IS
 COMPONENT fighterSystem
 PORT (
 		clk_clk : IN STD_LOGIC;
 		reset_reset_n : IN STD_LOGIC;
-		sdram_clk_clk : OUT STD_LOGIC;
+		--LEDS
 		leds_export : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+		--SWITCHES
 		switches_export : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		--KEYS
+		key_export : in std_logic_vector(3 downto 0);
+		--Keyboard
+		ps2_controller_CLK   : inout std_logic;           
+      ps2_controller_DAT   : inout std_logic;
+		--SDRAM
+		sdram_clk_clk : OUT STD_LOGIC;
 		sdram_wire_addr : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
 		sdram_wire_ba : BUFFER STD_LOGIC_VECTOR(1 DOWNTO 0);
 		sdram_wire_cas_n : OUT STD_LOGIC;
@@ -59,8 +70,8 @@ PORT (
 		SRAM_UB_N : OUT STD_LOGIC;
 		SRAM_CE_N : OUT STD_LOGIC;
 		SRAM_OE_N : OUT STD_LOGIC;
-		SRAM_WE_N : OUT STD_LOGIC;
-		key_export : in std_logic_vector(3 downto 0));
+		SRAM_WE_N : OUT STD_LOGIC
+		);
 END COMPONENT;
 SIGNAL DQM : STD_LOGIC_VECTOR(1 DOWNTO 0);
 SIGNAL BA : STD_LOGIC_VECTOR(1 DOWNTO 0);
@@ -74,9 +85,17 @@ NiosII: fighterSystem
 PORT MAP (
 		clk_clk => CLOCK_50,
 		reset_reset_n => SW(1),
-		sdram_clk_clk => DRAM_CLK,
+		--LEDS
 		leds_export => LEDG,
+		--SWITCHES
 		switches_export => SW,
+		--KEYS
+		key_export => KEY,
+		--KEYBOARD
+		ps2_controller_CLK   => PS2_CLK,   
+      ps2_controller_DAT   => PS2_DATA,    
+		--SDRAM
+		sdram_clk_clk => DRAM_CLK,
 		sdram_wire_addr => DRAM_ADDR,
 		sdram_wire_ba => BA,
 		sdram_wire_cas_n => DRAM_CAS_N,
@@ -106,6 +125,5 @@ PORT MAP (
 		sram_UB_N => SRAM_UB_N,
 		sram_CE_N => SRAM_CE_N,
 		sram_OE_N => SRAM_OE_N,
-		sram_WE_N => SRAM_WE_N,
-		key_export => KEY);
+		sram_WE_N => SRAM_WE_N);
 END Structure;
