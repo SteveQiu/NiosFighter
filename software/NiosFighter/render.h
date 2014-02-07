@@ -8,7 +8,7 @@
 #include "gameState.h"
 #include "materials.h"
 
-void InttoChar(int time_remain,char**);
+void InttoChar(int time_remain,char*);
 void InitPixBuff(alt_up_pixel_buffer_dma_dev **pixel_buffer_ptr);
 void InitCharBuff(alt_up_char_buffer_dev** char_buffer_ptr);
 void DrawBackground(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy);

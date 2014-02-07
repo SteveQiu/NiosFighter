@@ -1,12 +1,12 @@
 #include "render.h"
 
 //This function convert int into char array
-void InttoChar(int time_remain, char** array) {
+void InttoChar(int time_remain, char* array) {
 	if (time_remain > 99)
 		exit(1);
 	int n = time_remain;
 	;
-	sprintf(*array, "%d", n);
+	sprintf(array, "%d", n);
 }
 
 //This function initializes the buffer needed for drawing to work.
@@ -82,8 +82,8 @@ void DrawHP(alt_up_pixel_buffer_dma_dev* HP_buffer_cpy, gameState *gstate) {
 //Draw the timer by giving a time in int, using inttochar to convert int
 void DrawTimer(alt_up_char_buffer_dev* char_buffer_cpy, int time_remain) {
 	// Write some text
-	char* time_char;
-	InttoChar(time_remain, &time_char);
+	char time_char[3];
+	InttoChar(time_remain, time_char);
 
 	alt_up_char_buffer_string(char_buffer_cpy, " ", 38, 0);
 	alt_up_char_buffer_string(char_buffer_cpy, time_char, 39, 0);
