@@ -62,9 +62,10 @@ void DrawBackground1(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy) {
 	int row;
 	int column;
 
-	for (row = 0; row < 240; row++) {
-		for (column = 0; column < 320; column++) {
-			alt_up_pixel_buffer_dma_draw(pixel_buffer_cpy, bg1[row][column], column, row);
+	for (row = 0; row < (ROW - 1); row++) {
+		for (column = 0; column < (COLUMN - 1); column++) {
+			alt_up_pixel_buffer_dma_draw_box(pixel_buffer_cpy, column, row,
+					column, row, bg1[row][column], 1);
 		}
 	}
 }
