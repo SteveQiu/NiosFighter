@@ -16,3 +16,5 @@ void initaudio(alt_up_audio_dev **audio);
 void initsounddata(sounddata *data,int len);
 
 void loadsound(sounddata *data,int handle,alt_up_audio_dev *audio);
+
+void playsound(char* name,int len,alt_up_audio_dev *audio);
