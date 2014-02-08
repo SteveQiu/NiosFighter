@@ -2,7 +2,7 @@
 
 int main() {
 
-//	while(1){
+	while(1){
 	//create variables
 	gameState gstate;
 	frameTimer ftimer;
@@ -19,25 +19,19 @@ int main() {
 	InitPixBuff(&pixel_buffer);
 	InitCharBuff(&char_buffer);
 	initaudio(&audio);
-/*
+
+
 	//gameLoop
 		while(!(gstate.gameOver)) {
 		startFrame(&ftimer);
 		testsdcard(&card,device_reference);
+		//playsound("FILE NAME",sec * 100000, audio);
 		processInput(&gstate);
 		updateGame(&gstate, frameLength(&ftimer));
 		render(&gstate,char_buffer,pixel_buffer);
 		endFrame(&ftimer);
 		}
 }
-	 */
-
-	startFrame(&ftimer);
-
-	testsdcard(&card,device_reference);
-	playsound("MK.wav",1200000,audio);
-
-	endFrame(&ftimer);
 
 	return 0;
 }

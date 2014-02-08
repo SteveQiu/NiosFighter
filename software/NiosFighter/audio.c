@@ -34,7 +34,7 @@ void loadsound(sounddata *data,int handle ,alt_up_audio_dev *audio){
 		printf("Reading\n");
 		for( i=0;i<data->len;i++){
 				buf[i]=alt_up_sd_card_read(handle);
-				if(buf[i]<0)done=1;
+				if(buf[i]==-1)done=1;
 			}
 			printf("Loading \n");
 			int j=0;
@@ -61,8 +61,10 @@ void loadsound(sounddata *data,int handle ,alt_up_audio_dev *audio){
 		if(done==1)break;
 		printf("Reset\n");
 }
+	printf("Done playing music \n");
 }
-
+// play time 1.3 sec load time 1sec/100000 len
+//playsound("FILE NAME",sec * 100000, audio);
 void playsound(char* name,int len, alt_up_audio_dev *audio ){
 		int handle;
 		handle = alt_up_sd_card_fopen(name, 0);
