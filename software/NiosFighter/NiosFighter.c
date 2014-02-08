@@ -10,6 +10,7 @@ int main() {
 	alt_up_sd_card_dev *device_reference = NULL;
 	alt_up_char_buffer_dev* char_buffer;
 	alt_up_pixel_buffer_dma_dev* pixel_buffer;
+	alt_up_audio_dev *audio;
 
 	//initiation
 	initGameState(&gstate);
@@ -29,7 +30,8 @@ int main() {
 		}
 }
 	 */
-	startFrame(&ftimer);
+	/*
+	 startFrame(&ftimer);
 	testsdcard(&card,device_reference);
 	int handle;
 	handle = alt_up_sd_card_fopen("MK.wav", 0);
@@ -79,6 +81,25 @@ int main() {
 		printf("Reset\n");
 	}
 
+
+
+	endFrame(&ftimer);
+	 */
+	startFrame(&ftimer);
+
+	testsdcard(&card,device_reference);
+
+	int handle;
+	handle = alt_up_sd_card_fopen("MK.wav", 0);
+	if(handle)printf("file open failed");
+
+	initaudio(&audio);
+
+	sounddata data;
+
+	initsounddata(&data,1200000);
+
+	loadsound(&data,handle,audio);
 
 
 	endFrame(&ftimer);
