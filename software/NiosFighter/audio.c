@@ -46,13 +46,13 @@ void loadsound(sounddata *data,int handle ,alt_up_audio_dev *audio){
 				printf("Audio is null\n");
 
 		int index=0;
-		int bytes_left;
-		int bytes_right;
+		int bytes_left=0;
+		int bytes_right=0;
 		int index_left=22;
 		int index_right=22;
-		while(index< data->loop){
-			bytes_left = alt_up_audio_write_fifo(audio, &buffer[index_left], data->hlen, ALT_UP_AUDIO_LEFT);
-			bytes_right = alt_up_audio_write_fifo(audio, &buffer[index_right], data->hlen, ALT_UP_AUDIO_RIGHT);
+		while(index< 3000000){
+			bytes_left = alt_up_audio_write_fifo(audio, &buffer[index_left], data->hlen-index_left, ALT_UP_AUDIO_LEFT);
+			bytes_right = alt_up_audio_write_fifo(audio, &buffer[index_right], data->hlen-index_right, ALT_UP_AUDIO_RIGHT);
 			index_left += bytes_left;
 			index_right += bytes_right;
 			index++;

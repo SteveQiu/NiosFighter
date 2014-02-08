@@ -1,5 +1,7 @@
-#include "altera_up_avalon_audio_and_video_config.h"
-#include "altera_up_avalon_audio.h"
+#include <altera_up_avalon_audio_and_video_config.h>
+#include <altera_up_avalon_audio.h>
+#include <altera_up_sd_card_avalon_interface.h>
+#include <stdio.h>
 
 typedef struct sounddata{
 	int len;
