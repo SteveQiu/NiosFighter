@@ -6,6 +6,10 @@ void initDirtySection(dirtySection *target) {
 	target->next = 0;
 }
 
+void initDirtyManager(dirtyManager *dm){
+	dm->head = NULL;
+}
+
 void addDirtySection(dirtyManager *dm, dirtySection *ds) {
 	ds->next = dm->head;
 	dm->head = ds;

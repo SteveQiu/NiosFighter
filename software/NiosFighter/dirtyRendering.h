@@ -1,15 +1,16 @@
 typedef struct dirtySection {
-	int x,y;
-	int w,h;
+	int x, y;
+	int w, h;
 	struct dirtySection *next;
-}dirtySection;
+} dirtySection;
 
 void initDirtySection(dirtySection *target);
 
 typedef struct dirtyManager {
 	dirtySection *head;
-}dirtyManager ;
+} dirtyManager;
 
+void initDirtyManager(dirtyManager *dm);
 void addDirtySection(dirtyManager *dm, dirtySection *ds);
 void popDirtySection(dirtyManager *dm);
 

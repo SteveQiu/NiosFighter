@@ -1,7 +1,6 @@
 #include "render.h"
 
-void addDirty(dirtyManager *dm, int x, int y, int w,
-		int h) {
+void addDirty(dirtyManager *dm, int x, int y, int w, int h) {
 	dirtySection *newSection = malloc(sizeof(dirtySection));
 	initDirtySection(newSection);
 	newSection->x = x;
@@ -40,27 +39,24 @@ void InitPixBuff(alt_up_pixel_buffer_dma_dev **pixel_buffer_ptr) {
 	//Initialise the graphic buffer
 
 	unsigned int pixel_buffer_addr1 = SRAM_BASE;
-	unsigned int pixel_buffer_addr2 = SRAM_BASE + (320 * 240 * 2);
+	unsigned int pixel_buffer_addr2 = SRAM_BASE + (512 * 240 * 2);
 
 	// Set the 1st buffer address
 	alt_up_pixel_buffer_dma_change_back_buffer_address(*pixel_buffer_ptr,
 			pixel_buffer_addr1);
+	//Set background for this buffer address
+	DrawBackground1(*pixel_buffer_ptr, 0, 0, COLUMN, ROW);
 
 	// Swap buffers –we have to swap because there is only an API function
 	// to set the address of the background buffer.
 	alt_up_pixel_buffer_dma_swap_buffers(*pixel_buffer_ptr);
-
 	while (alt_up_pixel_buffer_dma_check_swap_buffers_status(*pixel_buffer_ptr))
 		;
+
 	// Set the 2nd buffer address
 	alt_up_pixel_buffer_dma_change_back_buffer_address(*pixel_buffer_ptr,
 			pixel_buffer_addr2);
-
-	// Clear both buffers (this makes all pixels black)
-	alt_up_pixel_buffer_dma_clear_screen(*pixel_buffer_ptr, 0);
-	alt_up_pixel_buffer_dma_clear_screen(*pixel_buffer_ptr, 1);
-	//0 front, 1 back
-
+	DrawBackground1(*pixel_buffer_ptr, 0, 0, COLUMN, ROW);
 }
 
 //This function initializes the buffer needed for char printing
@@ -86,21 +82,33 @@ void DrawBackground1(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy, int x,
 	int row;
 	int column;
 
-	for (row = y; row < (w - 1); row++) {
-		for (column = x; column < (h - 1); column++) {
+	for (row = y; row < h; row++) {
+		for (column = x; column < w; column++) {
 			draw_pixel_fast(pixel_buffer_cpy, bg1[row][column], column, row);
 		}
 	}
 }
 
-void DrawHP(alt_up_pixel_buffer_dma_dev* HP_buffer_cpy, gameState *gstate, dirtyManager *dm) {
+void DrawHP(alt_up_pixel_buffer_dma_dev* HP_buffer_cpy, gameState *gstate,
+		dirtyManager *dm) {
 
 	alt_up_pixel_buffer_dma_draw_box(HP_buffer_cpy, 15, 20,
 			(gstate->player1.health * 1.4), 30, 0xF800, 1);
+	int x_1 = 140 - (gstate->player1.health * 1.4);
+	int y_1 = 10;
+	int w_1 = 140 - x_1;
+	int h_1 = 10;
 
 	alt_up_pixel_buffer_dma_draw_box(HP_buffer_cpy, (320
 			- gstate->player2.health * 1.4), 20, 310, 30, 0xF800, 1);
-	addDirty();
+
+	int x_2 = 310 - (320 - gstate->player2.health * 1.4);
+	int y_2 = 10;
+	int w_2 = x_2 - 180;
+	int h_2 = 10;
+
+	addDirty(dm, x_1, y_1, w_1, h_1);
+	addDirty(dm, x_2, y_2, w_2, h_2);
 }
 
 //Draw the timer by giving a time in int, using inttochar to convert int
@@ -116,7 +124,8 @@ void DrawTimer(alt_up_char_buffer_dev* char_buffer_cpy, int time_remain) {
 }
 
 //TODO: Split Character Function
-void DrawCharacter(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate, dirtyManager *dm) {
+void DrawCharacter(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate,
+		dirtyManager *dm) {
 	alt_up_pixel_buffer_dma_draw_box(buffer_cpy, (gstate->player1.xPosition
 			+ 160 - gstate->player1.width), 120, (gstate->player1.xPosition
 			+ 160 + gstate->player1.width), 200, 0xF80F, 1);
@@ -124,10 +133,22 @@ void DrawCharacter(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate, d
 			+ 160), 140, (gstate->player1.xPosition + 160
 			+ gstate->player1.fistDistance), 150, 0xF80F, 1);
 
+	//int x_1 = 140 - (gstate->player1.health * 1.4);
+	//int y_1 = 10;
+	//int w_1 = gstate->player1.width;
+	//int h_1 = 80;
+
 	alt_up_pixel_buffer_dma_draw_box(buffer_cpy, (gstate->player2.xPosition
 			+ 160 - gstate->player2.width), 120, (gstate->player2.xPosition
 			+ 160 + gstate->player2.width), 200, 0x03FF, 1);
-	addDirty();
+
+	//int x_2 = 310 - (320 - gstate->player2.health * 1.4);
+	//int y_2 = 10;
+	//int w_2 = gstate->player1.width;
+	//int h_2 = 80;
+
+	//addDirty(dm, x_1, y_1, w_1, h_1);
+	//addDirty(dm, x_2, y_2, w_2, h_2);
 }
 
 void render(gameState *state, alt_up_char_buffer_dev* char_buffer,
@@ -145,11 +166,11 @@ void render(gameState *state, alt_up_char_buffer_dev* char_buffer,
 		popDirtySection(dm);
 	}
 
-	DrawHP(pixel_buffer, state);
+	DrawHP(pixel_buffer, state, dm);
 
 	DrawTimer(char_buffer, 99);
 
-	DrawCharacter(pixel_buffer, state);
+	DrawCharacter(pixel_buffer, state, dm);
 
 	alt_up_pixel_buffer_dma_swap_buffers(pixel_buffer);
 	while (alt_up_pixel_buffer_dma_check_swap_buffers_status(pixel_buffer))

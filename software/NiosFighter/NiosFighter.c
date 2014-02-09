@@ -10,7 +10,7 @@ int main() {
 		alt_up_sd_card_dev *device_reference = NULL;
 		alt_up_char_buffer_dev* char_buffer;
 		alt_up_pixel_buffer_dma_dev* pixel_buffer;
-		dirtyManager *dm;
+		dirtyManager dm;
 
 		//initiation
 		initGameState(&gstate);
@@ -18,7 +18,7 @@ int main() {
 		initsdcard(&card, &device_reference);
 		InitPixBuff(&pixel_buffer);
 		InitCharBuff(&char_buffer);
-		DrawBackground1(pixel_buffer, 0, 0, COLUMN, ROW);
+		initDirtyManager(&dm);
 
 		//gameLoop
 		while (!(gstate.gameOver)) {
@@ -26,7 +26,7 @@ int main() {
 			testsdcard(&card, device_reference);
 			processInput(&gstate);
 			updateGame(&gstate, frameLength(&ftimer));
-			render(&gstate, char_buffer, pixel_buffer, dm);
+			render(&gstate, char_buffer, pixel_buffer, &dm);
 			endFrame(&ftimer);
 		}
 	}
