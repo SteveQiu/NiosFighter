@@ -95,48 +95,19 @@ void DrawSomething(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy, int x, int y,
 void DrawHP(alt_up_pixel_buffer_dma_dev* HP_buffer_cpy, gameState *gstate,
 		dirtyManager *dm) {
 
-	alt_up_pixel_buffer_dma_draw_box(HP_buffer_cpy, 15, 20,
-			(gstate->player1.health * 1.4), 30, 0xF800, 1);
-	int x_1 = 140 - (gstate->player1.health * 1.4);
-	int y_1 = 20;
-	int w_1 = 140 - x_1;
-	int h_1 = 10;
+	int x_1 = 14;
+	int y_1 = 10;
+	int w_1 = 126 - gstate->player1.health * 1.26;
+	int h_1 = 6;
 
-	alt_up_pixel_buffer_dma_draw_box(HP_buffer_cpy, (320
-			- gstate->player2.health * 1.4), 20, 310, 30, 0xF800, 1);
-
-	int x_2 = 320 - 140;
-	int y_2 = 20;
-	int w_2 = 320 - gstate->player2.health * 1.4 - x_2;
-	int h_2 = 10;
+	int x_2 = 180;
+	int y_2 = 10;
+	int w_2 = 126 - gstate->player2.health * 1.26;
+	int h_2 = 6;
 
 	addDirty(dm, x_1, y_1, w_1, h_1);
 	addDirty(dm, x_2, y_2, w_2, h_2);
 }
-
-/*void DrawHP1(alt_up_pixel_buffer_dma_dev* HP_buffer_cpy, gameState *gstate,
- dirtyManager *dm) {
-
- DrawSomething(pixel_buffer, dm->head->x, dm->head->y, dm->head->w,
- dm->head->h, 1);
- alt_up_pixel_buffer_dma_draw_box(HP_buffer_cpy, 15, 20,
- (gstate->player1.health * 1.4), 30, 0xF800, 1);
- int x_1 = 140 - (gstate->player1.health * 1.4);
- int y_1 = 20;
- int w_1 = 140 - x_1;
- int h_1 = 10;
-
- alt_up_pixel_buffer_dma_draw_box(HP_buffer_cpy, (320
- - gstate->player2.health * 1.4), 20, 310, 30, 0xF800, 1);
-
- int x_2 = 320 - 140;
- int y_2 = 20;
- int w_2 = 320 - gstate->player2.health * 1.4 - x_2;
- int h_2 = 10;
-
- addDirty(dm, x_1, y_1, w_1, h_1);
- addDirty(dm, x_2, y_2, w_2, h_2);
- }*/
 
 //Draw the timer by giving a time in int, using inttochar to convert int
 void DrawTimer(alt_up_char_buffer_dev* char_buffer_cpy, int time_remain) {
@@ -193,8 +164,7 @@ void render(gameState *state, alt_up_char_buffer_dev* char_buffer,
 		popDirtySection(dm);
 	}
 
-	//DrawHP(pixel_buffer, state, dm);
-	//DrawHP1(pixel_buffer, state, dm);
+	DrawHP(pixel_buffer, state, dm);
 
 	DrawTimer(char_buffer, getTimeRemaining(state));
 
