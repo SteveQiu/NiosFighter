@@ -10,6 +10,7 @@ int main() {
 	alt_up_sd_card_dev *device_reference = NULL;
 	alt_up_char_buffer_dev* char_buffer;
 	alt_up_pixel_buffer_dma_dev* pixel_buffer;
+	alt_up_ps2_dev * ps2;
 
 	//initiation
 	initGameState(&gstate);
@@ -17,13 +18,13 @@ int main() {
 	initsdcard(&card,&device_reference);
 	InitPixBuff(&pixel_buffer);
 	InitCharBuff(&char_buffer);
-
+	initKeyboard(&ps2);
 	//gameLoop
 		while(!(gstate.gameOver)) {
 		startFrame(&ftimer);
 		testsdcard(&card,device_reference);
-		processInput(&gstate);
-		updateGame(&gstate, frameLength(&ftimer));
+		processInput(&gstate,&ps2);
+		updateGame(&gstate,frameLength(&ftimer));
 		render(&gstate,char_buffer,pixel_buffer);
 		endFrame(&ftimer);
 		}
@@ -49,21 +50,37 @@ void updateGame(gameState *gstate, float frameLength) {
 	updatePlayerStunned(p2, frameLength);
 }
 
-void processInput(gameState *gstate) {
+void processInput(gameState *gstate, alt_up_ps2_dev * ps2) {
 	input move;
-	refkey(&move);
+	int keyb=readKeyboard(&move,ps2);
+	if(keyb==0)
+		printf("keyboard did not read properly");
+
+	//Reset all states
 	gstate->player1.movingDirection = NOTMOVING;
 	gstate->player1.wantsToPunch = 0;
 	gstate->player1.wantsToBlock = 0;
-	if(move.p){
-		if(move.left)
+	gstate->player2.movingDirection = NOTMOVING;
+	gstate->player2.wantsToPunch = 0;
+	gstate->player2.wantsToBlock = 0;
+	//If move struct contains
+	if(move.press){
+		if(move.p1_left)
 			gstate->player1.movingDirection = LEFT;
-		if(move.right)
+		if(move.p1_right)
 			gstate->player1.movingDirection = RIGHT;
-		if(move.punch)
+		if(move.p1_punch)
 			gstate->player1.wantsToPunch = 1;
-		if(move.block)
+		if(move.p1_block)
 			gstate->player1.wantsToBlock = 1;
+		if(move.p2_left)
+			gstate->player2.movingDirection = LEFT;
+		if(move.p2_right)
+			gstate->player2.movingDirection = RIGHT;
+		if(move.p2_punch)
+			gstate->player2.wantsToPunch = 1;
+		if(move.p2_block)
+			gstate->player2.wantsToBlock = 1;
 	}
 
 }

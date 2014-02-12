@@ -12,7 +12,7 @@
 
 
 void updateGame(gameState* state, float frameLength);
-void processInput(gameState* gstate);
+void processInput(gameState* gstate,alt_up_ps2_dev * ps2);
 
 #endif //NIOSFIGHTER_H
 
