@@ -185,19 +185,11 @@ void DrawCharacter(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate,
 
 void render(gameState *state, alt_up_char_buffer_dev* char_buffer,
 		alt_up_pixel_buffer_dma_dev *pixel_buffer, dirtyManager *dm) {
-	//clear screen
-	//draw
-	//swap buffer
-	//check and wait for swap buffer
-	//alt_up_pixel_buffer_dma_clear_screen(pixel_buffer, 1);
-	//DrawBackground(pixel_buffer);
-	//Invoke this function to draw background;
 
+	//Redraw all the dirty sections
 	while (dm->head != NULL) {
 		DrawSomething(pixel_buffer, dm->head->x, dm->head->y, dm->head->w,
 				dm->head->h, 1);
-		//printf("%d,%d,%d,%d\n", dm->head->x, dm->head->y, dm->head->w,
-		//dm->head->h);
 		popDirtySection(dm);
 	}
 
