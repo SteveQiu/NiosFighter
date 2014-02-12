@@ -2,24 +2,27 @@
 
 int main() {
 
-	while(1){
-	//create variables
-	gameState gstate;
-	frameTimer ftimer;
-	sdcard card;
-	alt_up_sd_card_dev *device_reference = NULL;
-	alt_up_char_buffer_dev* char_buffer;
-	alt_up_pixel_buffer_dma_dev* pixel_buffer;
-	alt_up_audio_dev *audio;
+	while (1) {
+		//create variables
+		gameState gstate;
+		frameTimer ftimer;
+		sdcard card;
+		alt_up_sd_card_dev *device_reference = NULL;
+		alt_up_char_buffer_dev* char_buffer;
+		alt_up_pixel_buffer_dma_dev* pixel_buffer;
+		dirtyManager dm;
+		alt_up_audio_dev *audio;
 
-	//initiation
-	initGameState(&gstate);
-	initFrameTimer(&ftimer);
-	initsdcard(&card,&device_reference);
-	InitPixBuff(&pixel_buffer);
-	InitCharBuff(&char_buffer);
-	initaudio(&audio);
+		//initiation
+		initGameState(&gstate);
+		initFrameTimer(&ftimer);
+		initsdcard(&card, &device_reference);
+		InitPixBuff(&pixel_buffer);
+		InitCharBuff(&char_buffer);
+		initDirtyManager(&dm);
+		initaudio(&audio);
 
+<<<<<<< HEAD
 
 	//gameLoop
 		while(!(gstate.gameOver)) {
@@ -31,14 +34,25 @@ int main() {
 		updateGame(&gstate, frameLength(&ftimer));
 		render(&gstate,char_buffer,pixel_buffer);
 		endFrame(&ftimer);
+=======
+		//gameLoop
+		while (!(gstate.gameOver)) {
+			startFrame(&ftimer);
+			testsdcard(&card, device_reference);
+			//playsound("FILE NAME",sec * 100000, audio);
+			processInput(&gstate);
+			updateGame(&gstate, frameLength(&ftimer));
+			render(&gstate, char_buffer, pixel_buffer, &dm);
+			endFrame(&ftimer);
+>>>>>>> 3d53e205c848fa394f79889be87c0c64ef29d94b
 		}
-}
+	}
 
 	return 0;
 }
 
 void updateGame(gameState *gstate, float frameLength) {
-	checkhp(gstate,&gstate->player1, &gstate->player2);
+	checkhp(gstate, &gstate->player1, &gstate->player2);
 	character* p1 = &(gstate->player1);
 	character* p2 = &(gstate->player2);
 	checkPlayerCollisions(gstate);
@@ -57,14 +71,14 @@ void processInput(gameState *gstate) {
 	gstate->player1.movingDirection = NOTMOVING;
 	gstate->player1.wantsToPunch = 0;
 	gstate->player1.wantsToBlock = 0;
-	if(move.p){
-		if(move.left)
+	if (move.p) {
+		if (move.left)
 			gstate->player1.movingDirection = LEFT;
-		if(move.right)
+		if (move.right)
 			gstate->player1.movingDirection = RIGHT;
-		if(move.punch)
+		if (move.punch)
 			gstate->player1.wantsToPunch = 1;
-		if(move.block)
+		if (move.block)
 			gstate->player1.wantsToBlock = 1;
 	}
 
