@@ -87,6 +87,7 @@ void DrawSomething(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy, int x, int y,
 			else if (a == 2)
 				draw_pixel_fast(pixel_buffer_cpy, hb[row - y][column - x],
 						column, row);
+
 		}
 	}
 }
@@ -151,6 +152,7 @@ void DrawTimer(alt_up_char_buffer_dev* char_buffer_cpy, int time_remain) {
 
 void DrawCharacter(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate,
 		dirtyManager *dm) {
+
 	int playerColour = 0xF80F;
 	if (gstate->player1.status == STATUS_STUNNED) {
 		playerColour = 0x03FF;
@@ -190,6 +192,7 @@ void render(gameState *state, alt_up_char_buffer_dev* char_buffer,
 	//alt_up_pixel_buffer_dma_clear_screen(pixel_buffer, 1);
 	//DrawBackground(pixel_buffer);
 	//Invoke this function to draw background;
+
 	while (dm->head != NULL) {
 		DrawSomething(pixel_buffer, dm->head->x, dm->head->y, dm->head->w,
 				dm->head->h, 1);
@@ -208,4 +211,5 @@ void render(gameState *state, alt_up_char_buffer_dev* char_buffer,
 	alt_up_pixel_buffer_dma_swap_buffers(pixel_buffer);
 	while (alt_up_pixel_buffer_dma_check_swap_buffers_status(pixel_buffer))
 		;
+
 }

@@ -17,10 +17,9 @@ void initaudio(alt_up_audio_dev **audio){
 	*audio = alt_up_audio_open_dev(AUDIO_0_NAME);
 }
 
-void initsounddata(sounddata *data,int len){
-	data->len= len;
-	data->hlen= len/2;
-	data->loop= len/2*5;
+void initsounddata(sounddata *data){
+	data->len= 128;
+	data->hlen= 64;
 }
 
 void loadsound(sounddata *data,int handle ,alt_up_audio_dev *audio){
@@ -31,27 +30,27 @@ void loadsound(sounddata *data,int handle ,alt_up_audio_dev *audio){
 	int done;
 	printf("Starting to play\n");
 	while(1){
-		printf("Reading\n");
+		//printf("Reading\n");
 		for( i=0;i<data->len;i++){
 				buf[i]=alt_up_sd_card_read(handle);
 				if(buf[i]==-1)done=1;
 			}
-			printf("Loading \n");
+		//	printf("Loading \n");
 			int j=0;
 			for(i = 0; i<data->len; i+=2){
 					buffer[j] = (buf[i+1] << 8) | buf[i];
 					j++;
 					}
-			printf("converting\n");
+		//	printf("converting\n");
 			if(audio == NULL)
 				printf("Audio is null\n");
 
 		int index=0;
 		int bytes_left=0;
 		int bytes_right=0;
-		int index_left=22;
-		int index_right=22;
-		while(index< data->loop){
+		int index_left=0;
+		int index_right=0;
+		while(index< data->len){
 			bytes_left = alt_up_audio_write_fifo(audio, &buffer[index_left], data->hlen-index_left, ALT_UP_AUDIO_LEFT);
 			bytes_right = alt_up_audio_write_fifo(audio, &buffer[index_right], data->hlen-index_right, ALT_UP_AUDIO_RIGHT);
 			index_left += bytes_left;
@@ -59,18 +58,18 @@ void loadsound(sounddata *data,int handle ,alt_up_audio_dev *audio){
 			index++;
 		}
 		if(done==1)break;
-		printf("Reset\n");
+	//	printf("Reset\n");
 }
-	printf("Done playing music \n");
+//	printf("Done playing music \n");
 }
 // play time 1.3 sec load time 1sec/100000 len
-//playsound("FILE NAME",sec * 100000, audio);
-void playsound(char* name,int len, alt_up_audio_dev *audio ){
+//playsound("FILE NAME", audio);
+void playsound(char* name, alt_up_audio_dev *audio ){
 		int handle;
 		handle = alt_up_sd_card_fopen(name, 0);
 		if(handle<0)printf("file open failed");
 		sounddata data;
-		initsounddata(&data,len);
+		initsounddata(&data);
 		loadsound(&data,handle,audio);
 		alt_up_sd_card_fclose(handle);
 }

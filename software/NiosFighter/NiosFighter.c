@@ -11,6 +11,7 @@ int main() {
 		alt_up_char_buffer_dev* char_buffer;
 		alt_up_pixel_buffer_dma_dev* pixel_buffer;
 		dirtyManager dm;
+		dirtyManager dm2;
 		alt_up_audio_dev *audio;
 
 		//initiation
@@ -20,6 +21,7 @@ int main() {
 		InitPixBuff(&pixel_buffer);
 		InitCharBuff(&char_buffer);
 		initDirtyManager(&dm);
+		initDirtyManager(&dm2);
 		initaudio(&audio);
 
 		//gameLoop
@@ -29,6 +31,7 @@ int main() {
 			//playsound("FILE NAME",sec * 100000, audio);
 			processInput(&gstate);
 			updateGame(&gstate, frameLength(&ftimer));
+			swapdm(&dm, &dm2);
 			render(&gstate, char_buffer, pixel_buffer, &dm);
 			endFrame(&ftimer);
 		}

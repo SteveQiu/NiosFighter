@@ -6,15 +6,14 @@
 typedef struct sounddata{
 	int len;
 	int hlen;
-	int loop;
 } sounddata;
 
 void av_config_setup();
 
 void initaudio(alt_up_audio_dev **audio);
 
-void initsounddata(sounddata *data,int len);
+void initsounddata(sounddata *data);
 
 void loadsound(sounddata *data,int handle,alt_up_audio_dev *audio);
 
-void playsound(char* name,int len,alt_up_audio_dev *audio);
+void playsound(char* name,alt_up_audio_dev *audio);

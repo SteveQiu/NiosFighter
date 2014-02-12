@@ -13,6 +13,7 @@ typedef struct dirtyManager {
 void initDirtyManager(dirtyManager *dm);
 void addDirtySection(dirtyManager *dm, dirtySection *ds);
 void popDirtySection(dirtyManager *dm);
+void swapdm(dirtyManager **dm1, dirtyManager **dm2);
 
 //Usage in rendering function
 /*
