@@ -11,8 +11,9 @@ int initFrameTimer(frameTimer *ftimer) {
 
 void startFrame(frameTimer* ftimer) {
 	ftimer->lastFrameLength =
-			ftimer->frameEndTime - ftimer->frameStartTime;
-	ftimer->frameStartTime = alt_timestamp();
+			ftimer->frameEndTime;
+	//ftimer->frameStartTime = alt_timestamp();
+	alt_timestamp_start();
 }
 
 void endFrame(frameTimer* ftimer) {
@@ -20,8 +21,10 @@ void endFrame(frameTimer* ftimer) {
 }
 
 float frameLength(frameTimer *ftimer) {
-	return (float)(ftimer->lastFrameLength)
-			/(float)alt_timestamp_freq();
+	float val = (float)(ftimer->lastFrameLength)
+					/(float)alt_timestamp_freq();
+	DEBUGVAL("FRAMELENGTH: %f\n", val);
+	return val;
 }
 
 int numTicksPerSecond() {

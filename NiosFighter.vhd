@@ -8,7 +8,7 @@ PORT (
 --See EX 1.3 note 1 and add 3 missing files
 		SW : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
 		KEY : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
-		PS2_DATA : INOUT std_logic;
+		PS2_DAT : INOUT std_logic;
 		PS2_CLK : INOUT std_logic;
 		CLOCK_50 : IN STD_LOGIC;
 		LEDG : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
@@ -121,7 +121,7 @@ PORT MAP (
 		key_export => KEY,
 		--KEYBOARD
 		ps2_controller_CLK   => PS2_CLK,   
-      ps2_controller_DAT   => PS2_DATA,    
+      ps2_controller_DAT   => PS2_DAT,    
 		--SDRAM
 		sdram_clk_clk => DRAM_CLK,
 		sdram_wire_addr => DRAM_ADDR,

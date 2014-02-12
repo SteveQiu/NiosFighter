@@ -9,6 +9,7 @@
 #include "frameTimer.h"
 #include "debug.h"
 #include "input.h"
+#include "audio.h"
 
 
 void updateGame(gameState* state, float frameLength);
