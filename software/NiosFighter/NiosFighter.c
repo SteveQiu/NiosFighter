@@ -24,19 +24,6 @@ int main() {
 		initDirtyManager(&dm2);
 		initaudio(&audio);
 
-<<<<<<< HEAD
-
-	//gameLoop
-		while(!(gstate.gameOver)) {
-		startFrame(&ftimer);
-		testsdcard(&card,device_reference);
-		//playsound("FILE NAME",sec * 100000, audio);
-		playsound("MK.wav", audio);
-		processInput(&gstate);
-		updateGame(&gstate, frameLength(&ftimer));
-		render(&gstate,char_buffer,pixel_buffer);
-		endFrame(&ftimer);
-=======
 		//gameLoop
 		while (!(gstate.gameOver)) {
 			startFrame(&ftimer);
@@ -47,7 +34,6 @@ int main() {
 			swapdm(&dm, &dm2);
 			render(&gstate, char_buffer, pixel_buffer, &dm);
 			endFrame(&ftimer);
->>>>>>> 3d53e205c848fa394f79889be87c0c64ef29d94b
 		}
 	}
 
