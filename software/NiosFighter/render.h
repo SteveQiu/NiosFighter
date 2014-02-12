@@ -20,10 +20,12 @@ int draw_pixel_fast(alt_up_pixel_buffer_dma_dev *pixel_buffer,
 		unsigned int color, unsigned int x, unsigned int y);
 void InitPixBuff(alt_up_pixel_buffer_dma_dev **pixel_buffer_ptr);
 void InitCharBuff(alt_up_char_buffer_dev** char_buffer_ptr);
-void DrawBackground1(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy, int x,
-		int y, int w, int h);
+void DrawSomething(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy, int x, int y,
+		int w, int h, int a);
 void DrawTimer(alt_up_char_buffer_dev* char_buffer_cpy, int);
 void DrawHP(alt_up_pixel_buffer_dma_dev* HP_buffer_cpy, gameState *gstate,
+		dirtyManager *dm);
+void DrawHP1(alt_up_pixel_buffer_dma_dev* HP_buffer_cpy, gameState *gstate,
 		dirtyManager *dm);
 void DrawCharTest(alt_up_char_buffer_dev* char_buffer_cpy);
 void render(gameState *state, alt_up_char_buffer_dev* char_buffer,
