@@ -26,6 +26,7 @@ int main() {
 		startFrame(&ftimer);
 		testsdcard(&card,device_reference);
 		//playsound("FILE NAME",sec * 100000, audio);
+		playsound("MK.wav", audio);
 		processInput(&gstate);
 		updateGame(&gstate, frameLength(&ftimer));
 		render(&gstate,char_buffer,pixel_buffer);
