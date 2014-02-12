@@ -12,11 +12,13 @@ int initGameState(gameState *gstate) {
 	gstate->player2.facingDirection = LEFT;
 	gstate->player1.punchLength = 30;
 	gstate->player1.punchDamage = 20;
+	gstate->player2.punchLength = 30;
+	gstate->player2.punchDamage = 20;
 	gstate->player1.width = 10;
 	gstate->player2.width = 10;
 
-	gstate->player2.status = STATUS_BLOCKING;
-	gstate->player2.wantsToBlock = 1;
+	//gstate->player2.status = STATUS_BLOCKING;
+	//gstate->player2.wantsToBlock = 1;
 	return 0;
 }
 

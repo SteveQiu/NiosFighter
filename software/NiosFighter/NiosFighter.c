@@ -25,13 +25,14 @@ int main() {
 		initDirtyManager(&dm);
 		initDirtyManager(&dm2);
 		initaudio(&audio);
+		initKeyboard(&ps2);
 
 		//gameLoop
 		while (!(gstate.gameOver)) {
 			startFrame(&ftimer);
 			testsdcard(&card, device_reference);
 			//playsound("FILE NAME",sec * 100000, audio);
-			processInput(&gstate,&ps2);
+			processInput(&gstate,ps2);
 			updateGame(&gstate, frameLength(&ftimer));
 			swapdm(&dm, &dm2);
 			render(&gstate, char_buffer, pixel_buffer, &dm);
@@ -59,37 +60,25 @@ void updateGame(gameState *gstate, float frameLength) {
 
 void processInput(gameState *gstate, alt_up_ps2_dev * ps2) {
 	input move;
-	int keyb=readKeyboard(&move,ps2);
-	if(keyb==0)
-		printf("keyboard did not read properly");
+	readKeyboard(&move,ps2);
 
 	//Reset all states
 	gstate->player1.movingDirection = NOTMOVING;
 	gstate->player1.wantsToPunch = 0;
 	gstate->player1.wantsToBlock = 0;
-<<<<<<< HEAD
+
 	gstate->player2.movingDirection = NOTMOVING;
 	gstate->player2.wantsToPunch = 0;
 	gstate->player2.wantsToBlock = 0;
 	//If move struct contains
-	if(move.press){
-		if(move.p1_left)
+
+		if (move.p1_left)
 			gstate->player1.movingDirection = LEFT;
-		if(move.p1_right)
+		if (move.p1_right)
 			gstate->player1.movingDirection = RIGHT;
-		if(move.p1_punch)
+		if (move.p1_punch)
 			gstate->player1.wantsToPunch = 1;
-		if(move.p1_block)
-=======
-	if (move.p) {
-		if (move.left)
-			gstate->player1.movingDirection = LEFT;
-		if (move.right)
-			gstate->player1.movingDirection = RIGHT;
-		if (move.punch)
-			gstate->player1.wantsToPunch = 1;
-		if (move.block)
->>>>>>> master
+		if (move.p1_block)
 			gstate->player1.wantsToBlock = 1;
 		if(move.p2_left)
 			gstate->player2.movingDirection = LEFT;
@@ -99,6 +88,6 @@ void processInput(gameState *gstate, alt_up_ps2_dev * ps2) {
 			gstate->player2.wantsToPunch = 1;
 		if(move.p2_block)
 			gstate->player2.wantsToBlock = 1;
-	}
+
 
 }

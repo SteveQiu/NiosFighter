@@ -20,6 +20,6 @@ int p2_punch;
 }input;
 void initKeyboard(alt_up_ps2_dev ** ps2);
 int readKeyboard(input * key, alt_up_ps2_dev * ps2);
-
+void initKey(input *key);
 
 #endif

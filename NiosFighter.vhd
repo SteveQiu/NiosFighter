@@ -8,8 +8,8 @@ PORT (
 --See EX 1.3 note 1 and add 3 missing files
 		SW : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
 		KEY : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
-		PS2_DAT : INOUT std_logic;
-		PS2_CLK : INOUT std_logic;
+		PS2_DAT : INOUT std_logic := 'X';
+		PS2_CLK : INOUT std_logic := 'X';
 		CLOCK_50 : IN STD_LOGIC;
 		LEDG : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
 		DRAM_CLK, DRAM_CKE : OUT STD_LOGIC;
