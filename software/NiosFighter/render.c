@@ -71,14 +71,6 @@ void InitCharBuff(alt_up_char_buffer_dev** char_buffer_ptr) {
 	alt_up_char_buffer_init(*char_buffer_ptr);
 }
 
-//This function draws the background of the game
-void DrawBackground(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy) {
-	// Draw a line to the background buffer
-	alt_up_pixel_buffer_dma_draw_hline(pixel_buffer_cpy, 0, 320, 200, 0x064F, 1);
-	//Resolution:320x240
-
-}
-
 void DrawBackground1(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy, int x,
 		int y, int w, int h) {
 
