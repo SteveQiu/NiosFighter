@@ -27,7 +27,7 @@ int main() {
 		initDirtyManager(&dm2);
 		initaudio(&audio);
 		initKeyboard(&ps2);
-		initKey(&move);
+		//initKey(&move);
 
 		//Display Menu();
 		//if(input1){
@@ -70,34 +70,44 @@ void processInput(gameState *gstate, alt_up_ps2_dev * ps2, input *move) {
 
 
 	readKeyboard(move,ps2);
-	refkey(move);
-
-	//Reset all states
-	gstate->player1.movingDirection = NOTMOVING;
-	gstate->player1.wantsToPunch = 0;
-	gstate->player1.wantsToBlock = 0;
-
-	gstate->player2.movingDirection = NOTMOVING;
-	gstate->player2.wantsToPunch = 0;
-	gstate->player2.wantsToBlock = 0;
+	//refkey(move);
 	//If move struct contains
-
+		//player one movement
 		if (move->p1_left)
 			gstate->player1.movingDirection = LEFT;
-		if (move->p1_right)
+		else if (move->p1_right)
 			gstate->player1.movingDirection = RIGHT;
+		else
+			gstate->player1.movingDirection = NOTMOVING;
+		//player one punch
 		if (move->p1_punch)
 			gstate->player1.wantsToPunch = 1;
+		else
+			gstate->player1.wantsToPunch = 0;
+		//player one block
 		if (move->p1_block)
 			gstate->player1.wantsToBlock = 1;
-		if(move->p2_left)
+		else
+			gstate->player1.wantsToBlock = 0;
+
+
+		//player two movement
+		if (move->p2_left)
 			gstate->player2.movingDirection = LEFT;
-		if(move->p2_right)
+		else if (move->p2_right)
 			gstate->player2.movingDirection = RIGHT;
-		if(move->p2_punch)
+		else
+			gstate->player2.movingDirection = NOTMOVING;
+		//player two punch
+		if (move->p2_punch)
 			gstate->player2.wantsToPunch = 1;
-		if(move->p2_block)
+		else
+			gstate->player2.wantsToPunch = 0;
+		//player two block
+		if (move->p2_block)
 			gstate->player2.wantsToBlock = 1;
+		else
+			gstate->player2.wantsToBlock = 0;
 
 
 }

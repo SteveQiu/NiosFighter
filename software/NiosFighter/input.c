@@ -17,40 +17,47 @@ int readKeyboard(input * key, alt_up_ps2_dev * ps2){
 	decode_scancode(ps2,&mode,&buf,&ascii);
 	//printf("mode: %d, buf: %d, ascii: %c\n",mode,buf,ascii);
 	//initKey(key);
-	while(mode<=5){
-			//printf("mode: %d, buf: %d, ascii: %c\n",mode,buf,ascii);
-			key->press = 1;
+	while(mode != 6){
+			printf("mode: %d, buf: %d, ascii: %c\n",mode,buf,ascii);
 			switch(mode){
 			case KB_ASCII_MAKE_CODE:
-				if(ascii == 'A')
+				if(buf == 0x1C)
 					key->p1_left = 1;
-				if(ascii == 'S')
+				if(buf == 0x1B)
 					key->p1_right = 1;
-				if(ascii == 'D')
+				if(buf == 0x23)
 					key->p1_punch = 1;
-				if(ascii == 'F')
+				if(buf == 0x2B)
 					key->p1_block = 1;
-				if(ascii == 'H')
+				if(buf == 0x33)
 					key->p2_left = 1;
-				if(ascii == 'J')
+				if(buf == 0x3B)
 					key->p2_right = 1;
-				if(ascii == 'K')
+				if(buf == 0x42)
 					key->p2_punch = 1;
-				if(ascii == 'L')
+				if(buf == 0x4B)
 					key->p2_block = 1;
 				break;
 			case KB_BINARY_MAKE_CODE:
 				//binary keys
 				break;
 			case KB_BREAK_CODE:
-				//if (ascii == 'A')
-					key->p1_left=0;
-				//if (ascii == 'S')
-					key->p1_right=0;
-				//if (ascii == 'D')
-					key->p1_punch=0;
-				//if (ascii == 'F')
-					key->p1_block=0;
+				if(buf == 0x1C)
+					key->p1_left = 0;
+				if(buf == 0x1B)
+					key->p1_right = 0;
+				if(buf == 0x23)
+					key->p1_punch = 0;
+				if(buf == 0x2B)
+					key->p1_block = 0;
+				if(buf == 0x33)
+					key->p2_left = 0;
+				if(buf == 0x3B)
+					key->p2_right = 0;
+				if(buf == 0x42)
+					key->p2_punch = 0;
+				if(buf == 0x4B)
+					key->p2_block = 0;
 				break;
 			default:
 				break;
@@ -66,6 +73,10 @@ void initKey(input * key){
 	key->p1_left=0;
 	key->p1_punch=0;
 	key->p1_right=0;
+	key->p2_block=0;
+	key->p2_left=0;
+	key->p2_punch=0;
+	key->p2_right=0;
 }
 
 void initDE2Key(input *key) {
