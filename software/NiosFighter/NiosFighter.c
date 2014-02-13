@@ -2,8 +2,6 @@
 
 int main() {
 
-
-
 	while (1) {
 		//create variables
 		gameState gstate;
@@ -29,9 +27,9 @@ int main() {
 		initKeyboard(&ps2);
 		initKey(&move);
 
-		alt_irq_register(AUDIO_0_IRQ,&audio,play_isr);
-		alt_irq_enable(AUDIO_0_IRQ);
-		alt_up_audio_enable_write_interrupt(audio);
+		//alt_irq_register(AUDIO_0_IRQ,&audio,play_isr);
+		//alt_irq_enable(AUDIO_0_IRQ);
+		//alt_up_audio_enable_write_interrupt(audio);
 
 		//Display Menu();
 		//if(input1){
@@ -40,14 +38,13 @@ int main() {
 			startFrame(&ftimer);
 			testsdcard(&card, device_reference);
 			//playsound("MK.wav", audio);
-			processInput(&gstate,ps2,&move);
+			processInput(&gstate, ps2, &move);
 			updateGame(&gstate, frameLength(&ftimer));
 			swapdm(&dm, &dm2);
 			render(&gstate, char_buffer, pixel_buffer, &dm);
 			endFrame(&ftimer);
 
 		}
-
 
 		//}
 		//else if(input2){
@@ -76,8 +73,7 @@ void updateGame(gameState *gstate, float frameLength) {
 
 void processInput(gameState *gstate, alt_up_ps2_dev * ps2, input *move) {
 
-
-	readKeyboard(move,ps2);
+	readKeyboard(move, ps2);
 	refkey(move);
 
 	//Reset all states
@@ -90,22 +86,21 @@ void processInput(gameState *gstate, alt_up_ps2_dev * ps2, input *move) {
 	gstate->player2.wantsToBlock = 0;
 	//If move struct contains
 
-		if (move->p1_left)
-			gstate->player1.movingDirection = LEFT;
-		if (move->p1_right)
-			gstate->player1.movingDirection = RIGHT;
-		if (move->p1_punch)
-			gstate->player1.wantsToPunch = 1;
-		if (move->p1_block)
-			gstate->player1.wantsToBlock = 1;
-		if(move->p2_left)
-			gstate->player2.movingDirection = LEFT;
-		if(move->p2_right)
-			gstate->player2.movingDirection = RIGHT;
-		if(move->p2_punch)
-			gstate->player2.wantsToPunch = 1;
-		if(move->p2_block)
-			gstate->player2.wantsToBlock = 1;
-
+	if (move->p1_left)
+		gstate->player1.movingDirection = LEFT;
+	if (move->p1_right)
+		gstate->player1.movingDirection = RIGHT;
+	if (move->p1_punch)
+		gstate->player1.wantsToPunch = 1;
+	if (move->p1_block)
+		gstate->player1.wantsToBlock = 1;
+	if (move->p2_left)
+		gstate->player2.movingDirection = LEFT;
+	if (move->p2_right)
+		gstate->player2.movingDirection = RIGHT;
+	if (move->p2_punch)
+		gstate->player2.wantsToPunch = 1;
+	if (move->p2_block)
+		gstate->player2.wantsToBlock = 1;
 
 }
