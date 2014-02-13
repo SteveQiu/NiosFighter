@@ -30,14 +30,6 @@ int readKeyboard(input * key, alt_up_ps2_dev * ps2){
 					key->p1_punch = 1;
 				if(ascii == 'F')
 					key->p1_block = 1;
-				if(ascii == 'H')
-					key->p2_left = 1;
-				if(ascii == 'J')
-					key->p2_right = 1;
-				if(ascii == 'K')
-					key->p2_punch = 1;
-				if(ascii == 'L')
-					key->p2_block = 1;
 				break;
 			case KB_BINARY_MAKE_CODE:
 				//binary keys
