@@ -147,9 +147,10 @@ void DrawCharacter(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate,
 			+ 160), 140, (gstate->player2.xPosition + 160
 			+ gstate->player2.fistDistance), 150, 0x03FF, 1);
 
-	int x_2 = gstate->player2.xPosition + 160 - gstate->player2.width;
+	int x_2 = gstate->player2.xPosition + 160 + gstate->player2.fistDistance
+			- gstate->player2.width;;
 	int y_2 = 120;
-	int w_2 = 2 * gstate->player2.width + gstate->player2.fistDistance + 1;
+	int w_2 = 2* gstate->player2.width - gstate->player2.fistDistance + 3;
 	int h_2 = 81;
 
 	addDirty(dm, x_1, y_1, w_1, h_1);
