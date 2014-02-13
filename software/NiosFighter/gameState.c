@@ -17,32 +17,29 @@ int initGameState(gameState *gstate) {
 	gstate->player1.width = 10;
 	gstate->player2.width = 10;
 
-	//gstate->player2.status = STATUS_BLOCKING;
-	//gstate->player2.wantsToBlock = 1;
 	return 0;
 }
 
 void updatePlayerPosition(character *ch, float time) {
 	if (ch->status == STATUS_IDLE) {
-		ch->xPosition +=
-				time * ch->movingDirection * ch->walkingSpeed *2;
+		ch->xPosition += time * ch->movingDirection * ch->walkingSpeed * 2;
 		if (ch->xPosition < ARENALEFTBORDER)
-				ch->xPosition = ARENALEFTBORDER;
+			ch->xPosition = ARENALEFTBORDER;
 		if (ch->xPosition > ARENARIGHTBORDER)
-				ch->xPosition = ARENARIGHTBORDER;
+			ch->xPosition = ARENARIGHTBORDER;
 	}
 }
 
 void checkPlayerCollisions(gameState *state) {
 	character *p1 = &(state->player1);
 	character *p2 = &(state->player2);
-	if (p1->xPosition > (p2->xPosition + (p1->width + p2->width)/2)) {
-		p1->xPosition = p2->xPosition - (p1->width - p2->width)/2;
+	if (p1->xPosition > (p2->xPosition + (p1->width + p2->width) / 2)) {
+		p1->xPosition = p2->xPosition - (p1->width - p2->width) / 2;
 		p1->movingDirection = NOTMOVING;
 	}
-	if (p2->xPosition < (p1->xPosition + (p1->width + p2->width)/2)) {
-			p2->xPosition = p1->xPosition + (p1->width + p2->width)/2;
-			p2->movingDirection = NOTMOVING;
+	if (p2->xPosition < (p1->xPosition + (p1->width + p2->width) / 2)) {
+		p2->xPosition = p1->xPosition + (p1->width + p2->width) / 2;
+		p2->movingDirection = NOTMOVING;
 	}
 }
 
@@ -50,28 +47,27 @@ void updatePlayerPunch(character *p1, character *p2, float time) {
 	if (p1->wantsToPunch == 1 && p1->status == STATUS_IDLE) {
 		p1->status = STATUS_PUNCHING;
 		p1->punchDuration = 0.0;
-	}
-	else if (p1->status == STATUS_PUNCHING) {
+	} else if (p1->status == STATUS_PUNCHING) {
 		if (p1->punchDuration < p1->punchMaxDuration) {
 			p1->punchDuration += time;
-			p1->fistDistance =(p1->punchDuration/p1->punchMaxDuration)* p1->punchLength * p1->facingDirection;
-		}
-		else if (p1->punchDuration > p1->punchMaxDuration) {
-			p1->status = hitDetection(p1,p2);
+			p1->fistDistance = (p1->punchDuration / p1->punchMaxDuration)
+					* p1->punchLength * p1->facingDirection;
+		} else if (p1->punchDuration > p1->punchMaxDuration) {
+			p1->status = hitDetection(p1, p2);
 			p1->punchDuration = 0.0;
 			p1->fistDistance = 0;
-			}
+		}
 	}
 }
 
 int hitDetection(character *c1, character *c2) {
 	if (c1->facingDirection == RIGHT) {
-		if (c1->xPosition+c1->punchLength >c2->xPosition - c2->width){
+		if (c1->xPosition + c1->punchLength > c2->xPosition - c2->width) {
 			return performPunch(c1, c2);
 		}
 	}
 	if (c1->facingDirection == LEFT) {
-		if (c1->xPosition-c1->punchLength <c2->xPosition + c2->width){
+		if (c1->xPosition - c1->punchLength < c2->xPosition + c2->width) {
 			return performPunch(c1, c2);
 		}
 	}
@@ -79,10 +75,9 @@ int hitDetection(character *c1, character *c2) {
 }
 
 int performPunch(character *c1, character *c2) {
-	if(c2->status == STATUS_BLOCKING) {
+	if (c2->status == STATUS_BLOCKING) {
 		return STATUS_STUNNED;
-	}
-	else {
+	} else {
 		c2->health -= c1->punchDamage;
 		return STATUS_IDLE;
 	}
@@ -125,10 +120,10 @@ void updatePlayerBlocking(character *c, float time) {
 	}
 }
 
-void checkhp(gameState *state,character *c1, character *c2){
-	if(c1->health <= 0)
+void checkhp(gameState *state, character *c1, character *c2) {
+	if (c1->health <= 0)
 		state->gameOver = 1;
-	else if(c2 -> health <=0)
+	else if (c2 -> health <= 0)
 		state->gameOver = 1;
 }
 
@@ -141,13 +136,6 @@ void updateTime(gameState *gstate, float time) {
 
 int getTimeRemaining(gameState *gstate) {
 	float timeleft = 99 - gstate->roundTime;
-	return (int)timeleft;
+	return (int) timeleft;
 }
-
-
-
-
-
-
-
 

@@ -29,6 +29,8 @@ int main() {
 		initKeyboard(&ps2);
 		initKey(&move);
 
+		//Display Menu();
+		//if(input1){
 		//gameLoop
 		while (!(gstate.gameOver)) {
 			startFrame(&ftimer);
@@ -41,6 +43,10 @@ int main() {
 			endFrame(&ftimer);
 
 		}
+		//}
+		//else if(input2){
+		//displayinstruction();
+		//}
 	}
 
 	return 0;
