@@ -67,7 +67,7 @@ void loadsound(sounddata *data,int handle ,alt_up_audio_dev *audio){
 void playsound(char* name, alt_up_audio_dev *audio ){
 		int handle;
 		handle = alt_up_sd_card_fopen(name, 0);
-		if(handle<0)printf("file open failed");
+		//if(handle<0)printf("file open failed");
 		sounddata data;
 		initsounddata(&data);
 		loadsound(&data,handle,audio);
