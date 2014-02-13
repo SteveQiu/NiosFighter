@@ -1,4 +1,8 @@
 #include "NiosFighter.h"
+//Red Arm = 39px
+//Shoulder to Shoulder 26px
+//Blue Arm = 39px
+//StS 26px
 
 int main() {
 	while (1) {
@@ -43,6 +47,7 @@ int main() {
 			swapdm(&dm, &dm2);
 			render(&gstate, char_buffer, pixel_buffer, &dm);
 			endFrame(&ftimer);
+			printf("FRAME TIME: %f\n", frameLength(&ftimer));
 
 		}
 
@@ -69,6 +74,7 @@ void updateGame(gameState *gstate, float frameLength) {
 	updatePlayerBlocking(p1, frameLength);
 	updatePlayerBlocking(p2, frameLength);
 	updateTime(gstate, frameLength);
+
 }
 
 void processInput(gameState *gstate, alt_up_ps2_dev * ps2, input *move) {

@@ -13,12 +13,12 @@ int initGameState(gameState *gstate) {
 	gstate->player2.movingDirection = NOTMOVING;
 	gstate->player1.facingDirection = RIGHT;
 	gstate->player2.facingDirection = LEFT;
-	gstate->player1.punchLength = 30;
+	gstate->player1.punchLength = 33;
 	gstate->player1.punchDamage = 20;
-	gstate->player2.punchLength = 30;
+	gstate->player2.punchLength = 33;
 	gstate->player2.punchDamage = 20;
-	gstate->player1.width = 10;
-	gstate->player2.width = 10;
+	gstate->player1.width = 13;
+	gstate->player2.width = 13;
 
 	return 0;
 }
@@ -109,14 +109,25 @@ void updatePlayerBlocking(character *c, float time) {
 				c->blockChangeTime += time;
 			} else if (c->blockChangeTime > c->blockChangeMaxTime) {
 				c->status = STATUS_BLOCKING;
+				c->blockHoldTime = 0.0;
 				c->blockChangeTime = 0.0;
+
+			}
+		}
+		else if (c->status == STATUS_BLOCKING) {
+			c->blockHoldTime = time + c->blockHoldTime;
+			if (c->blockHoldTime > c->blockMaxHoldTime) {
+				c->status = STATUS_IDLE;
+				c->blockHoldTime = 0;
 			}
 		}
 	}
 	if (c->wantsToBlock == 0) {
 		c->blockChangeTime = 0;
-		if (c->status == STATUS_BLOCKING)
+		if (c->status == STATUS_BLOCKING) {
 			c->status = STATUS_IDLE;
+			c->blockHoldTime = 0.0;
+		}
 	}
 }
 
