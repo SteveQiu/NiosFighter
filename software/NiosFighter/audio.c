@@ -78,6 +78,15 @@ void playsound(char* name, alt_up_audio_dev *audio ){
 void play_isr(void *context,alt_u32 id){
 	alt_up_audio_dev *audio = *(alt_up_audio_dev **) context;
 	playsound("MK.wav", audio);
+	//playsound("punch.wav", audio);
+}
+
+
+
+void playbg_isr(void *context,alt_u32 id){
+	alt_up_audio_dev *audio = *(alt_up_audio_dev **) context;
+	playsound("MK.wav", audio);
+	//playsound("punch.wav", audio);
 }
 
 /*//test code

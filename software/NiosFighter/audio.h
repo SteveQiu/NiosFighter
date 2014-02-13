@@ -25,3 +25,5 @@ void loadsound(sounddata *data,int handle,alt_up_audio_dev *audio);
 void playsound(char* name,alt_up_audio_dev *audio);
 
 void play_isr(void *context,alt_u32 id);
+
+void playbg_isr(void *context,alt_u32 id);

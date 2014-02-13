@@ -29,9 +29,26 @@ int main() {
 		initKeyboard(&ps2);
 		initKey(&move);
 
+/*
+		alt_up_audio_enable_write_interrupt(audio);
 		alt_irq_register(AUDIO_0_IRQ,&audio,play_isr);
 		alt_irq_enable(AUDIO_0_IRQ);
+*/
+
+
+/*
 		alt_up_audio_enable_write_interrupt(audio);
+		alt_avalon_timer_sc_init ((void *)BG_TIMER_BASE, BG_TIMER_IRQ_INTERRUPT_CONTROLLER_ID, BG_TIMER_IRQ, BG_TIMER_FREQ);
+		alt_irq_register(BG_TIMER_IRQ,&audio,play_isr);
+		alt_irq_enable(BG_TIMER_IRQ);
+*/
+
+/*
+		IOWR_ALTERA_AVALON_TIMER_CONTROL(TIMER_1_BASE,(1<<3)|(1<<1)|(1<<0));
+		IOWR_ALTERA_AVALON_TIMER_STATUS(TIMER_1_BASE,0);//clear to bit reaching 0
+		alt_irq_register(TIMER_1_BASE,&audio,play_isr);
+		IOWR_ALTERA_AVALON_TIMER_CONTROL(TIMER_1_BASE,(1<<2)|(1<<1)|(1<<0));//start timer, IRQ enble
+*/
 
 		//Display Menu();
 		//if(input1){
