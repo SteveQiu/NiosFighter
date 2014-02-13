@@ -76,40 +76,48 @@ void processInput(gameState *gstate, alt_up_ps2_dev * ps2, input *move) {
 	//refkey(move);
 	//If move struct contains
 		//player one movement
-		if (move->p1_left)
+		if (move->A)
 			gstate->player1.movingDirection = LEFT;
-		else if (move->p1_right)
+		else if (move->D)
 			gstate->player1.movingDirection = RIGHT;
 		else
 			gstate->player1.movingDirection = NOTMOVING;
 		//player one punch
-		if (move->p1_punch)
+		if (move->H)
 			gstate->player1.wantsToPunch = 1;
 		else
 			gstate->player1.wantsToPunch = 0;
 		//player one block
-		if (move->p1_block)
+		if (move->J)
 			gstate->player1.wantsToBlock = 1;
 		else
 			gstate->player1.wantsToBlock = 0;
-
+/*		if(move->K)
+			gstate->player1.wantsToFake = 1;
+		else
+			gstate->player1.wantsToFake = 0;
+*/
 
 		//player two movement
-		if (move->p2_left)
+		if (move->LARR)
 			gstate->player2.movingDirection = LEFT;
-		else if (move->p2_right)
+		else if (move->RARR)
 			gstate->player2.movingDirection = RIGHT;
 		else
 			gstate->player2.movingDirection = NOTMOVING;
 		//player two punch
-		if (move->p2_punch)
+		if (move->NP1)
 			gstate->player2.wantsToPunch = 1;
 		else
 			gstate->player2.wantsToPunch = 0;
 		//player two block
-		if (move->p2_block)
+		if (move->NP2)
 			gstate->player2.wantsToBlock = 1;
 		else
 			gstate->player2.wantsToBlock = 0;
-
+/*		if(move->NP3)
+			gstate->player2.wantsToFake = 1;
+		else
+			gstate->player2.wantsToFake = 0;
+*/
 }
