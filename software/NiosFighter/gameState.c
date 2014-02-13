@@ -109,14 +109,9 @@ void updatePlayerBlocking(character *c, float time) {
 		}
 	}
 	if (c->wantsToBlock == 0) {
-		if (c->status == STATUS_BLOCKING) {
-			if (c->blockChangeTime < c->blockChangeMaxTime) {
-				c->blockChangeTime += time;
-			} else if (c->blockChangeTime > c->blockChangeMaxTime) {
-				c->status = STATUS_IDLE;
-				c->blockChangeTime = 0.0;
-			}
-		}
+		c->blockChangeTime = 0;
+		if (c->status == STATUS_BLOCKING)
+			c->status = STATUS_IDLE;
 	}
 }
 

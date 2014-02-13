@@ -63,6 +63,8 @@ void updateGame(gameState *gstate, float frameLength) {
 	updatePlayerPunch(p2, p1, frameLength);
 	updatePlayerStunned(p1, frameLength);
 	updatePlayerStunned(p2, frameLength);
+	updatePlayerBlocking(p1, frameLength);
+	updatePlayerBlocking(p2, frameLength);
 	updateTime(gstate, frameLength);
 }
 
