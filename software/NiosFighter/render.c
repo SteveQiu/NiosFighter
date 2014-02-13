@@ -97,12 +97,12 @@ void DrawHP(alt_up_pixel_buffer_dma_dev* HP_buffer_cpy, gameState *gstate,
 
 	int x_1 = 14;
 	int y_1 = 10;
-	int w_1 = 126 - gstate->player1.health * 1.26;
+	int w_1 = 126 - gstate->player1.health * 1.26 + 1;
 	int h_1 = 6;
 
-	int x_2 = 180;
+	int x_2 = 180 + gstate->player2.health * 1.26;
 	int y_2 = 10;
-	int w_2 = 126 - gstate->player2.health * 1.26;
+	int w_2 = 126 - gstate->player2.health * 1.26 + 1;
 	int h_2 = 6;
 
 	addDirty(dm, x_1, y_1, w_1, h_1);

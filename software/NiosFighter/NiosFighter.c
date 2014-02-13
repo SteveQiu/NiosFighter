@@ -24,6 +24,8 @@ int main() {
 		initDirtyManager(&dm2);
 		initaudio(&audio);
 
+		//Display Menu();
+		//if(input1){
 		//gameLoop
 		while (!(gstate.gameOver)) {
 			startFrame(&ftimer);
@@ -35,6 +37,10 @@ int main() {
 			render(&gstate, char_buffer, pixel_buffer, &dm);
 			endFrame(&ftimer);
 		}
+		//}
+		//else if(input2){
+		//displayinstruction();
+		//}
 	}
 
 	return 0;
