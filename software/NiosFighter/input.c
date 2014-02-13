@@ -13,12 +13,12 @@ int readKeyboard(input * key, alt_up_ps2_dev * ps2){
 	alt_u8 buf = 0;
 	char ascii;
 	KB_CODE_TYPE mode;
-	printf("Pre decode\n");
+	//printf("Pre decode\n");
 	decode_scancode(ps2,&mode,&buf,&ascii);
-	printf("mode: %d, buf: %d, ascii: %c\n",mode,buf,ascii);
+	//printf("mode: %d, buf: %d, ascii: %c\n",mode,buf,ascii);
 	//initKey(key);
 	while(mode<=5){
-			printf("mode: %d, buf: %d, ascii: %c\n",mode,buf,ascii);
+			//printf("mode: %d, buf: %d, ascii: %c\n",mode,buf,ascii);
 			key->press = 1;
 			switch(mode){
 			case KB_ASCII_MAKE_CODE:
