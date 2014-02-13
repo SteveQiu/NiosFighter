@@ -10,6 +10,7 @@ void initKeyboard(alt_up_ps2_dev ** ps2){
 }
 //reading from PS2 Keyboard
 int readKeyboard(input * key, alt_up_ps2_dev * ps2){
+	int counter=0;
 	alt_u8 buf = 0;
 	char ascii;
 	KB_CODE_TYPE mode;
@@ -17,7 +18,7 @@ int readKeyboard(input * key, alt_up_ps2_dev * ps2){
 	decode_scancode(ps2,&mode,&buf,&ascii);
 	//printf("mode: %d, buf: %d, ascii: %c\n",mode,buf,ascii);
 	//initKey(key);
-	while(mode != 6){
+	while(mode < 6 && counter <10){
 			printf("mode: %d, buf: %d, ascii: %c\n",mode,buf,ascii);
 			switch(mode){
 			case KB_ASCII_MAKE_CODE:
@@ -64,7 +65,7 @@ int readKeyboard(input * key, alt_up_ps2_dev * ps2){
 				break;
 				}
 			decode_scancode(ps2,&mode,&buf,&ascii);
-
+			counter++;
 	}
 
 	return 0;

@@ -5,9 +5,12 @@ int initGameState(gameState *gstate) {
 	gstate->roundTime = 0;
 	initCharacter(&(gstate->player1));
 	initCharacter(&(gstate->player2));
-
+	gstate->player1.status = STATUS_IDLE;
+	gstate->player2.status = STATUS_IDLE;
 	gstate->player1.xPosition = -50;
 	gstate->player2.xPosition = 50;
+	gstate->player1.movingDirection = NOTMOVING;
+	gstate->player2.movingDirection = NOTMOVING;
 	gstate->player1.facingDirection = RIGHT;
 	gstate->player2.facingDirection = LEFT;
 	gstate->player1.punchLength = 30;
@@ -21,13 +24,13 @@ int initGameState(gameState *gstate) {
 }
 
 void updatePlayerPosition(character *ch, float time) {
-	// (ch->status == STATUS_IDLE) {
+	 if(ch->status == STATUS_IDLE) {
 		ch->xPosition += time * ch->movingDirection * ch->walkingSpeed * 2;
 		if (ch->xPosition < ARENALEFTBORDER)
 			ch->xPosition = ARENALEFTBORDER;
 		if (ch->xPosition > ARENARIGHTBORDER)
 			ch->xPosition = ARENARIGHTBORDER;
-	//}
+	}
 }
 
 void checkPlayerCollisions(gameState *state) {

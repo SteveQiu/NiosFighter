@@ -1,9 +1,6 @@
 #include "NiosFighter.h"
 
 int main() {
-
-
-
 	while (1) {
 		//create variables
 		gameState gstate;
@@ -25,13 +22,14 @@ int main() {
 		InitCharBuff(&char_buffer);
 		initDirtyManager(&dm);
 		initDirtyManager(&dm2);
-		initaudio(&audio);
+		//initaudio(&audio);
 		initKeyboard(&ps2);
+		initKey(&move);
 		//initKey(&move);
 
-		alt_irq_register(AUDIO_0_IRQ,&audio,play_isr);
-		alt_irq_enable(AUDIO_0_IRQ);
-		alt_up_audio_enable_write_interrupt(audio);
+		//alt_irq_register(AUDIO_0_IRQ,&audio,play_isr);
+		//alt_irq_enable(AUDIO_0_IRQ);
+		//alt_up_audio_enable_write_interrupt(audio);
 
 		//Display Menu();
 		//if(input1){
