@@ -73,6 +73,13 @@ void playsound(char* name, alt_up_audio_dev *audio ){
 		loadsound(&data,handle,audio);
 		alt_up_sd_card_fclose(handle);
 }
+
+
+void play_isr(void *context,alt_u32 id){
+	alt_up_audio_dev *audio = *(alt_up_audio_dev **) context;
+	playsound("MK.wav", audio);
+}
+
 /*//test code
  startFrame(&ftimer);
 testsdcard(&card,device_reference);

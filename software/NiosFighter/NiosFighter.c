@@ -24,19 +24,26 @@ int main() {
 		initDirtyManager(&dm2);
 		initaudio(&audio);
 
+		alt_irq_register(AUDIO_0_IRQ,&audio,play_isr);
+		alt_irq_enable(AUDIO_0_IRQ);
+		alt_up_audio_enable_write_interrupt(audio);
+
 		//Display Menu();
 		//if(input1){
 		//gameLoop
 		while (!(gstate.gameOver)) {
 			startFrame(&ftimer);
 			testsdcard(&card, device_reference);
-			//playsound("FILE NAME",sec * 100000, audio);
+			//playsound("FILE NAME", audio);
+			//playsound("MK.wav", audio);
 			processInput(&gstate);
 			updateGame(&gstate, frameLength(&ftimer));
 			swapdm(&dm, &dm2);
 			render(&gstate, char_buffer, pixel_buffer, &dm);
 			endFrame(&ftimer);
 		}
+
+
 		//}
 		//else if(input2){
 		//displayinstruction();
