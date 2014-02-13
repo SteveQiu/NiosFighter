@@ -125,7 +125,7 @@ void DrawCharacter(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate,
 
 	int playerColour = 0xF80F;
 	if (gstate->player1.status == STATUS_STUNNED) {
-		playerColour = 0x03FF;
+		playerColour = 0x0500;
 	}
 
 	alt_up_pixel_buffer_dma_draw_box(buffer_cpy, (gstate->player1.xPosition
@@ -144,12 +144,12 @@ void DrawCharacter(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate,
 			+ 160 - gstate->player2.width), 120, (gstate->player2.xPosition
 			+ 160 + gstate->player2.width), 200, 0x03FF, 1);
 	alt_up_pixel_buffer_dma_draw_box(buffer_cpy, (gstate->player2.xPosition
-				+ 160), 140, (gstate->player2.xPosition + 160
-				+ gstate->player2.fistDistance), 150, playerColour, 1);
+			+ 160), 140, (gstate->player2.xPosition + 160
+			+ gstate->player2.fistDistance), 150, 0x03FF, 1);
 
 	int x_2 = gstate->player2.xPosition + 160 - gstate->player2.width;
 	int y_2 = 120;
-	int w_2 = 2* gstate->player2.width  + gstate->player2.fistDistance + 1;
+	int w_2 = 2 * gstate->player2.width + gstate->player2.fistDistance + 1;
 	int h_2 = 81;
 
 	addDirty(dm, x_1, y_1, w_1, h_1);
