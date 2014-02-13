@@ -87,6 +87,10 @@ void DrawSomething(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy, int x, int y,
 			else if (a == 2)
 				draw_pixel_fast(pixel_buffer_cpy, hb[row - y][column - x],
 						column, row);
+			else if (a == 3)
+				if (hit1[row - y][column - x] != 0xFFFF)
+					draw_pixel_fast(pixel_buffer_cpy,
+							hit1[row - y][column - x], column, row);
 		}
 	}
 }
@@ -128,6 +132,7 @@ void DrawCharacter(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate,
 		playerColour = 0x0500;
 	}
 
+	//DrawSomething(buffer_cpy, gstate->player1.xPosition + 160, 120, 71, 100, 3);
 	alt_up_pixel_buffer_dma_draw_box(buffer_cpy, (gstate->player1.xPosition
 			+ 160 - gstate->player1.width), 120, (gstate->player1.xPosition
 			+ 160 + gstate->player1.width), 200, playerColour, 1);
@@ -148,9 +153,10 @@ void DrawCharacter(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate,
 			+ gstate->player2.fistDistance), 150, 0x03FF, 1);
 
 	int x_2 = gstate->player2.xPosition + 160 + gstate->player2.fistDistance
-			- gstate->player2.width;;
+			- gstate->player2.width;
+	;
 	int y_2 = 120;
-	int w_2 = 2* gstate->player2.width - gstate->player2.fistDistance + 3;
+	int w_2 = 2 * gstate->player2.width - gstate->player2.fistDistance + 3;
 	int h_2 = 81;
 
 	addDirty(dm, x_1, y_1, w_1, h_1);
