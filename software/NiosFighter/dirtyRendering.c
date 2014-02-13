@@ -6,7 +6,7 @@ void initDirtySection(dirtySection *target) {
 	target->next = 0;
 }
 
-void initDirtyManager(dirtyManager *dm){
+void initDirtyManager(dirtyManager *dm) {
 	dm->head = NULL;
 }
 
@@ -33,3 +33,14 @@ void swapdm(dirtyManager **dm1, dirtyManager **dm2) {
 	*dm1 = *dm2;
 	*dm2 = temp;
 }
+
+void addDirty(dirtyManager *dm, int x, int y, int w, int h) {
+	dirtySection *newSection = malloc(sizeof(dirtySection));
+	initDirtySection(newSection);
+	newSection->x = x;
+	newSection->y = y;
+	newSection->w = w;
+	newSection->h = h;
+	addDirtySection(dm, newSection);
+}
+

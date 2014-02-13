@@ -38,14 +38,13 @@ int main() {
 			startFrame(&ftimer);
 			testsdcard(&card, device_reference);
 			//playsound("MK.wav", audio);
-			processInput(&gstate,ps2,&move);
+			processInput(&gstate, ps2, &move);
 			updateGame(&gstate, frameLength(&ftimer));
 			swapdm(&dm, &dm2);
 			render(&gstate, char_buffer, pixel_buffer, &dm);
 			endFrame(&ftimer);
 
 		}
-
 
 		//}
 		//else if(input2){
@@ -73,8 +72,6 @@ void updateGame(gameState *gstate, float frameLength) {
 }
 
 void processInput(gameState *gstate, alt_up_ps2_dev * ps2, input *move) {
-
-
 	readKeyboard(move,ps2);
 	//refkey(move);
 	//If move struct contains
@@ -114,6 +111,5 @@ void processInput(gameState *gstate, alt_up_ps2_dev * ps2, input *move) {
 			gstate->player2.wantsToBlock = 1;
 		else
 			gstate->player2.wantsToBlock = 0;
-
 
 }

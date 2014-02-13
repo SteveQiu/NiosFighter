@@ -14,6 +14,7 @@ void initDirtyManager(dirtyManager *dm);
 void addDirtySection(dirtyManager *dm, dirtySection *ds);
 void popDirtySection(dirtyManager *dm);
 void swapdm(dirtyManager **dm1, dirtyManager **dm2);
+void addDirty(dirtyManager *dm, int x, int y, int w, int h);
 
 //Usage in rendering function
 /*
