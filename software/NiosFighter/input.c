@@ -37,6 +37,7 @@ int readKeyboard(input * key, alt_up_ps2_dev * ps2){
 					key->p2_punch = 1;
 				if(buf == 0x4B)
 					key->p2_block = 1;
+
 				break;
 			case KB_BINARY_MAKE_CODE:
 				//binary keys
