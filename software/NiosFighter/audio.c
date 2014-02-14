@@ -84,9 +84,22 @@ void play_isr(void *context,alt_u32 id){
 
 
 void playbg_isr(void *context,alt_u32 id){
-	alt_up_audio_dev *audio = *(alt_up_audio_dev **) context;
-	playsound("MK.wav", audio);
-	//playsound("punch.wav", audio);
+		sounddata  *data= (sounddata *) context;
+
+
+				if(data->index< data->len){
+					data->index=0;
+					data->bytes_left=0;
+					data->bytes_right=0;
+					data->index_left=0;
+					data->index_right=0;}
+
+					data->bytes_left = alt_up_audio_write_fifo(data->audio, &(data->buffer[data->index_left]), data->len, ALT_UP_AUDIO_LEFT);
+					data->bytes_right = alt_up_audio_write_fifo(data->audio, &(data->buffer[data->index_right]), data->len, ALT_UP_AUDIO_RIGHT);
+					data->index_left += data->bytes_left;
+					data->index_right += data->bytes_right;
+					data->index++;
+
 }
 
 /*//test code
