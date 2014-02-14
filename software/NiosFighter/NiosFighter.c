@@ -1,8 +1,10 @@
 #include "NiosFighter.h"
+//Red Arm = 39px
+//Shoulder to Shoulder 26px
+//Blue Arm = 39px
+//StS 26px
 
 int main() {
-
-
 
 	while (1) {
 		//create variables
@@ -17,6 +19,7 @@ int main() {
 		dirtyManager dm2;
 		alt_up_audio_dev *audio;
 		alt_up_ps2_dev * ps2;
+		sounddata data;
 		//initiation
 		initGameState(&gstate);
 		initFrameTimer(&ftimer);
@@ -29,26 +32,41 @@ int main() {
 		initKeyboard(&ps2);
 		initKey(&move);
 
-/*
-		alt_up_audio_enable_write_interrupt(audio);
-		alt_irq_register(AUDIO_0_IRQ,&audio,play_isr);
+
+//************************************************
+		data.audio=audio;
+		testsdcard(&card,device_reference);
+		int handle;
+		handle = alt_up_sd_card_fopen("MK.wav", 0);
+		if(handle)printf("file open failed");
+
+		const int length=600000;
+		//const int hlength=600000;
+		//unsigned int buffer[length/2];
+		unsigned int buf [length];
+		int i;
+
+		printf("Starting to play\n");
+
+			printf("Reading\n");
+			for( i=0;i<length;i++){
+					buf[i]=alt_up_sd_card_read(handle);
+			}
+
+			printf("Downloading\n");
+			int j=0;
+			for(i = 0; i<length; i+=2){
+				data.buffer[j] = (buf[i+1] << 8) | buf[i];
+				j++;
+			}
+			data.play=1;
+			printf("interrupt\n");
+//********************************************
+
+		alt_irq_register(AUDIO_0_IRQ,&data,playbg_isr);
 		alt_irq_enable(AUDIO_0_IRQ);
-*/
-
-
-/*
 		alt_up_audio_enable_write_interrupt(audio);
-		alt_avalon_timer_sc_init ((void *)BG_TIMER_BASE, BG_TIMER_IRQ_INTERRUPT_CONTROLLER_ID, BG_TIMER_IRQ, BG_TIMER_FREQ);
-		alt_irq_register(BG_TIMER_IRQ,&audio,play_isr);
-		alt_irq_enable(BG_TIMER_IRQ);
-*/
 
-/*
-		IOWR_ALTERA_AVALON_TIMER_CONTROL(TIMER_1_BASE,(1<<3)|(1<<1)|(1<<0));
-		IOWR_ALTERA_AVALON_TIMER_STATUS(TIMER_1_BASE,0);//clear to bit reaching 0
-		alt_irq_register(TIMER_1_BASE,&audio,play_isr);
-		IOWR_ALTERA_AVALON_TIMER_CONTROL(TIMER_1_BASE,(1<<2)|(1<<1)|(1<<0));//start timer, IRQ enble
-*/
 
 		//Display Menu();
 		//if(input1){
@@ -57,14 +75,14 @@ int main() {
 			startFrame(&ftimer);
 			testsdcard(&card, device_reference);
 			//playsound("MK.wav", audio);
-			processInput(&gstate,ps2,&move);
+			processInput(&gstate, ps2, &move);
 			updateGame(&gstate, frameLength(&ftimer));
 			swapdm(&dm, &dm2);
 			render(&gstate, char_buffer, pixel_buffer, &dm);
 			endFrame(&ftimer);
+			printf("FRAME TIME: %f\n", frameLength(&ftimer));
 
 		}
-
 
 		//}
 		//else if(input2){
@@ -89,12 +107,12 @@ void updateGame(gameState *gstate, float frameLength) {
 	updatePlayerBlocking(p1, frameLength);
 	updatePlayerBlocking(p2, frameLength);
 	updateTime(gstate, frameLength);
+
 }
 
 void processInput(gameState *gstate, alt_up_ps2_dev * ps2, input *move) {
 
-
-	readKeyboard(move,ps2);
+	readKeyboard(move, ps2);
 	refkey(move);
 
 	//Reset all states
@@ -107,22 +125,21 @@ void processInput(gameState *gstate, alt_up_ps2_dev * ps2, input *move) {
 	gstate->player2.wantsToBlock = 0;
 	//If move struct contains
 
-		if (move->p1_left)
-			gstate->player1.movingDirection = LEFT;
-		if (move->p1_right)
-			gstate->player1.movingDirection = RIGHT;
-		if (move->p1_punch)
-			gstate->player1.wantsToPunch = 1;
-		if (move->p1_block)
-			gstate->player1.wantsToBlock = 1;
-		if(move->p2_left)
-			gstate->player2.movingDirection = LEFT;
-		if(move->p2_right)
-			gstate->player2.movingDirection = RIGHT;
-		if(move->p2_punch)
-			gstate->player2.wantsToPunch = 1;
-		if(move->p2_block)
-			gstate->player2.wantsToBlock = 1;
-
+	if (move->p1_left)
+		gstate->player1.movingDirection = LEFT;
+	if (move->p1_right)
+		gstate->player1.movingDirection = RIGHT;
+	if (move->p1_punch)
+		gstate->player1.wantsToPunch = 1;
+	if (move->p1_block)
+		gstate->player1.wantsToBlock = 1;
+	if (move->p2_left)
+		gstate->player2.movingDirection = LEFT;
+	if (move->p2_right)
+		gstate->player2.movingDirection = RIGHT;
+	if (move->p2_punch)
+		gstate->player2.wantsToPunch = 1;
+	if (move->p2_block)
+		gstate->player2.wantsToBlock = 1;
 
 }

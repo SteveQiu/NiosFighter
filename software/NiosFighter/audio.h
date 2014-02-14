@@ -11,6 +11,14 @@
 typedef struct sounddata{
 	int len;
 	int hlen;
+	unsigned int buffer[300000];
+	int index;
+	alt_up_audio_dev *audio;
+	int bytes_left;
+	int bytes_right;
+	int index_left;
+	int index_right;
+	int play;
 } sounddata;
 
 void av_config_setup();
