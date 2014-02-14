@@ -85,3 +85,15 @@ void render(gameState *state, alt_up_char_buffer_dev* char_buffer,
 		;
 
 }
+
+/*
+displayMenu(){
+	int a=0;
+	while(!a){
+	readKeyboard();
+	if(key->ENT) a=1;
+	}
+}
+ 	 //select current item
+
+*/
