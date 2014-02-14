@@ -635,16 +635,20 @@ void DrawPunching1(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate,
 void DrawPunching2(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate,
 		dirtyManager *dm) {
 	if (fpunch2 == 0) {
-		DrawPunching2p1(buffer_cpy, gstate->player2.xPosition + 150, 110, dm);
+		DrawPunching2p1(buffer_cpy, gstate->player2.xPosition + 150
+				+ gstate->player2.fistDistance, 110, dm);
 		fpunch2++;
 	} else if (fpunch2 == 1) {
-		DrawPunching2p2(buffer_cpy, gstate->player2.xPosition + 150, 110, dm);
+		DrawPunching2p2(buffer_cpy, gstate->player2.xPosition + 150
+				+ gstate->player2.fistDistance, 110, dm);
 		fpunch2++;
 	} else if (fpunch2 == 2) {
-		DrawPunching2p3(buffer_cpy, gstate->player2.xPosition + 150, 110, dm);
+		DrawPunching2p3(buffer_cpy, gstate->player2.xPosition + 150
+				+ gstate->player2.fistDistance, 110, dm);
 		fpunch2++;
 	} else if (fpunch2 == 3) {
-		DrawPunching2p4(buffer_cpy, gstate->player2.xPosition + 150, 110, dm);
+		DrawPunching2p4(buffer_cpy, gstate->player2.xPosition + 150
+				+ gstate->player2.fistDistance, 110, dm);
 		fpunch2 = 0;
 	}
 }
