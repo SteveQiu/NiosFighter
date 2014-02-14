@@ -9,14 +9,19 @@
 
 typedef struct input{
 int press;
-int p1_left;
-int p2_left;
-int p1_right;
-int p2_right;
-int p1_block;
-int p2_block;
-int p1_punch;
-int p2_punch;
+int A;
+int D;
+int H;
+int J;
+int K;
+int LARR;
+int UARR;
+int DARR;
+int RARR;
+int NP1;
+int NP2;
+int NP3;
+int ENT;
 }input;
 void initKeyboard(alt_up_ps2_dev ** ps2);
 int readKeyboard(input * key, alt_up_ps2_dev * ps2);

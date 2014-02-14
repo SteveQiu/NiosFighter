@@ -5,9 +5,12 @@ int initGameState(gameState *gstate) {
 	gstate->roundTime = 0;
 	initCharacter(&(gstate->player1));
 	initCharacter(&(gstate->player2));
-
+	gstate->player1.status = STATUS_IDLE;
+	gstate->player2.status = STATUS_IDLE;
 	gstate->player1.xPosition = -50;
 	gstate->player2.xPosition = 50;
+	gstate->player1.movingDirection = NOTMOVING;
+	gstate->player2.movingDirection = NOTMOVING;
 	gstate->player1.facingDirection = RIGHT;
 	gstate->player2.facingDirection = LEFT;
 	gstate->player1.punchLength = 33;
@@ -21,7 +24,7 @@ int initGameState(gameState *gstate) {
 }
 
 void updatePlayerPosition(character *ch, float time) {
-	if (ch->status == STATUS_IDLE) {
+	 if(ch->status == STATUS_IDLE) {
 		ch->xPosition += time * ch->movingDirection * ch->walkingSpeed * 2;
 		if (ch->xPosition < ARENALEFTBORDER)
 			ch->xPosition = ARENALEFTBORDER;
@@ -44,7 +47,8 @@ void checkPlayerCollisions(gameState *state) {
 }
 
 void updatePlayerPunch(character *p1, character *p2, float time) {
-	if (p1->wantsToPunch == 1 && p1->status == STATUS_IDLE) {
+	//if (p1->wantsToPunch == 1 && p1->status == STATUS_IDLE) {
+	if (p1->wantsToPunch == 1 && p1->status != STATUS_PUNCHING) {
 		p1->status = STATUS_PUNCHING;
 		p1->punchDuration = 0.0;
 	} else if (p1->status == STATUS_PUNCHING) {
@@ -52,7 +56,8 @@ void updatePlayerPunch(character *p1, character *p2, float time) {
 			p1->punchDuration += time;
 			p1->fistDistance = (p1->punchDuration / p1->punchMaxDuration)
 					* p1->punchLength * p1->facingDirection;
-		} else if (p1->punchDuration > p1->punchMaxDuration) {
+		//} else if (p1->punchDuration > p1->punchMaxDuration) {
+		} else if (p1->punchDuration) {
 			p1->status = hitDetection(p1, p2);
 			p1->punchDuration = 0.0;
 			p1->fistDistance = 0;

@@ -10,6 +10,7 @@ void initKeyboard(alt_up_ps2_dev ** ps2){
 }
 //reading from PS2 Keyboard
 int readKeyboard(input * key, alt_up_ps2_dev * ps2){
+	int counter=0;
 	alt_u8 buf = 0;
 	char ascii;
 	KB_CODE_TYPE mode;
@@ -17,54 +18,103 @@ int readKeyboard(input * key, alt_up_ps2_dev * ps2){
 	decode_scancode(ps2,&mode,&buf,&ascii);
 	//printf("mode: %d, buf: %d, ascii: %c\n",mode,buf,ascii);
 	//initKey(key);
-	while(mode<=5){
-			//printf("mode: %d, buf: %d, ascii: %c\n",mode,buf,ascii);
-			key->press = 1;
+	while(mode < 6 && counter <10){
+			printf("mode: %d, buf: %d, ascii: %c\n",mode,buf,ascii);
 			switch(mode){
 			case KB_ASCII_MAKE_CODE:
-				if(ascii == 'A')
-					key->p1_left = 1;
-				if(ascii == 'S')
-					key->p1_right = 1;
-				if(ascii == 'D')
-					key->p1_punch = 1;
-				if(ascii == 'F')
-					key->p1_block = 1;
+				if(buf == 0x1C)
+					key->A = 1;
+				if(buf == 0x23)
+					key->D = 1;
+				if(buf == 0x33)
+					key->H = 1;
+				if(buf == 0x3B)
+					key->J = 1;
+				if(buf == 0x42)
+					key->K = 1;
+				if(buf == 0x69)
+					key->NP1 = 1;
+				if(buf == 0x72)
+					key->NP2 = 1;
+				if(buf == 0x7A)
+					key->NP3 = 1;
+				if(buf == 0x5A)
+					key->ENT = 1;
+				break;
+			case KB_LONG_BINARY_MAKE_CODE:
+				if(buf == 0x6B)
+					key->LARR = 1;
+				if(buf == 0x74)
+					key->RARR = 1;
+				if(buf == 0x75)
+					key->UARR = 1;
+				if(buf == 0x72)
+					key->DARR = 1;
 				break;
 			case KB_BINARY_MAKE_CODE:
 				//binary keys
 				break;
 			case KB_BREAK_CODE:
-				//if (ascii == 'A')
-					key->p1_left=0;
-				//if (ascii == 'S')
-					key->p1_right=0;
-				//if (ascii == 'D')
-					key->p1_punch=0;
-				//if (ascii == 'F')
-					key->p1_block=0;
+				if(buf == 0x1C)
+					key->A = 0;
+				if(buf == 0x23)
+					key->D = 0;
+				if(buf == 0x33)
+					key->H = 0;
+				if(buf == 0x3B)
+					key->J = 0;
+				if(buf == 0x42)
+					key->K = 0;
+				if(buf == 0x69)
+					key->NP1 = 0;
+				if(buf == 0x72)
+					key->NP2 = 0;
+				if(buf == 0x7A)
+					key->NP3 = 0;
+				if(buf == 0x5A)
+					key->ENT = 0;
+				break;
+			case KB_LONG_BREAK_CODE:
+				if(buf == 0x6B)
+					key->LARR = 0;
+				if(buf == 0x74)
+					key->RARR = 0;
+				if(buf == 0x75)
+					key->UARR = 0;
+				if(buf == 0x72)
+					key->DARR = 0;
 				break;
 			default:
 				break;
 				}
 			decode_scancode(ps2,&mode,&buf,&ascii);
-
+			counter++;
 	}
 
 	return 0;
 }
 void initKey(input * key){
-	key->p1_block=0;
-	key->p1_left=0;
-	key->p1_punch=0;
-	key->p1_right=0;
+	key->A=0;
+	key->D=0;
+	key->H=0;
+	key->J=0;
+	key->K=0;
+	key->LARR=0;
+	key->RARR=0;
+	key->UARR=0;
+	key->DARR=0;
+	key->NP1=0;
+	key->NP2=0;
+	key->NP3=0;
+	key->ENT=0;
 }
 
 void initDE2Key(input *key) {
-	key->p2_block=0;
-	key->p2_left=0;
-	key->p2_punch=0;
-	key->p2_right=0;
+	key->LARR=0;
+	key->RARR=0;
+	key->NP1=0;
+	key->NP2=0;
+	key->NP3=0;
 }
 
 int isleftkey(){
@@ -102,20 +152,21 @@ void refkey(input *key){
 	{
 		//bug: tolerate multi key pressed
 		if(isleftkey()){
-			key->press =1;
-			key->p2_left =1;
+			key->LARR =1;
 		}
 		if(isrightkey())
-		{	key->p2_right =1;
-			key->press =1;
+		{
+			key->RARR =1;
 		}
 		if(isblockkey())
-		{	key->p2_block = 1;
-			key->press =1;
+		{
+			key->NP2 = 1;
+
 		}
 		if(ispunchkey())
-		{	key->p2_punch = 1;
-			key->press =1;
+		{
+			key->NP1 = 1;
+
 		}
 
 	}
