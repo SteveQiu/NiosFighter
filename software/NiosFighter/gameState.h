@@ -1,6 +1,6 @@
 #ifndef GAMESTATE_H
 #define GAMESTATE_H
-#include "audio.h"
+#include <altera_up_avalon_audio.h>
 #include "character.h"
 #include "debug.h"
 

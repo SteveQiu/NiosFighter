@@ -8,6 +8,8 @@
 #include <sys/alt_alarm.h>
 #include <sys/alt_irq.h>
 
+#ifndef _AUDIO_H__
+#define _AUDIO_H__
 typedef struct sounddata{
 	int len;
 	int hlen;
@@ -20,6 +22,7 @@ typedef struct sounddata{
 	int index_right;
 	int play;
 } sounddata;
+#endif
 
 void av_config_setup();
 

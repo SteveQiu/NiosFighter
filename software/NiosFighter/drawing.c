@@ -653,24 +653,20 @@ void DrawPunching1(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate,
 void DrawPunching2(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate,
 		dirtyManager *dm) {
 	if (fpunch2 == 0) {
-		DrawPunching2p1(buffer_cpy, gstate->player2.xPosition + 150
-				+ gstate->player2.fistDistance - 33 - gstate->player2.width,
-				110, dm);
+		DrawPunching2p1(buffer_cpy, gstate->player2.xPosition + 150 - 33
+				- gstate->player2.width - 3, 110, dm);
 		fpunch2++;
 	} else if (fpunch2 == 1) {
-		DrawPunching2p2(buffer_cpy, gstate->player2.xPosition + 150
-				+ gstate->player2.fistDistance - 33 - gstate->player2.width,
-				110, dm);
+		DrawPunching2p2(buffer_cpy, gstate->player2.xPosition + 150 - 33
+				- gstate->player2.width - 5, 110, dm);
 		fpunch2++;
 	} else if (fpunch2 == 2) {
-		DrawPunching2p3(buffer_cpy, gstate->player2.xPosition + 150
-				+ gstate->player2.fistDistance - 33 - gstate->player2.width,
-				110, dm);
+		DrawPunching2p3(buffer_cpy, gstate->player2.xPosition + 150 - 33
+				- gstate->player2.width - 7, 110, dm);
 		fpunch2++;
 	} else if (fpunch2 == 3) {
-		DrawPunching2p4(buffer_cpy, gstate->player2.xPosition + 150
-				+ gstate->player2.fistDistance - 33 - gstate->player2.width,
-				110, dm);
+		DrawPunching2p4(buffer_cpy, gstate->player2.xPosition + 150 - 33
+				- gstate->player2.width - 9, 110, dm);
 		fpunch2 = 0;
 	}
 }
@@ -689,7 +685,7 @@ void DrawCharacter(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate,
 	}
 	if (gstate->player2.status == STATUS_PUNCHING) {
 		DrawPunching2(buffer_cpy, gstate, dm);
-		playsound("punch.wav",gstate->audio);
+		playsound("punch.wav", gstate->audio);
 	}
 	if (gstate->player1.status == STATUS_STUNNED) {
 		DrawHit1(buffer_cpy, gstate->player1.xPosition - gstate->player1.width

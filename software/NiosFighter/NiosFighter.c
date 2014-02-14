@@ -35,51 +35,23 @@ int main() {
 		//initKey(&move);
 		gstate.audio=audio;
 /*
-//************************************************
-		data.audio=audio;
-		testsdcard(&card,device_reference);
-		int handle;
-		handle = alt_up_sd_card_fopen("MK.wav", 0);
-		if(handle)printf("file open failed");
-
-		const int length=600000;
-		//const int hlength=600000;
-		//unsigned int buffer[length/2];
-		unsigned int buf [length];
-		int i;
-
-		printf("Starting to play\n");
-
-			printf("Reading\n");
-			for( i=0;i<length;i++){
-					buf[i]=alt_up_sd_card_read(handle);
-			}
-
-			printf("Downloading\n");
-			int j=0;
-			for(i = 0; i<length; i+=2){
-				data.buffer[j] = (buf[i+1] << 8) | buf[i];
-				j++;
-			}
-			data.play=1;
-			printf("interrupt\n");
-//********************************************
-
 		alt_irq_register(AUDIO_0_IRQ,&data,playbg_isr);
 		alt_irq_enable(AUDIO_0_IRQ);
 		alt_up_audio_enable_write_interrupt(audio);
 */
-
+		startFrame(&ftimer);
 		//Menu Loop
 		//displayMenu();
-
+		testsdcard(&card,device_reference);
+		playsound("MK.wav", audio);
 		//Game Loop
+		endFrame(&ftimer);
 		alt_up_char_buffer_clear(char_buffer);
 
 		while (!(gstate.gameOver)) {
 			startFrame(&ftimer);
 			testsdcard(&card, device_reference);
-			//playsound("MK.wav", audio);
+			playsound("MK.wav", audio);
 			processInput(&gstate, ps2, &move);
 			updateGame(&gstate, frameLength(&ftimer));
 			swapdm(&dm, &dm2);
