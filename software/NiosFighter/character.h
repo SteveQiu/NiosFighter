@@ -30,6 +30,8 @@ typedef struct character {
 	int wantsToBlock;
 	float blockChangeTime;
 	float blockChangeMaxTime;
+	float blockHoldTime;
+	float blockMaxHoldTime;
 } character;
 
 int initCharacter(character *target);
