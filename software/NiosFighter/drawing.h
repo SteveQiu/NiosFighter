@@ -2,6 +2,10 @@
 #define DRAWING_H_
 #include "render.h"
 
+void DrawStartScreen(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy,
+		alt_up_char_buffer_dev* char_buffer_cpy, int x, int y, int w, int h);
+void DrawInstruction(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy,
+		alt_up_char_buffer_dev* char_buffer_cpy);
 void DrawBackground(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy, int x,
 		int y, int w, int h);
 void DrawHealthBar(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy, int x, int y);
