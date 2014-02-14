@@ -689,6 +689,7 @@ void DrawCharacter(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate,
 	}
 	if (gstate->player2.status == STATUS_PUNCHING) {
 		DrawPunching2(buffer_cpy, gstate, dm);
+		playsound("punch.wav",gstate->audio);
 	}
 	if (gstate->player1.status == STATUS_STUNNED) {
 		DrawHit1(buffer_cpy, gstate->player1.xPosition - gstate->player1.width

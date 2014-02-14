@@ -33,8 +33,8 @@ int main() {
 		initKeyboard(&ps2);
 		initKey(&move);
 		//initKey(&move);
-
-
+		gstate.audio=audio;
+/*
 //************************************************
 		data.audio=audio;
 		testsdcard(&card,device_reference);
@@ -68,7 +68,7 @@ int main() {
 		alt_irq_register(AUDIO_0_IRQ,&data,playbg_isr);
 		alt_irq_enable(AUDIO_0_IRQ);
 		alt_up_audio_enable_write_interrupt(audio);
-
+*/
 
 		//Menu Loop
 		//displayMenu();

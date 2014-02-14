@@ -1,5 +1,6 @@
 #ifndef GAMESTATE_H
 #define GAMESTATE_H
+#include "audio.h"
 #include "character.h"
 #include "debug.h"
 
@@ -8,6 +9,7 @@ typedef struct gameState {
 	character player2;
 	int gameOver;
 	float roundTime;
+	alt_up_audio_dev *audio;
 } gameState;
 
 //Returns 0 on successful completion
