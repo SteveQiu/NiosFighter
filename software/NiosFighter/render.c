@@ -61,7 +61,14 @@ void InitCharBuff(alt_up_char_buffer_dev** char_buffer_ptr) {
 	//Initialize the character buffer
 	alt_up_char_buffer_init(*char_buffer_ptr);
 }
+void LED_health(gameState *gstate)
+{
+	int h1= gstate->player1.health;
+	int h2= gstate->player2.health;
+	if(h1<13)
+		LED_BASE = 0xFF;
 
+}
 void render(gameState *state, alt_up_char_buffer_dev* char_buffer,
 		alt_up_pixel_buffer_dma_dev *pixel_buffer, dirtyManager *dm) {
 

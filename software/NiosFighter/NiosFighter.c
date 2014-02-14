@@ -5,6 +5,7 @@
 //StS 26px
 
 int main() {
+
 	while (1) {
 
 		//create variables
@@ -50,7 +51,7 @@ int main() {
 			swapdm(&dm, &dm2);
 			render(&gstate, char_buffer, pixel_buffer, &dm);
 			endFrame(&ftimer);
-			printf("FRAME TIME: %f\n", frameLength(&ftimer));
+			//printf("FRAME TIME: %f\n", frameLength(&ftimer));
 
 		}
 
