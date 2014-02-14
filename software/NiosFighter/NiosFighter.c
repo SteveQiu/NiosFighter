@@ -31,6 +31,15 @@ int main() {
 		initKey(&move);
 		//initKey(&move);
 
+		//alt_irq_register(AUDIO_0_IRQ,&audio,play_isr);
+		//alt_irq_enable(AUDIO_0_IRQ);
+		//alt_up_audio_enable_write_interrupt(audio);
+
+		//Display Menu();
+		//if(input1){
+		//gameLoop
+		alt_up_char_buffer_clear(char_buffer);
+
 		while (!(gstate.gameOver)) {
 			startFrame(&ftimer);
 			testsdcard(&card, device_reference);
@@ -39,6 +48,7 @@ int main() {
 			updateGame(&gstate, frameLength(&ftimer));
 			swapdm(&dm, &dm2);
 			render(&gstate, char_buffer, pixel_buffer, dm);
+			//renderStartscreen(char_buffer, pixel_buffer, &dm);
 			endFrame(&ftimer);
 			//printf("FPS: %f\n", 1.0/frameLength(&ftimer));
 
@@ -71,52 +81,52 @@ void updateGame(gameState *gstate, float frameLength) {
 }
 
 void processInput(gameState *gstate, alt_up_ps2_dev * ps2, input *move) {
-	readKeyboard(move,ps2);
+	readKeyboard(move, ps2);
 	//refkey(move);
 	//If move struct contains
-		//player one movement
-		if (move->A)
-			gstate->player1.movingDirection = LEFT;
-		else if (move->D)
-			gstate->player1.movingDirection = RIGHT;
-		else
-			gstate->player1.movingDirection = NOTMOVING;
-		//player one punch
-		if (move->H)
-			gstate->player1.wantsToPunch = 1;
-		else
-			gstate->player1.wantsToPunch = 0;
-		//player one block
-		if (move->J)
-			gstate->player1.wantsToBlock = 1;
-		else
-			gstate->player1.wantsToBlock = 0;
-/*		if(move->K)
-			gstate->player1.wantsToFake = 1;
-		else
-			gstate->player1.wantsToFake = 0;
-*/
+	//player one movement
+	if (move->A)
+		gstate->player1.movingDirection = LEFT;
+	else if (move->D)
+		gstate->player1.movingDirection = RIGHT;
+	else
+		gstate->player1.movingDirection = NOTMOVING;
+	//player one punch
+	if (move->H)
+		gstate->player1.wantsToPunch = 1;
+	else
+		gstate->player1.wantsToPunch = 0;
+	//player one block
+	if (move->J)
+		gstate->player1.wantsToBlock = 1;
+	else
+		gstate->player1.wantsToBlock = 0;
+	/*		if(move->K)
+	 gstate->player1.wantsToFake = 1;
+	 else
+	 gstate->player1.wantsToFake = 0;
+	 */
 
-		//player two movement
-		if (move->LARR)
-			gstate->player2.movingDirection = LEFT;
-		else if (move->RARR)
-			gstate->player2.movingDirection = RIGHT;
-		else
-			gstate->player2.movingDirection = NOTMOVING;
-		//player two punch
-		if (move->NP1)
-			gstate->player2.wantsToPunch = 1;
-		else
-			gstate->player2.wantsToPunch = 0;
-		//player two block
-		if (move->NP2)
-			gstate->player2.wantsToBlock = 1;
-		else
-			gstate->player2.wantsToBlock = 0;
-/*		if(move->NP3)
-			gstate->player2.wantsToFake = 1;
-		else
-			gstate->player2.wantsToFake = 0;
-*/
+	//player two movement
+	if (move->LARR)
+		gstate->player2.movingDirection = LEFT;
+	else if (move->RARR)
+		gstate->player2.movingDirection = RIGHT;
+	else
+		gstate->player2.movingDirection = NOTMOVING;
+	//player two punch
+	if (move->NP1)
+		gstate->player2.wantsToPunch = 1;
+	else
+		gstate->player2.wantsToPunch = 0;
+	//player two block
+	if (move->NP2)
+		gstate->player2.wantsToBlock = 1;
+	else
+		gstate->player2.wantsToBlock = 0;
+	/*		if(move->NP3)
+	 gstate->player2.wantsToFake = 1;
+	 else
+	 gstate->player2.wantsToFake = 0;
+	 */
 }
