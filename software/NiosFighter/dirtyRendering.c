@@ -6,8 +6,9 @@ void initDirtySection(dirtySection *target) {
 	target->next = 0;
 }
 
-void initDirtyManager(dirtyManager *dm) {
-	dm->head = NULL;
+void initDirtyManager(dirtyManager **dm) {
+	*dm = (dirtyManager*)malloc(sizeof(dirtyManager));
+	(*dm)->head = NULL;
 }
 
 void addDirtySection(dirtyManager *dm, dirtySection *ds) {

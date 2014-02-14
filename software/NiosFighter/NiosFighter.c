@@ -14,8 +14,8 @@ int main() {
 		alt_up_sd_card_dev *device_reference = NULL;
 		alt_up_char_buffer_dev* char_buffer;
 		alt_up_pixel_buffer_dma_dev* pixel_buffer;
-		dirtyManager dm;
-		dirtyManager dm2;
+		dirtyManager *dm;
+		dirtyManager *dm2;
 		alt_up_audio_dev *audio;
 		alt_up_ps2_dev * ps2;
 		//initiation
@@ -31,13 +31,6 @@ int main() {
 		initKey(&move);
 		//initKey(&move);
 
-		//alt_irq_register(AUDIO_0_IRQ,&audio,play_isr);
-		//alt_irq_enable(AUDIO_0_IRQ);
-		//alt_up_audio_enable_write_interrupt(audio);
-
-		//Display Menu();
-		//if(input1){
-		//gameLoop
 		while (!(gstate.gameOver)) {
 			startFrame(&ftimer);
 			testsdcard(&card, device_reference);
@@ -45,9 +38,9 @@ int main() {
 			processInput(&gstate, ps2, &move);
 			updateGame(&gstate, frameLength(&ftimer));
 			swapdm(&dm, &dm2);
-			render(&gstate, char_buffer, pixel_buffer, &dm);
+			render(&gstate, char_buffer, pixel_buffer, dm);
 			endFrame(&ftimer);
-			printf("FRAME TIME: %f\n", frameLength(&ftimer));
+			//printf("FPS: %f\n", 1.0/frameLength(&ftimer));
 
 		}
 
