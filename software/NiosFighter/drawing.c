@@ -566,25 +566,32 @@ void DrawTimer(alt_up_char_buffer_dev* char_buffer_cpy, int time_remain) {
 void DrawStanding1(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate,
 		dirtyManager *dm) {
 	if (fstand1 == 0) {
-		DrawStanding1p1(buffer_cpy, gstate->player1.xPosition + 110, 110, dm);
+		DrawStanding1p1(buffer_cpy, gstate->player1.xPosition + 110
+				- gstate->player1.width, 110, dm);
 		fstand1++;
 	} else if (fstand1 == 1) {
-		DrawStanding1p2(buffer_cpy, gstate->player1.xPosition + 110, 110, dm);
+		DrawStanding1p2(buffer_cpy, gstate->player1.xPosition + 110
+				- gstate->player1.width - 1, 110, dm);
 		fstand1++;
 	} else if (fstand1 == 2) {
-		DrawStanding1p3(buffer_cpy, gstate->player1.xPosition + 110, 110, dm);
+		DrawStanding1p3(buffer_cpy, gstate->player1.xPosition + 110
+				- gstate->player1.width - 2, 110, dm);
 		fstand1++;
 	} else if (fstand1 == 3) {
-		DrawStanding1p4(buffer_cpy, gstate->player1.xPosition + 110, 110, dm);
+		DrawStanding1p4(buffer_cpy, gstate->player1.xPosition + 110
+				- gstate->player1.width - 3, 110, dm);
 		fstand1++;
 	} else if (fstand1 == 4) {
-		DrawStanding1p5(buffer_cpy, gstate->player1.xPosition + 110, 110, dm);
+		DrawStanding1p5(buffer_cpy, gstate->player1.xPosition + 110
+				- gstate->player1.width - 4, 110, dm);
 		fstand1++;
 	} else if (fstand1 == 5) {
-		DrawStanding1p6(buffer_cpy, gstate->player1.xPosition + 110, 110, dm);
+		DrawStanding1p6(buffer_cpy, gstate->player1.xPosition + 110
+				- gstate->player1.width - 3, 110, dm);
 		fstand1++;
 	} else if (fstand1 == 6) {
-		DrawStanding1p7(buffer_cpy, gstate->player1.xPosition + 110, 110, dm);
+		DrawStanding1p7(buffer_cpy, gstate->player1.xPosition
+				- gstate->player1.width - 2 + 110, 110, dm);
 		fstand1 = 0;
 	}
 }
@@ -592,25 +599,32 @@ void DrawStanding1(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate,
 void DrawStanding2(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate,
 		dirtyManager *dm) {
 	if (fstand2 == 0) {
-		DrawStanding2p1(buffer_cpy, gstate->player2.xPosition + 150, 110, dm);
+		DrawStanding2p1(buffer_cpy, gstate->player2.xPosition + 150 - 33
+				- gstate->player2.width, 110, dm);
 		fstand2++;
 	} else if (fstand2 == 1) {
-		DrawStanding2p2(buffer_cpy, gstate->player2.xPosition + 150, 110, dm);
+		DrawStanding2p2(buffer_cpy, gstate->player2.xPosition + 150 - 33
+				- gstate->player2.width - 1, 110, dm);
 		fstand2++;
 	} else if (fstand2 == 2) {
-		DrawStanding2p3(buffer_cpy, gstate->player2.xPosition + 150, 110, dm);
+		DrawStanding2p3(buffer_cpy, gstate->player2.xPosition + 150 - 33
+				- gstate->player2.width - 2, 110, dm);
 		fstand2++;
 	} else if (fstand2 == 3) {
-		DrawStanding2p4(buffer_cpy, gstate->player2.xPosition + 150, 110, dm);
+		DrawStanding2p4(buffer_cpy, gstate->player2.xPosition + 150 - 33
+				- gstate->player2.width - 3, 110, dm);
 		fstand2++;
 	} else if (fstand2 == 4) {
-		DrawStanding2p5(buffer_cpy, gstate->player2.xPosition + 150, 110, dm);
+		DrawStanding2p5(buffer_cpy, gstate->player2.xPosition + 150 - 33
+				- gstate->player2.width - 4, 110, dm);
 		fstand2++;
 	} else if (fstand2 == 5) {
-		DrawStanding2p6(buffer_cpy, gstate->player2.xPosition + 150, 110, dm);
+		DrawStanding2p6(buffer_cpy, gstate->player2.xPosition + 150 - 33
+				- gstate->player2.width - 3, 110, dm);
 		fstand2++;
 	} else if (fstand2 == 6) {
-		DrawStanding2p7(buffer_cpy, gstate->player2.xPosition + 150, 110, dm);
+		DrawStanding2p7(buffer_cpy, gstate->player2.xPosition + 150 - 33
+				- gstate->player2.width - 2, 110, dm);
 		fstand2 = 0;
 	}
 }
@@ -618,16 +632,20 @@ void DrawStanding2(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate,
 void DrawPunching1(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate,
 		dirtyManager *dm) {
 	if (fpunch1 == 0) {
-		DrawPunching1p1(buffer_cpy, gstate->player1.xPosition + 110, 110, dm);
+		DrawPunching1p1(buffer_cpy, gstate->player1.xPosition + 110
+				- gstate->player1.width, 110, dm);
 		fpunch1++;
 	} else if (fpunch1 == 1) {
-		DrawPunching1p2(buffer_cpy, gstate->player1.xPosition + 110, 110, dm);
+		DrawPunching1p2(buffer_cpy, gstate->player1.xPosition + 110
+				- gstate->player1.width, 110, dm);
 		fpunch1++;
 	} else if (fpunch1 == 2) {
-		DrawPunching1p3(buffer_cpy, gstate->player1.xPosition + 110, 110, dm);
+		DrawPunching1p3(buffer_cpy, gstate->player1.xPosition + 110
+				- gstate->player1.width, 110, dm);
 		fpunch1++;
 	} else if (fpunch1 == 3) {
-		DrawPunching1p4(buffer_cpy, gstate->player1.xPosition + 110, 110, dm);
+		DrawPunching1p4(buffer_cpy, gstate->player1.xPosition + 110
+				- gstate->player1.width, 110, dm);
 		fpunch1 = 0;
 	}
 }
@@ -636,19 +654,23 @@ void DrawPunching2(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate,
 		dirtyManager *dm) {
 	if (fpunch2 == 0) {
 		DrawPunching2p1(buffer_cpy, gstate->player2.xPosition + 150
-				+ gstate->player2.fistDistance, 110, dm);
+				+ gstate->player2.fistDistance - 33 - gstate->player2.width,
+				110, dm);
 		fpunch2++;
 	} else if (fpunch2 == 1) {
 		DrawPunching2p2(buffer_cpy, gstate->player2.xPosition + 150
-				+ gstate->player2.fistDistance, 110, dm);
+				+ gstate->player2.fistDistance - 33 - gstate->player2.width,
+				110, dm);
 		fpunch2++;
 	} else if (fpunch2 == 2) {
 		DrawPunching2p3(buffer_cpy, gstate->player2.xPosition + 150
-				+ gstate->player2.fistDistance, 110, dm);
+				+ gstate->player2.fistDistance - 33 - gstate->player2.width,
+				110, dm);
 		fpunch2++;
 	} else if (fpunch2 == 3) {
 		DrawPunching2p4(buffer_cpy, gstate->player2.xPosition + 150
-				+ gstate->player2.fistDistance, 110, dm);
+				+ gstate->player2.fistDistance - 33 - gstate->player2.width,
+				110, dm);
 		fpunch2 = 0;
 	}
 }
@@ -669,16 +691,20 @@ void DrawCharacter(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate,
 		DrawPunching2(buffer_cpy, gstate, dm);
 	}
 	if (gstate->player1.status == STATUS_STUNNED) {
-		DrawHit1(buffer_cpy, gstate->player1.xPosition + 110, 110, dm);
+		DrawHit1(buffer_cpy, gstate->player1.xPosition - gstate->player1.width
+				+ 110, 110, dm);
 	}
 	if (gstate->player2.status == STATUS_STUNNED) {
-		DrawHit2(buffer_cpy, gstate->player2.xPosition + 150, 110, dm);
+		DrawHit2(buffer_cpy, gstate->player2.xPosition - gstate->player2.width
+				- 33 + 150, 110, dm);
 	}
 	if (gstate->player1.status == STATUS_BLOCKING) {
-		DrawBlock1(buffer_cpy, gstate->player1.xPosition + 110, 110, dm);
+		DrawBlock1(buffer_cpy, gstate->player1.xPosition
+				- gstate->player1.width + 110, 110, dm);
 	}
 	if (gstate->player2.status == STATUS_BLOCKING) {
-		DrawBlock2(buffer_cpy, gstate->player2.xPosition + 150, 110, dm);
+		DrawBlock2(buffer_cpy, gstate->player2.xPosition - 33
+				- gstate->player2.width + 150, 110, dm);
 	}
 }
 
