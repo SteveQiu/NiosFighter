@@ -30,18 +30,18 @@ void loadsound(sounddata *data,int handle ,alt_up_audio_dev *audio){
 	int done;
 	printf("Starting to play\n");
 	while(1){
-		printf("Reading\n");
+		//printf("Reading\n");
 		for( i=0;i<128;i++){
 				buf[i]=alt_up_sd_card_read(handle);
 				if(buf[i]==-1)done=1;
 			}
-			printf("Loading \n");
+		//	printf("Loading \n");
 			int j=0;
 			for(i = 0; i<128; i+=2){
 					buffer[j] = (buf[i+1] << 8) | buf[i];
 					j++;
 					}
-			printf("converting\n");
+		//	printf("converting\n");
 			if(audio == NULL)
 				printf("Audio is null\n");
 
@@ -51,8 +51,8 @@ void loadsound(sounddata *data,int handle ,alt_up_audio_dev *audio){
 		int index_left=0;
 		int index_right=0;
 		while(index< 128){
-			bytes_left = alt_up_audio_write_fifo(audio, &buffer[index_left], data->hlen-index_left, ALT_UP_AUDIO_LEFT);
-			bytes_right = alt_up_audio_write_fifo(audio, &buffer[index_right], data->hlen-index_right, ALT_UP_AUDIO_RIGHT);
+			bytes_left = alt_up_audio_write_fifo(audio, &buffer[index_left], data->hlen, ALT_UP_AUDIO_LEFT);
+			bytes_right = alt_up_audio_write_fifo(audio, &buffer[index_right], data->hlen, ALT_UP_AUDIO_RIGHT);
 			index_left += bytes_left;
 			index_right += bytes_right;
 			index++;
@@ -84,23 +84,9 @@ void play_isr(void *context,alt_u32 id){
 
 
 void playbg_isr(void *context,alt_u32 id){
-	sounddata  *data= (sounddata *) context;
-
-
-				if(data->index> data->len){
-					data->index=0;
-					data->bytes_left=0;
-					data->bytes_right=0;
-					data->index_left=0;
-					data->index_right=0;}
-
-					data->bytes_left = alt_up_audio_write_fifo(data->audio, &(data->buffer[data->index_left]), data->len, ALT_UP_AUDIO_LEFT);
-					data->bytes_right = alt_up_audio_write_fifo(data->audio, &(data->buffer[data->index_right]), data->len, ALT_UP_AUDIO_RIGHT);
-					data->index_left += data->bytes_left;
-					data->index_right += data->bytes_right;
-					data->index++;
-
-
+	alt_up_audio_dev *audio = *(alt_up_audio_dev **) context;
+	playsound("MK.wav", audio);
+	//playsound("punch.wav", audio);
 }
 
 /*//test code

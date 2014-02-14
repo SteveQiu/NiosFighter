@@ -29,11 +29,11 @@ int main() {
 		InitCharBuff(&char_buffer);
 		initDirtyManager(&dm);
 		initDirtyManager(&dm2);
-		//initaudio(&audio);
+		initaudio(&audio);
 		initKeyboard(&ps2);
 		initKey(&move);
 		//initKey(&move);
-		gstate.audio=audio;
+		//gstate.audio=audio;
 /*
 		alt_irq_register(AUDIO_0_IRQ,&data,playbg_isr);
 		alt_irq_enable(AUDIO_0_IRQ);
@@ -51,7 +51,7 @@ int main() {
 		while (!(gstate.gameOver)) {
 			startFrame(&ftimer);
 			testsdcard(&card, device_reference);
-			playsound("MK.wav", audio);
+			//playsound("MK.wav", audio);
 			processInput(&gstate, ps2, &move);
 			updateGame(&gstate, frameLength(&ftimer));
 			swapdm(&dm, &dm2);
