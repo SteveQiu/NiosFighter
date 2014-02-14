@@ -34,6 +34,7 @@ int main() {
 		//Display Menu();
 		//if(input1){
 		//gameLoop
+		alt_up_char_buffer_clear(char_buffer);
 		while (!(gstate.gameOver)) {
 			startFrame(&ftimer);
 			testsdcard(&card, device_reference);
@@ -42,6 +43,7 @@ int main() {
 			updateGame(&gstate, frameLength(&ftimer));
 			swapdm(&dm, &dm2);
 			render(&gstate, char_buffer, pixel_buffer, &dm);
+			//renderStartscreen(char_buffer, pixel_buffer, &dm);
 			endFrame(&ftimer);
 
 		}

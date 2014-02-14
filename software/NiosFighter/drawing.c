@@ -4,6 +4,28 @@ int fstand2 = 0;
 int fpunch1 = 0;
 int fpunch2 = 0;
 
+void DrawStartScreen(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy,
+		alt_up_char_buffer_dev* char_buffer_cpy, int x, int y, int w, int h) {
+	int row;
+	int column;
+	int realw = x + w;
+	int realh = y + h;
+	for (row = y; row < realh; row++) {
+		for (column = x; column < realw; column++) {
+			/*draw_pixel_fast(pixel_buffer_cpy, startscreen[row][column], column,
+			 row);*/
+		}
+	}
+	alt_up_char_buffer_string(char_buffer_cpy, "Start Game", 35, 40);
+	alt_up_char_buffer_string(char_buffer_cpy, "Instruction", 34, 50);
+	//80*60 array across 320*280 resolution screen
+}
+
+void DrawInstruction(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy,
+		alt_up_char_buffer_dev* char_buffer_cpy) {
+
+}
+
 void DrawBackground(alt_up_pixel_buffer_dma_dev* pixel_buffer_cpy, int x,
 		int y, int w, int h) {
 	int row;
@@ -654,37 +676,5 @@ void DrawCharacter(alt_up_pixel_buffer_dma_dev* buffer_cpy, gameState *gstate,
 	if (gstate->player2.status == STATUS_BLOCKING) {
 		DrawBlock2(buffer_cpy, gstate->player2.xPosition + 150, 110, dm);
 	}
-	/*int playerColour = 0xF80F;
-	 if (gstate->player1.status == STATUS_STUNNED) {
-	 playerColour = 0x0500;
-	 }
-
-	 alt_up_pixel_buffer_dma_draw_box(buffer_cpy, (gstate->player1.xPosition
-	 + 160 - gstate->player1.width), 120, (gstate->player1.xPosition
-	 + 160 + gstate->player1.width), 200, playerColour, 1);
-	 alt_up_pixel_buffer_dma_draw_box(buffer_cpy, (gstate->player1.xPosition
-	 + 160), 140, (gstate->player1.xPosition + 160
-	 + gstate->player1.fistDistance), 150, playerColour, 1);
-
-	 int x_1 = gstate->player1.xPosition + 160 - gstate->player1.width;
-	 int y_1 = 120;
-	 int w_1 = 2 * gstate->player1.width + gstate->player1.fistDistance + 1;
-	 int h_1 = 81;
-
-	 alt_up_pixel_buffer_dma_draw_box(buffer_cpy, (gstate->player2.xPosition
-	 + 160 - gstate->player2.width), 120, (gstate->player2.xPosition
-	 + 160 + gstate->player2.width), 200, 0x03FF, 1);
-	 alt_up_pixel_buffer_dma_draw_box(buffer_cpy, (gstate->player2.xPosition
-	 + 160), 140, (gstate->player2.xPosition + 160
-	 + gstate->player2.fistDistance), 150, 0x03FF, 1);
-
-	 int x_2 = gstate->player2.xPosition + 160 + gstate->player2.fistDistance
-	 - gstate->player2.width;
-	 int y_2 = 120;
-	 int w_2 = 2 * gstate->player2.width - gstate->player2.fistDistance + 3;
-	 int h_2 = 81;
-
-	 addDirty(dm, x_1, y_1, w_1, h_1);
-	 addDirty(dm, x_2, y_2, w_2, h_2);*/
 }
 
