@@ -16,8 +16,8 @@ int main() {
 		alt_up_sd_card_dev *device_reference = NULL;
 		alt_up_char_buffer_dev* char_buffer;
 		alt_up_pixel_buffer_dma_dev* pixel_buffer;
-		dirtyManager dm;
-		dirtyManager dm2;
+		dirtyManager *dm;
+		dirtyManager *dm2;
 		alt_up_audio_dev *audio;
 		alt_up_ps2_dev * ps2;
 		//initiation
