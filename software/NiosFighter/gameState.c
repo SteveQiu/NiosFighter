@@ -7,8 +7,8 @@ int initGameState(gameState *gstate) {
 	initCharacter(&(gstate->player2));
 	gstate->player1.status = STATUS_IDLE;
 	gstate->player2.status = STATUS_IDLE;
-	gstate->player1.xPosition = -50;
-	gstate->player2.xPosition = 50;
+	gstate->player1.xPosition = -25;
+	gstate->player2.xPosition = 75;
 	gstate->player1.movingDirection = NOTMOVING;
 	gstate->player2.movingDirection = NOTMOVING;
 	gstate->player1.facingDirection = RIGHT;
@@ -24,7 +24,7 @@ int initGameState(gameState *gstate) {
 }
 
 void updatePlayerPosition(character *ch, float time) {
-	 if(ch->status == STATUS_IDLE) {
+	if (ch->status == STATUS_IDLE) {
 		ch->xPosition += time * ch->movingDirection * ch->walkingSpeed * 2;
 		if (ch->xPosition < ARENALEFTBORDER)
 			ch->xPosition = ARENALEFTBORDER;
@@ -56,7 +56,7 @@ void updatePlayerPunch(character *p1, character *p2, float time) {
 			p1->punchDuration += time;
 			p1->fistDistance = (p1->punchDuration / p1->punchMaxDuration)
 					* p1->punchLength * p1->facingDirection;
-		//} else if (p1->punchDuration > p1->punchMaxDuration) {
+			//} else if (p1->punchDuration > p1->punchMaxDuration) {
 		} else if (p1->punchDuration) {
 			p1->status = hitDetection(p1, p2);
 			p1->punchDuration = 0.0;
@@ -113,8 +113,7 @@ void updatePlayerBlocking(character *c, float time) {
 				c->blockChangeTime = 0.0;
 
 			}
-		}
-		else if (c->status == STATUS_BLOCKING) {
+		} else if (c->status == STATUS_BLOCKING) {
 			c->blockHoldTime = time + c->blockHoldTime;
 			if (c->blockHoldTime > c->blockMaxHoldTime) {
 				c->status = STATUS_IDLE;
