@@ -16,10 +16,11 @@ int main() {
 		alt_up_sd_card_dev *device_reference = NULL;
 		alt_up_char_buffer_dev* char_buffer;
 		alt_up_pixel_buffer_dma_dev* pixel_buffer;
-		dirtyManager dm;
-		dirtyManager dm2;
+		dirtyManager *dm;
+		dirtyManager *dm2;
 		alt_up_audio_dev *audio;
 		alt_up_ps2_dev * ps2;
+		sounddata data;
 		//initiation
 		initGameState(&gstate);
 		initFrameTimer(&ftimer);
@@ -28,17 +29,24 @@ int main() {
 		InitCharBuff(&char_buffer);
 		initDirtyManager(&dm);
 		initDirtyManager(&dm2);
-		//initaudio(&audio);
+		initaudio(&audio);
 		initKeyboard(&ps2);
 		initKey(&move);
 		//initKey(&move);
 
-		//alt_irq_register(AUDIO_0_IRQ,&audio,play_isr);
-		//alt_irq_enable(AUDIO_0_IRQ);
-		//alt_up_audio_enable_write_interrupt(audio);
-
-
+		//gstate.audio=audio;
+/*
+		alt_irq_register(AUDIO_0_IRQ,&data,playbg_isr);
+		alt_irq_enable(AUDIO_0_IRQ);
+		alt_up_audio_enable_write_interrupt(audio);
+*/
+		startFrame(&ftimer);
+		//Menu Loop
+		//displayMenu();
+		testsdcard(&card,device_reference);
+		playsound("MK.wav", audio);
 		//Game Loop
+		endFrame(&ftimer);
 		alt_up_char_buffer_clear(char_buffer);
 		renderStartscreen(char_buffer, pixel_buffer, &dm , &move ,ps2);
 		while (!(gstate.gameOver)) {

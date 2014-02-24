@@ -1,6 +1,6 @@
 #ifndef NIOSFIGHTER_H
 #define NIOSFIGHTER_H
-#include <system.h>
+#include "system.h"
 #include <assert.h>
 #include <unistd.h>
 #include "sdcard.h"

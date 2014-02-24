@@ -31,3 +31,4 @@
 #include "standing2p5.h"
 #include "standing2p6.h"
 #include "standing2p7.h"
+#include "startbackgroundyellow.h"

@@ -8,10 +8,21 @@
 #include <sys/alt_alarm.h>
 #include <sys/alt_irq.h>
 
+#ifndef _AUDIO_H__
+#define _AUDIO_H__
 typedef struct sounddata{
 	int len;
 	int hlen;
+	unsigned int buffer[300000];
+	int index;
+	alt_up_audio_dev *audio;
+	int bytes_left;
+	int bytes_right;
+	int index_left;
+	int index_right;
+	int play;
 } sounddata;
+#endif
 
 void av_config_setup();
 
@@ -25,3 +36,5 @@ void loadsound(sounddata *data,int handle,alt_up_audio_dev *audio);
 void playsound(char* name,alt_up_audio_dev *audio);
 
 void play_isr(void *context,alt_u32 id);
+
+void playbg_isr(void *context,alt_u32 id);
