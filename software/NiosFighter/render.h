@@ -14,16 +14,13 @@
 #include "drawing.h"
 
 void renderStartscreen(alt_up_char_buffer_dev* char_buffer,
-		alt_up_pixel_buffer_dma_dev *pixel_buffer, dirtyManager *dm);
-void renderInstrction(gameState *state, alt_up_char_buffer_dev* char_buffer,
-		alt_up_pixel_buffer_dma_dev *pixel_buffer);
+		alt_up_pixel_buffer_dma_dev *pixel_buffer, dirtyManager *dm, input * key, alt_up_ps2_dev * ps2);
+void renderInstruction(gameState *state, alt_up_char_buffer_dev* char_buffer, alt_up_pixel_buffer_dma_dev *pixel_buffer);
 void InttoChar(int time_remain, char*);
-int draw_pixel_fast(alt_up_pixel_buffer_dma_dev *pixel_buffer,
-		unsigned int color, unsigned int x, unsigned int y);
+int draw_pixel_fast(alt_up_pixel_buffer_dma_dev *pixel_buffer, unsigned int color, unsigned int x, unsigned int y);
 void InitPixBuff(alt_up_pixel_buffer_dma_dev **pixel_buffer_ptr);
 void InitCharBuff(alt_up_char_buffer_dev** char_buffer_ptr);
 void render(gameState *state, alt_up_char_buffer_dev* char_buffer,
 		alt_up_pixel_buffer_dma_dev *pixel_buffer, dirtyManager *dm);
-void LED_health(gameState *gstate);
 
 #endif //RENDER_H

@@ -37,12 +37,10 @@ int main() {
 		//alt_irq_enable(AUDIO_0_IRQ);
 		//alt_up_audio_enable_write_interrupt(audio);
 
-		//Menu Loop
-		//displayMenu();
 
 		//Game Loop
 		alt_up_char_buffer_clear(char_buffer);
-
+		renderStartscreen(char_buffer, pixel_buffer, &dm , &move ,ps2);
 		while (!(gstate.gameOver)) {
 			startFrame(&ftimer);
 			testsdcard(&card, device_reference);

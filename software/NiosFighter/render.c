@@ -1,11 +1,20 @@
 #include "render.h"
 
+
 void renderStartscreen(alt_up_char_buffer_dev* char_buffer,
-		alt_up_pixel_buffer_dma_dev *pixel_buffer, dirtyManager *dm) {
+		alt_up_pixel_buffer_dma_dev *pixel_buffer, dirtyManager *dm, input * key, alt_up_ps2_dev * ps2) {
 	DrawStartScreen(pixel_buffer, char_buffer, 0, 0, 320, 240);
+	int a=0;
+					while(a==0){
+						readKeyboard(key, ps2);
+						if(key->ENT){
+							a=1;
+						}
+					}
+
 }
 
-void renderInstrction(gameState *state, alt_up_char_buffer_dev* char_buffer,
+void renderInstruction(gameState *state, alt_up_char_buffer_dev* char_buffer,
 		alt_up_pixel_buffer_dma_dev *pixel_buffer) {
 	DrawInstruction(pixel_buffer, char_buffer);
 }
@@ -52,8 +61,7 @@ void InitPixBuff(alt_up_pixel_buffer_dma_dev **pixel_buffer_ptr) {
 	// Swap buffers –we have to swap because there is only an API function
 	// to set the address of the background buffer.
 	alt_up_pixel_buffer_dma_swap_buffers(*pixel_buffer_ptr);
-	while (alt_up_pixel_buffer_dma_check_swap_buffers_status(*pixel_buffer_ptr))
-		;
+	while (alt_up_pixel_buffer_dma_check_swap_buffers_status(*pixel_buffer_ptr));
 
 	// Set the 2nd buffer address
 	alt_up_pixel_buffer_dma_change_back_buffer_address(*pixel_buffer_ptr,
@@ -71,16 +79,10 @@ void InitCharBuff(alt_up_char_buffer_dev** char_buffer_ptr) {
 	//Initialize the character buffer
 	alt_up_char_buffer_init(*char_buffer_ptr);
 }
-void LED_health(gameState *gstate)
-{
-	int h1= gstate->player1.health;
-	int h2= gstate->player2.health;
-	if(h1<13)
-		LED_BASE = 0xFF;
-
-}
 void render(gameState *state, alt_up_char_buffer_dev* char_buffer,
 		alt_up_pixel_buffer_dma_dev *pixel_buffer, dirtyManager *dm) {
+
+
 
 	//Redraw all the dirty sections
 	while (dm->head != NULL) {

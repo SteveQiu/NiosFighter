@@ -23,5 +23,4 @@ void checkhp(gameState *state,character *c1, character *c2);
 void updateTime(gameState *gstate, float time);
 int getTimeRemaining(gameState *gstate);
 void updatePlayerBlocking(character *c, float time);
-
 #endif //GAMESTATE_H
